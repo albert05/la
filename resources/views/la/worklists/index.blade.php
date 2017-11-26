@@ -7,7 +7,7 @@
 @section("htmlheader_title", "Work Listing")
 
 @section("headerElems")
-@la_access("Tasks", "create")
+@la_access("WorkLists", "create")
 	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Tasks</button>
 @endla_access
 @endsection
