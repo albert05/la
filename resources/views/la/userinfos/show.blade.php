@@ -45,7 +45,7 @@
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("UserInfos", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/userinfos/'.$userinfo->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+				<a href="{{ url(config('laraadmin.adminRoute') . '/userinfos/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 
 			@la_access("UserInfos", "delete")
