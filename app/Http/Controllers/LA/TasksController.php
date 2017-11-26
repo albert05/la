@@ -127,11 +127,7 @@ class TasksController extends Controller
 				$module = Module::get('Tasks');
 				$module->row = $task;
 				
-				// Get User Table Information
-				$user = User::where('context_id', '=', $id)->firstOrFail();
-				
 				return view('la.tasks.show', [
-					'user' => $user,
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
@@ -164,13 +160,9 @@ class TasksController extends Controller
 				
 				$module->row = $task;
 				
-				// Get User Table Information
-				$user = User::where('context_id', '=', $id)->firstOrFail();
-				
 				return view('la.tasks.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-					'user' => $user,
 				])->with('task', $task);
 			} else {
 				return view('errors.404', [
@@ -202,18 +194,8 @@ class TasksController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$task_id = Module::updateRow("Tasks", $request, $id);
+			Module::updateRow("Tasks", $request, $id);
         	
-			// Update User
-			$user = User::where('context_id', $task_id)->first();
-			$user->name = $request->name;
-			$user->save();
-			
-			// update user role
-			$user->detachRoles();
-			$role = Role::find($request->role);
-			$user->attachRole($role);
-			
 			return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
 			
 		} else {
@@ -261,9 +243,6 @@ class TasksController extends Controller
 				if($col == $this->view_col) {
 					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/tasks/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
-				// else if($col == "author") {
-				//    $data->data[$i][$j];
-				// }
 			}
 			
 			if($this->show_action) {
