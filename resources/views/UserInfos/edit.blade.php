@@ -23,14 +23,16 @@
     </div>
 @endif
 
+
 <div class="box">
 	<div class="box-header">
 		
 	</div>
+
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($worklists, ['route' => [config('laraadmin.adminRoute') . '.userinfos.update', $worklist->id ], 'method'=>'PUT', 'id' => 'userinfo-edit-form']) !!}
+				{!! Form::model($userinfo, ['route' => [config('laraadmin.adminRoute') . '.userinfos.update', $userinfo->id ], 'method'=>'PUT', 'id' => 'userinfo-edit-form']) !!}
 					@la_form($module)
 					<br>
 					<div class="form-group">
