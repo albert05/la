@@ -84,4 +84,9 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
     Route::get(config('laraadmin.adminRoute') . '/userinfo_dt_ajax', 'LA\UserInfosController@dtajax');
 
 
+    /* ================== WorkConfigs ================== */
+    Route::resource(config('laraadmin.adminRoute') . '/workconfigs', 'LA\WorkConfigsController');
+    Route::get(config('laraadmin.adminRoute') . '/workconfig_dt_ajax', 'LA\WorkConfigsController@dtajax');
+
+
 });

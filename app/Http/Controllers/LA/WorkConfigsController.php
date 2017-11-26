@@ -20,27 +20,27 @@ use Dwij\Laraadmin\Models\ModuleFields;
 use Dwij\Laraadmin\Helpers\LAHelper;
 
 use App\User;
-use App\Models\UserInfo;
+use App\Models\WorkConfig;
 use App\Role;
 use Mail;
 use Log;
 
-class UserInfosController extends Controller
+class WorkConfigsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'user_key';
-	public $listing_cols = ['user_key', 'user_name', 'password', 'pay_passwd'];
+	public $view_col = 'id';
+	public $listing_cols = ['id', 'work_id', 'key', 'value'];
 	
 	public function __construct() {
 		
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('UserInfos', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('WorkConfigs', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('UserInfos', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('WorkConfigs', $this->listing_cols);
 		}
 	}
 	
@@ -51,10 +51,10 @@ class UserInfosController extends Controller
 	 */
 	public function index()
 	{
-		$module = Module::get('UserInfos');
+		$module = Module::get('WorkConfigs');
 
 		if(Module::hasAccess($module->id)) {
-			return View('la.userinfos.index', [
+			return View('la.workconfigs.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -83,9 +83,9 @@ class UserInfosController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("UserInfos", "create")) {
+		if(Module::hasAccess("WorkConfigs", "create")) {
 		
-			$rules = Module::validateRules("UserInfos", $request);
+			$rules = Module::validateRules("WorkConfigs", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -94,17 +94,17 @@ class UserInfosController extends Controller
 			}
 			
 
-			$userinfo = UserInfo::create([
-				'user_key' => $request->user_key,
-                'user_name' => $request->user_name,
-                'password' => $request->password,
-                'pay_passwd' => $request->pay_passwd,
+			// Create WorkList
+			$workconfig = WorkConfig::create([
+				'work_id' => $request->work_id,
+                'key' => $request->key,
+                'value' => $request->value,
 			]);
 
 
-			Log::info("UserInfo created: user_key: ".$userinfo->user_key." name: ".$userinfo->user_name);
+			Log::info("WorkConfigs created: work_id: ".$workconfig->work_id." key: ".$workconfig->key);
 
-			return redirect()->route(config('laraadmin.adminRoute') . '.userinfos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.workconfigs.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -119,23 +119,23 @@ class UserInfosController extends Controller
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("UserInfos", "view")) {
-
-			$userinfo = UserInfo::find($id);
-			if(isset($userinfo->id)) {
-				$module = Module::get('UserInfos');
-				$module->row = $userinfo;
+		if(Module::hasAccess("WorkConfigs", "view")) {
+			
+			$workconfig = WorkConfig::find($id);
+			if(isset($workconfig->id)) {
+				$module = Module::get('WorkConfigs');
+				$module->row = $workconfig;
 				
-				return view('la.userinfos.show', [
+				return view('la.workconfigs.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('userinfo', $userinfo);
+				])->with('workconfig', $workconfig);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("userinfo"),
+					'record_name' => ucfirst("workconfig"),
 				]);
 			}
 		} else {
@@ -151,22 +151,22 @@ class UserInfosController extends Controller
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("UserInfos", "edit")) {
+		if(Module::hasAccess("WorkConfigs", "edit")) {
 			
-			$userinfo = UserInfo::find($id);
-			if(isset($userinfo->id)) {
-				$module = Module::get('UserInfos');
+			$workconfig = WorkConfig::find($id);
+			if(isset($workconfig->id)) {
+				$module = Module::get('WorkConfigs');
 				
-				$module->row = $userinfo;
+				$module->row = $workconfig;
 				
-				return view('la.userinfos.edit', [
+				return view('la.worklists.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('userinfo', $userinfo);
+				])->with('workconfig', $workconfig);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("userinfo"),
+					'record_name' => ucfirst("workconfig"),
 				]);
 			}
 		} else {
@@ -183,9 +183,9 @@ class UserInfosController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("UserInfos", "edit")) {
+		if(Module::hasAccess("WorkConfigs", "edit")) {
 			
-			$rules = Module::validateRules("UserInfos", $request, true);
+			$rules = Module::validateRules("WorkConfigs", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -193,9 +193,9 @@ class UserInfosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			Module::updateRow("UserInfos", $request, $id);
+			Module::updateRow("WorkLists", $request, $id);
         	
-			return redirect()->route(config('laraadmin.adminRoute') . '.userinfos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.workconfigs.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -210,11 +210,11 @@ class UserInfosController extends Controller
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("UserInfos", "delete")) {
-            UserInfo::find($id)->delete();
+		if(Module::hasAccess("WorkConfigs", "delete")) {
+            WorkConfig::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.userinfos.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.workconfigs.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -227,11 +227,11 @@ class UserInfosController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('userinfos')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('workconfigs')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('UserInfos');
+		$fields_popup = ModuleFields::getModuleFields('WorkConfigs');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -240,20 +240,18 @@ class UserInfosController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/userinfos/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/workconfigs/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 			}
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("UserInfos", "edit")) {
-                    $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/worklists/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
-
-                    $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/userinfos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("WorkConfigs", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/workconfigs/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("UserInfos", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.userinfos.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("WorkConfigs", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.workconfigs.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}
