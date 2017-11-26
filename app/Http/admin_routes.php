@@ -77,7 +77,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 
     /* ================== WorkLists ================== */
     Route::resource(config('laraadmin.adminRoute') . '/worklists', 'LA\WorkListsController');
-    Route::get(config('laraadmin.adminRoute') . '/work_list_dt_ajax', 'LA\WorkListsController@dtajax');
+    Route::get(config('laraadmin.adminRoute') . '/worklist_dt_ajax', 'LA\WorkListsController@dtajax');
 
 
 });
