@@ -29,7 +29,7 @@ class UserInfosController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'user_key';
-	public $listing_cols = ['user_key', 'user_name', 'password', 'pay_passwd'];
+	public $listing_cols = ['id', 'user_key', 'user_name', 'password', 'pay_passwd'];
 	
 	public function __construct() {
 		
@@ -247,8 +247,6 @@ class UserInfosController extends Controller
 			if($this->show_action) {
 				$output = '';
 				if(Module::hasAccess("UserInfos", "edit")) {
-                    $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/worklists/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
-
                     $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/userinfos/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				

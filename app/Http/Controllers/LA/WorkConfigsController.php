@@ -28,7 +28,7 @@ use Log;
 class WorkConfigsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'id';
+	public $view_col = 'work_id';
 	public $listing_cols = ['id', 'work_id', 'key', 'value'];
 	
 	public function __construct() {
