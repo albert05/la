@@ -95,12 +95,14 @@ class UserInfosController extends Controller
 			
 
 			$userinfo = UserInfo::create([
-				'name' => $request->name,
-				'work_id' => $request->work_id,
+				'user_key' => $request->user_key,
+                'user_name' => $request->user_name,
+                'password' => $request->password,
+                'pay_passwd' => $request->pay_passwd,
 			]);
 
 
-			Log::info("WorkLists created: user_key: ".$userinfo->user_key." name: ".$userinfo->user_name);
+			Log::info("UserInfo created: user_key: ".$userinfo->user_key." name: ".$userinfo->user_name);
 
 			return redirect()->route(config('laraadmin.adminRoute') . '.userinfos.index');
 			
