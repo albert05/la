@@ -135,16 +135,18 @@ class TasksController extends Controller
             ->where('work_id', 'global')
             ->lists('key', 'value');
 
-        foreach ($global_config as $key => $item) {
-            if ($key == 'cmd') {
-                $cmd = $item;
-            } elseif($key == 'script_path') {
-                $code_path = $item;
+        $cmd = '';
+        $script_path = '';
+        foreach ($global_config as $v => $k) {
+            if ($k == 'cmd') {
+                $cmd = $v;
+            } elseif($k == 'script_path') {
+                $script_path = $v;
             }
         }
 
 
-        return " " . $cmd . " " . $code_path . " ";
+        return " " . $cmd . " " . $script_path . " ";
     }
 
     private function getLogOutput(Request $request) {
@@ -152,9 +154,10 @@ class TasksController extends Controller
             ->where('work_id', 'global')
             ->lists('key', 'value');
 
-        foreach ($global_config as $key => $item) {
-            if ($key == 'log_path') {
-                $log_path = $item;
+        $log_path = '/tmp/';
+        foreach ($global_config as $v => $k) {
+            if ($k == 'log_path') {
+                $log_path = $v;
             }
         }
 
