@@ -74,6 +74,9 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	/* ================== Tasks ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/tasks', 'LA\TasksController');
 	Route::get(config('laraadmin.adminRoute') . '/task_dt_ajax', 'LA\TasksController@dtajax');
-	Route::post(config('laraadmin.adminRoute') . '/change_password/{id}', 'LA\TasksController@change_password');
-	
+
+    /* ================== WorkLists ================== */
+    Route::resource(config('laraadmin.adminRoute') . '/worklists', 'LA\WorkListsController');
+    Route::get(config('laraadmin.adminRoute') . '/work_list_dt_ajax', 'LA\WorkListsController@dtajax');
+
 });
