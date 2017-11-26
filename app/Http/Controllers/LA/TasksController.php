@@ -108,7 +108,7 @@ class TasksController extends Controller
                 'voucher_id' => $request->voucher_id,
                 'is_kdb_pay' => $request->is_kdb_pay,
                 'prize_number' => $request->prize_number,
-                'run_time' => date("Y-m-d H:i:s", strtotime($request->run_time)),
+                'run_time' => $request->run_time,
                 'status' => 0,
             ]);
 
@@ -174,7 +174,7 @@ class TasksController extends Controller
         return " id:" . $request->user_key . " job:" . $request->work_id .  " product_id:" . $request->product_id .
                 " time_point:" . $request->time_point . " code:" . $request->code . " money:" . $request->money .
                 " voucher_id:" . $request->voucher_id . " is_kdb_pay:" . $request->is_kdb_pay .
-                " prize_number:" . $request->prize_number . " " . date("Y-m-d H:i:s", strtotime($request->run_time));
+                " prize_number:" . $request->prize_number . " ";
     }
 
     /**
