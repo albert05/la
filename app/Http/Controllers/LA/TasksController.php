@@ -135,11 +135,11 @@ class TasksController extends Controller
             ->where('work_id', 'global')
             ->lists('key', 'value');
 
-        foreach ($global_config as $item) {
-            if ($item['key'] == 'cmd') {
-                $cmd = $item['value'];
-            } elseif($item['key'] == 'script_path') {
-                $code_path = $item['value'];
+        foreach ($global_config as $key => $item) {
+            if ($key == 'cmd') {
+                $cmd = $item;
+            } elseif($key == 'script_path') {
+                $code_path = $item;
             }
         }
 
@@ -152,9 +152,9 @@ class TasksController extends Controller
             ->where('work_id', 'global')
             ->lists('key', 'value');
 
-        foreach ($global_config as $item) {
-            if ($item['key'] == 'log_path') {
-                $log_path = $item['value'];
+        foreach ($global_config as $key => $item) {
+            if ($key == 'log_path') {
+                $log_path = $item;
             }
         }
 
