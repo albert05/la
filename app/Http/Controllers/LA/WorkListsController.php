@@ -52,7 +52,7 @@ class WorkListsController extends Controller
 	public function index()
 	{
 		$module = Module::get('WorkLists');
-		
+
 		if(Module::hasAccess($module->id)) {
 			return View('la.worklists.index', [
 				'show_actions' => $this->show_action,
