@@ -166,7 +166,7 @@ class TasksController extends Controller
             mkdir($path, 0777, true);
         }
 
-        return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>>&1 & ";
+        return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>&1 & ";
 
     }
 
