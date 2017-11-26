@@ -20,7 +20,7 @@ use Dwij\Laraadmin\Models\ModuleFields;
 use Dwij\Laraadmin\Helpers\LAHelper;
 
 use App\User;
-use App\Models\Task;
+use App\Models\WorkList;
 use App\Role;
 use Mail;
 use Log;
@@ -94,14 +94,14 @@ class WorkListsController extends Controller
 			}
 			
 
-			// Create User
-			$worklists = WorkLists::create([
+			// Create WorkList
+			$worklist = WorkList::create([
 				'name' => $request->name,
 				'work_id' => $request->work_id,
 			]);
 
 
-			Log::info("WorkLists created: work_id: ".$worklists->work_id." name: ".$worklists->name);
+			Log::info("WorkLists created: work_id: ".$worklist->work_id." name: ".$worklist->name);
 
 			return redirect()->route(config('laraadmin.adminRoute') . '.worklists.index');
 			
@@ -120,17 +120,17 @@ class WorkListsController extends Controller
 	{
 		if(Module::hasAccess("WorkLists", "view")) {
 			
-			$worklists = WorkLists::find($id);
-			if(isset($worklists->id)) {
+			$worklist = WorkList::find($id);
+			if(isset($worklist->id)) {
 				$module = Module::get('WorkLists');
-				$module->row = $worklists;
+				$module->row = $worklist;
 				
 				return view('la.worklists.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('worklists', $worklists);
+				])->with('worklist', $worklist);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
@@ -152,16 +152,16 @@ class WorkListsController extends Controller
 	{
 		if(Module::hasAccess("WorkLists", "edit")) {
 			
-			$worklists = WorkLists::find($id);
-			if(isset($worklists->id)) {
+			$worklist = WorkList::find($id);
+			if(isset($worklist->id)) {
 				$module = Module::get('WorkLists');
 				
-				$module->row = $worklists;
+				$module->row = $worklist;
 				
 				return view('la.worklists.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('worklist', $worklists);
+				])->with('worklist', $worklist);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
@@ -194,7 +194,7 @@ class WorkListsController extends Controller
 			
 			Module::updateRow("WorkLists", $request, $id);
         	
-			return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.worklists.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -210,7 +210,7 @@ class WorkListsController extends Controller
 	public function destroy($id)
 	{
 		if(Module::hasAccess("WorkLists", "delete")) {
-            WorkLists::find($id)->delete();
+            WorkList::find($id)->delete();
 			
 			// Redirecting to index() method
 			return redirect()->route(config('laraadmin.adminRoute') . '.worklists.index');
