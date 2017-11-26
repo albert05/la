@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	WorkLists View
+	UserInfos View
 @endsection
 
 @section('main-content')
@@ -13,19 +13,19 @@
 					<img class="profile-image" src="{{ Gravatar::fallback(asset('/img/avatar5.png'))->get(Auth::user()->email, ['size'=>400]) }}" alt="">
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $worklist->$view_col }}</h4>
+					<h4 class="name">{{ $userinfo->$view_col }}</h4>
 					<div class="row stats">
-						<div class="col-md-6 stat"><div class="label2" data-toggle="tooltip" data-placement="top" title="Designation">{{ $worklist->designation }}</div></div>
-						<div class="col-md-6 stat"><i class="fa fa-map-marker"></i> {{ $worklist->city or "NA" }}</div>
+						<div class="col-md-6 stat"><div class="label2" data-toggle="tooltip" data-placement="top" title="Designation">{{ $userinfo->designation }}</div></div>
+						<div class="col-md-6 stat"><i class="fa fa-map-marker"></i> {{ $userinfo->city or "NA" }}</div>
 					</div>
-					<p class="desc">{{ substr($worklist->about, 0, 33) }}@if(strlen($worklist->about) > 33)...@endif</p>
+					<p class="desc">{{ substr($userinfo->about, 0, 33) }}@if(strlen($userinfo->about) > 33)...@endif</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="dats1"><i class="fa fa-envelope-o"></i> {{ $worklist->email }}</div>
-			<div class="dats1"><i class="fa fa-phone"></i> {{ $worklist->mobile }}</div>
-			<div class="dats1"><i class="fa fa-clock-o"></i> Joined on {{ date("M d, Y", strtotime($worklist->date_hire)) }}</div>
+			<div class="dats1"><i class="fa fa-envelope-o"></i> {{ $userinfo->email }}</div>
+			<div class="dats1"><i class="fa fa-phone"></i> {{ $userinfo->mobile }}</div>
+			<div class="dats1"><i class="fa fa-clock-o"></i> Joined on {{ date("M d, Y", strtotime($userinfo->date_hire)) }}</div>
 		</div>
 		<div class="col-md-4">
 			<div class="teamview">
@@ -44,12 +44,12 @@
 			
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("WorkLists", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/worklists/'.$worklist->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("UserInfos", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/userinfos/'.$userinfo->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
-			
-			@la_access("WorkLists", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.worklists.destroy', $worklist->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+
+			@la_access("UserInfos", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.userinfos.destroy', $userinfo->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -57,10 +57,10 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/worklists') }}" data-toggle="tooltip" data-placement="right" title="Back to WorkLists"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/userinfos') }}" data-toggle="tooltip" data-placement="right" title="Back to UserInfos"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
-		@if($worklist->id == Auth::user()->id || Entrust::hasRole("SUPER_ADMIN"))
+		@if($userinfo->id == Auth::user()->id || Entrust::hasRole("SUPER_ADMIN"))
 			<li class=""><a role="tab" data-toggle="tab" href="#tab-account-settings" data-target="#tab-account-settings"><i class="fa fa-key"></i> Account settings</a></li>
 		@endif
 	</ul>
