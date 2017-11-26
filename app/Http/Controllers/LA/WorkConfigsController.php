@@ -28,8 +28,8 @@ use Log;
 class WorkConfigsController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'w_id';
-	public $listing_cols = ['id', 'w_id', 'key', 'value'];
+	public $view_col = 'work_id';
+	public $listing_cols = ['id', 'work_id', 'key', 'value'];
 	
 	public function __construct() {
 		
@@ -96,13 +96,13 @@ class WorkConfigsController extends Controller
 
 			// Create WorkList
 			$workconfig = WorkConfig::create([
-				'w_id' => $request->work_id,
+				'work_id' => $request->work_id,
                 'key' => $request->key,
                 'value' => $request->value,
 			]);
 
 
-			Log::info("WorkConfigs created: w_id: ".$workconfig->w_id." key: ".$workconfig->key);
+			Log::info("WorkConfigs created: work_id: ".$workconfig->work_id." key: ".$workconfig->key);
 
 			return redirect()->route(config('laraadmin.adminRoute') . '.workconfigs.index');
 			
