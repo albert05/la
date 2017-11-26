@@ -1,10 +1,10 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title", "Tasks")
-@section("contentheader_description", "Tasks listing")
+@section("contentheader_description", "tasks listing")
 @section("section", "Tasks")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Task Listing")
+@section("htmlheader_title", "Tasks Listing")
 
 @section("headerElems")
     @la_access("Tasks", "create")
@@ -51,12 +51,29 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Task</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add Employee</h4>
                 </div>
                 {!! Form::open(['action' => 'LA\TasksController@store', 'id' => 'task-add-form']) !!}
                 <div class="modal-body">
                     <div class="box-body">
                         @la_form($module)
+
+                        {{--
+                        @la_input($module, 'name')
+                        @la_input($module, 'designation')
+                        @la_input($module, 'gender')
+                        @la_input($module, 'mobile')
+                        @la_input($module, 'mobile2')
+                        @la_input($module, 'email')
+                        @la_input($module, 'dept')
+                        @la_input($module, 'city')
+                        @la_input($module, 'address')
+                        @la_input($module, 'about')
+                        @la_input($module, 'date_birth')
+                        @la_input($module, 'date_hire')
+                        @la_input($module, 'date_left')
+                        @la_input($module, 'salary_cur')
+                        --}}
                         <div class="form-group">
                             <label for="role">Role* :</label>
                             <select class="form-control" required="1" data-placeholder="Select Role" rel="select2" name="role">
@@ -79,7 +96,6 @@
         </div>
     </div>
     @endla_access
-
 
 @endsection
 
@@ -104,7 +120,7 @@
             columnDefs: [ { orderable: false, targets: [-1] }],
             @endif
         });
-        $("#task-add-form").validate({
+        $("#employee-add-form").validate({
 
         });
     });
