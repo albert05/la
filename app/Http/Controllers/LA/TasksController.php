@@ -20,7 +20,7 @@ use Dwij\Laraadmin\Models\ModuleFields;
 use Dwij\Laraadmin\Helpers\LAHelper;
 
 use App\User;
-use App\Models\Employee;
+use App\Models\Task;
 use App\Role;
 use Mail;
 use Log;
@@ -28,8 +28,8 @@ use Log;
 class TasksController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'designation', 'mobile', 'email', 'dept'];
+	public $view_col = 'title';
+	public $listing_cols = ['id', 'title', 'work_id', 'user_name', 'cmd', 'status', 'result'];
 	
 	public function __construct() {
 		
@@ -54,7 +54,7 @@ class TasksController extends Controller
 		$module = Module::get('Tasks');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.employees.index', [
+			return View('la.tasks.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -92,35 +92,19 @@ class TasksController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			// generate password
-			$password = LAHelper::gen_password();
-			
-			// Create Employee
-			$employee_id = Module::insert("Tasks", $request);
+
 			// Create User
-			$user = User::create([
-				'name' => $request->name,
-				'email' => $request->email,
-				'password' => bcrypt($password),
-				'context_id' => $employee_id,
-				'type' => "Employee",
+			$task = User::create([
+				'name' => $request->title,
+				'user_name' => $request->user_name,
+				'cmd' => $request->cmd,
+				'work_id' => $request->work_id,
+				'status' => 0,
 			]);
-	
-			// update user role
-			$user->detachRoles();
-			$role = Role::find($request->role);
-			$user->attachRole($role);
-			
-			if(env('MAIL_USERNAME') != null && env('MAIL_USERNAME') != "null" && env('MAIL_USERNAME') != "") {
-				// Send mail to User his Password
-				Mail::send('emails.send_login_cred', ['user' => $user, 'password' => $password], function ($m) use ($user) {
-					$m->from('hello@laraadmin.com', 'LaraAdmin');
-					$m->to($user->email, $user->name)->subject('LaraAdmin - Your Login Credentials');
-				});
-			} else {
-				Log::info("User created: username: ".$user->email." Password: ".$password);
-			}
-			
+
+
+			Log::info("Task created: id: ".$task->id." work: ".$task->work_id);
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
 			
 		} else {
@@ -138,10 +122,10 @@ class TasksController extends Controller
 	{
 		if(Module::hasAccess("Tasks", "view")) {
 			
-			$employee = Employee::find($id);
-			if(isset($employee->id)) {
+			$task = Task::find($id);
+			if(isset($task->id)) {
 				$module = Module::get('Tasks');
-				$module->row = $employee;
+				$module->row = $task;
 				
 				// Get User Table Information
 				$user = User::where('context_id', '=', $id)->firstOrFail();
@@ -152,7 +136,7 @@ class TasksController extends Controller
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('task', $employee);
+				])->with('task', $task);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
@@ -174,11 +158,11 @@ class TasksController extends Controller
 	{
 		if(Module::hasAccess("Tasks", "edit")) {
 			
-			$employee = Employee::find($id);
-			if(isset($employee->id)) {
+			$task = Task::find($id);
+			if(isset($task->id)) {
 				$module = Module::get('Tasks');
 				
-				$module->row = $employee;
+				$module->row = $task;
 				
 				// Get User Table Information
 				$user = User::where('context_id', '=', $id)->firstOrFail();
@@ -187,7 +171,7 @@ class TasksController extends Controller
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'user' => $user,
-				])->with('task', $employee);
+				])->with('task', $task);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
@@ -218,10 +202,10 @@ class TasksController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$employee_id = Module::updateRow("Tasks", $request, $id);
+			$task_id = Module::updateRow("Tasks", $request, $id);
         	
 			// Update User
-			$user = User::where('context_id', $employee_id)->first();
+			$user = User::where('context_id', $task_id)->first();
 			$user->name = $request->name;
 			$user->save();
 			
@@ -246,7 +230,7 @@ class TasksController extends Controller
 	public function destroy($id)
 	{
 		if(Module::hasAccess("Tasks", "delete")) {
-			Employee::find($id)->delete();
+			Task::find($id)->delete();
 			
 			// Redirecting to index() method
 			return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
@@ -299,41 +283,5 @@ class TasksController extends Controller
 		$out->setData($data);
 		return $out;
 	}
-	
-	/**
-     * Change Employee Password
-     *
-     * @return
-     */
-	public function change_password($id, Request $request) {
-		
-		$validator = Validator::make($request->all(), [
-            'password' => 'required|min:6',
-			'password_confirmation' => 'required|min:6|same:password'
-        ]);
-		
-		if ($validator->fails()) {
-			return \Redirect::to(config('laraadmin.adminRoute') . '/employees/'.$id)->withErrors($validator);
-		}
-		
-		$employee = Employee::find($id);
-		$user = User::where("context_id", $employee->id)->where('type', 'Employee')->first();
-		$user->password = bcrypt($request->password);
-		$user->save();
-		
-		\Session::flash('success_message', 'Password is successfully changed');
-		
-		// Send mail to User his new Password
-		if(env('MAIL_USERNAME') != null && env('MAIL_USERNAME') != "null" && env('MAIL_USERNAME') != "") {
-			// Send mail to User his new Password
-			Mail::send('emails.send_login_cred_change', ['user' => $user, 'password' => $request->password], function ($m) use ($user) {
-				$m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
-				$m->to($user->email, $user->name)->subject('LaraAdmin - Login Credentials chnaged');
-			});
-		} else {
-			Log::info("User change_password: username: ".$user->email." Password: ".$request->password);
-		}
-		
-		return redirect(config('laraadmin.adminRoute') . '/employees/'.$id.'#tab-account-settings');
-	}
+
 }
