@@ -161,6 +161,11 @@ class TasksController extends Controller
             }
         }
 
+        $path = $log_path . $request->work_id;
+        if (!is_dir($path)) {
+            mkdir($path);
+        }
+
         return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>>&1 & ";
 
     }
@@ -169,7 +174,7 @@ class TasksController extends Controller
         return " id:" . $request->user_key . " job:" . $request->work_id .  " product_id:" . $request->product_id .
                 " time_point:" . $request->time_point . " code:" . $request->code . " money:" . $request->money .
                 " voucher_id:" . $request->voucher_id . " is_kdb_pay:" . $request->is_kdb_pay .
-                " prize_number:" . $request->prize_number . " ";
+                " prize_number:" . $request->prize_number . " " . " run_time:" . $request->run_time . " ";
     }
 
     /**
