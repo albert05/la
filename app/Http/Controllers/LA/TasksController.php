@@ -163,7 +163,7 @@ class TasksController extends Controller
 
         $path = $log_path . $request->work_id;
         if (!is_dir($path)) {
-            mkdir($path);
+            mkdir($path, 0777, true);
         }
 
         return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>>&1 & ";
