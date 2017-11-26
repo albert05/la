@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\LA;
 
 use App\Http\Controllers\Controller;
+use App\Models\WorkConfig;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
@@ -93,13 +94,21 @@ class TasksController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-
             // Create Task
             $task = Task::create([
                 'title' => $request->title,
-                'user_name' => $request->user_name,
-                'cmd' => $request->cmd,
+                'user_name' => Auth::user()->name,
+                'cmd' => $this->getCmd($request),
                 'work_id' => $request->work_id,
+                'user_key' => $request->user_key,
+                'time_point' => $request->time_point,
+                'product_id' => $request->product_id,
+                'code' => $request->code,
+                'money' => $request->money,
+                'voucher_id' => $request->voucher_id,
+                'is_kdb_pay' => $request->is_kdb_pay,
+                'prize_number' => $request->prize_number,
+                'run_time' => $request->run_time,
                 'status' => 0,
             ]);
 
@@ -111,6 +120,53 @@ class TasksController extends Controller
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
         }
+    }
+
+    private function getCmd(Request $request) {
+        $bash = $this->getBash();
+        $log = $this->getLogOutput($request);
+        $params = $this->getParams($request);
+
+        return $bash . $params . $log;
+    }
+
+    private function getBash() {
+        $global_config = DB::table('workconfigs')
+            ->where('work_id', 'global')
+            ->lists('key', 'value');
+
+        foreach ($global_config as $item) {
+            if ($item['key'] == 'cmd') {
+                $cmd = $item['value'];
+            } elseif($item['key'] == 'script_path') {
+                $code_path = $item['value'];
+            }
+        }
+
+
+        return " " . $cmd . " " . $code_path . " ";
+    }
+
+    private function getLogOutput(Request $request) {
+        $global_config = DB::table('workconfigs')
+            ->where('work_id', 'global')
+            ->lists('key', 'value');
+
+        foreach ($global_config as $item) {
+            if ($item['key'] == 'log_path') {
+                $log_path = $item['value'];
+            }
+        }
+
+        return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>>&1 & ";
+
+    }
+
+    private function getParams(Request $request) {
+        return " id:" . $request->user_key . " job:" . $request->work_id .  " product_id:" . $request->product_id .
+                " time_point:" . $request->time_point . " code:" . $request->code . " money:" . $request->money .
+                " voucher_id:" . $request->voucher_id . " is_kdb_pay:" . $request->is_kdb_pay .
+                " prize_number:" . $request->prize_number . " ";
     }
 
     /**
