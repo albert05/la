@@ -56,7 +56,7 @@
 			{!! Form::open(['action' => 'LA\WorkConfigsController@store', 'id' => 'workconfig-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
-                    {{--@la_form($module)--}}
+                    @la_form($module)
 					{{--@la_input($module, 'work_id')--}}
 					{{--@la_input($module, 'key')--}}
 					{{--@la_input($module, 'value')--}}
