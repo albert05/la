@@ -30,7 +30,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($worklists, ['route' => [config('laraadmin.adminRoute') . '.worklists.update', $worklist->id ], 'method'=>'PUT', 'id' => 'worklist-edit-form']) !!}
+				{!! Form::model($worklist, ['route' => [config('laraadmin.adminRoute') . '.worklists.update', $worklist->id ], 'method'=>'PUT', 'id' => 'worklist-edit-form']) !!}
 					@la_form($module)
 					
 					{{--
