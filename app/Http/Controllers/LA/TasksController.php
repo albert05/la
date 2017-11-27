@@ -133,11 +133,11 @@ class TasksController extends Controller
     private function getBash() {
         $global_config = DB::table('workconfigs')
             ->where('work_id', 'global')
-            ->lists('key', 'value');
+            ->lists('value', 'key');
 
         $cmd = '';
         $script_path = '';
-        foreach ($global_config as $v => $k) {
+        foreach ($global_config as $k => $v) {
             if ($k == 'cmd') {
                 $cmd = $v;
             } elseif($k == 'script_path') {
@@ -152,10 +152,10 @@ class TasksController extends Controller
     private function getLogOutput(Request $request) {
         $global_config = DB::table('workconfigs')
             ->where('work_id', 'global')
-            ->lists('key', 'value');
+            ->lists( 'value', 'key');
 
         $log_path = '/tmp/';
-        foreach ($global_config as $v => $k) {
+        foreach ($global_config as $k => $v) {
             if ($k == 'log_path') {
                 $log_path = $v;
             }
