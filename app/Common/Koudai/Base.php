@@ -12,6 +12,7 @@ use \Curl\Curl;
 
 class Base
 {
+    protected $curl;
     protected $url = "";
     protected $cookie;
     protected $error_no = 0;
@@ -19,6 +20,7 @@ class Base
 
     public function __construct($url)
     {
+        $this->curl = new Curl();
         $this->url = $url;
     }
 
@@ -47,15 +49,14 @@ class Base
 
     public function run($params)
     {
-        $curl = new Curl();
         if ($this->cookie) {
-            $curl->setCookie('SESSIONID', $this->cookie);
+            $this->curl->setCookie('SESSIONID', $this->cookie);
         }
-        $curl->post($this->url, $params);
+        $this->curl->post($this->url, $params);
 
         if (!$this->cookie) {
-            $this->setCookie($curl->response->sessionid);
+            $this->setCookie($this->curl->response->sessionid);
         }
-        return $this->setError($curl->response);
+        return $this->setError($this->curl->response);
     }
 }

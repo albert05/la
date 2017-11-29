@@ -16,6 +16,7 @@ class User extends Base
 
     public function __construct($username, $password)
     {
+        parent::__construct(self::LOGIN_URL);
         $this->username = $username;
         $this->password = $password;
     }
