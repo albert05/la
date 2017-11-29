@@ -8,9 +8,11 @@
 
 namespace App\Common\Koudai;
 
+use \Curl\Curl;
 
 class Base
 {
+    protected $curl;
     protected $url = "";
     protected $cookie;
     protected $error_no = 0;
@@ -19,6 +21,7 @@ class Base
     public function __construct($url)
     {
         $this->url = $url;
+        $this->curl = new Curl();
     }
 
     public function getErrorNo() {
@@ -42,5 +45,18 @@ class Base
 
     public function setCookie($cookie) {
         $this->cookie = $cookie;
+    }
+
+    public function run($params)
+    {
+        if ($this->cookie) {
+            $this->curl->setCookie('SESSIONID', $this->cookie);
+        }
+        $this->curl->post($this->url, $params);
+
+        if (!$this->cookie) {
+            $this->setCookie($this->curl->response->sessionid);
+        }
+        return $this->setError($this->curl->response);
     }
 }

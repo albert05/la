@@ -21,14 +21,12 @@ class Earn extends Base
         $this->cookie= $cookie;
     }
 
-    public function run()
+    public function doJob()
     {
-        $curl = new Curl();
-        $curl->setCookie('SESSIONID', $this->cookie);
-        $curl->post(self::SIGNIN_URL, array(
+        $params = [
             'type' => self::TYPE,
-        ));
+        ];
 
-        return $this->setError($curl->response);
+        return $this->run($params);
     }
 }

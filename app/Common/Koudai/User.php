@@ -24,13 +24,11 @@ class User extends Base
 
     public function login()
     {
-        $curl = new Curl();
-        $curl->post($this->url, array(
+        $params = [
             'username' => $this->username,
             'password' => $this->password,
-        ));
+        ];
 
-        $this->setCookie($curl->response->sessionid);
-        return $this->setError($curl->response);
+        return $this->run($params);
     }
 }
