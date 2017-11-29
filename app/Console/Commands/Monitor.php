@@ -48,10 +48,10 @@ class Monitor extends Command
 
             $now = intval(date('gis', time()));
             foreach ($task_list as $item) {
-                //if ($item['run_time'] >= $now) {
-                    $this->runCmd($item['run_time']);
-                    $this->comment($item['run_time'] . " is start run.\n");
-                    DB::table("tasks")->where('id', $item['id'])->update(['status' => 1]);
+                //if ($item->run_time >= $now) {
+                    $this->runCmd($item->cmd);
+                    $this->comment($item->cmd . " is start run.\n");
+                    DB::table("tasks")->where('id', $item->id)->update(['status' => 1]);
                 //}
             }
 
