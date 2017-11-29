@@ -19,7 +19,7 @@ class Helper
      * @return bool
      */
     public static function Lock($name) {
-        $lock_file = '/tmp/_la_lock_console_' . $name;
+        $lock_file = '/tmp/_la_lock_console_' . $name . '.log';
 
         if (file_exists($lock_file)) {
             return false;
@@ -34,7 +34,7 @@ class Helper
      * @return bool
      */
     public static function unlock($name) {
-        $lock_file = '/tmp/_la_lock_console_' . $name;
+        $lock_file = '/tmp/_la_lock_console_' . $name . '.log';
 
         if (!file_exists($lock_file)) {
             return false;
