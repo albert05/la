@@ -8,8 +8,6 @@
  */
 namespace App\Common\Koudai;
 
-use \Curl\Curl;
-
 class Earn extends Base
 {
     const EARN_URL = "https://deposit.koudailc.com/user-level/earn";

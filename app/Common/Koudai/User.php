@@ -8,8 +8,6 @@
  */
 namespace App\Common\Koudai;
 
-use \Curl\Curl;
-
 class User extends Base
 {
     const LOGIN_URL = "http://deposit.koudailc.com/user/login";

@@ -12,7 +12,6 @@ use \Curl\Curl;
 
 class Base
 {
-    protected $curl;
     protected $url = "";
     protected $cookie;
     protected $error_no = 0;
@@ -21,7 +20,6 @@ class Base
     public function __construct($url)
     {
         $this->url = $url;
-        $this->curl = new Curl();
     }
 
     public function getErrorNo() {
@@ -49,14 +47,15 @@ class Base
 
     public function run($params)
     {
+        $curl = new Curl();
         if ($this->cookie) {
-            $this->curl->setCookie('SESSIONID', $this->cookie);
+            $curl->setCookie('SESSIONID', $this->cookie);
         }
-        $this->curl->post($this->url, $params);
+        $curl->post($this->url, $params);
 
         if (!$this->cookie) {
-            $this->setCookie($this->curl->response->sessionid);
+            $this->setCookie($curl->response->sessionid);
         }
-        return $this->setError($this->curl->response);
+        return $this->setError($curl->response);
     }
 }
