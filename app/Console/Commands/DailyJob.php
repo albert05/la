@@ -45,7 +45,7 @@ class DailyJob extends Command
             $user->login();
 
             $earn = new Earn($user->getCookie());
-            $earn->run();
+            $earn->doJob();
             var_dump($earn->getErrorMsg());
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
