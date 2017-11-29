@@ -10,12 +10,11 @@ namespace App\Common\Koudai;
 
 use \Curl\Curl;
 
-class User
+class User extends Base
 {
     const LOGIN_URL = "http://deposit.koudailc.com/user/login";
     private $username;
     private $password;
-    private $cookie;
 
     public function __construct($username, $password)
     {
@@ -26,16 +25,12 @@ class User
     public function login()
     {
         $curl = new Curl();
-        $curl->post(self::LOGIN_URL, array(
+        $curl->post($this->url, array(
             'username' => $this->username,
             'password' => $this->password,
         ));
 
-        $this->cookie = $curl->response->sessionid;
+        $this->setCookie($curl->response->sessionid);
+        return $this->setError($curl->response);
     }
-
-    public function getCookie() {
-        return $this->cookie;
-    }
-
 }

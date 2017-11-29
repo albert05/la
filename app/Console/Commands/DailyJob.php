@@ -6,7 +6,7 @@ use DB;
 use Illuminate\Console\Command;
 use App\Common\Helper;
 use App\Common\Koudai\User;
-use App\Common\Koudai\Signin;
+use App\Common\Koudai\Earn;
 
 class DailyJob extends Command
 {
@@ -43,9 +43,9 @@ class DailyJob extends Command
 
         $user->login();
 
-        $sign_in = new Signin($user->getCookie());
-        $sign_in->run();
-        var_dump($sign_in->getErrorMsg());
+        $earn = new Earn($user->getCookie());
+        $earn->run();
+        var_dump($earn->getErrorMsg());
 
         $this->comment($this->signature . " script is run end.\n");
         Helper::unlock($this->signature);

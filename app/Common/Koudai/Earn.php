@@ -10,16 +10,14 @@ namespace App\Common\Koudai;
 
 use \Curl\Curl;
 
-class Signin
+class Earn extends Base
 {
-    const SIGNIN_URL = "http://deposit.koudailc.com/user/login";
+    const EARN_URL = "https://deposit.koudailc.com/user-level/earn";
     const TYPE = 3; // 冒险型
-    private $cookie;
-    private $error_msg = '';
-
 
     public function __construct($cookie)
     {
+        parent::__construct(self::EARN_URL);
         $this->cookie= $cookie;
     }
 
@@ -31,16 +29,6 @@ class Signin
             'type' => self::TYPE,
         ));
 
-        if ($curl->response->code == 0) {
-            return true;
-        }
-
-        $this->error_msg = $curl->response->message;
-        return false;
+        return $this->setError($curl->response);
     }
-
-    public function getErrorMsg() {
-        return $this->error_msg;
-    }
-
 }
