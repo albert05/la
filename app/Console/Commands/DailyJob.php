@@ -36,20 +36,23 @@ class DailyJob extends Command
             return false;
         }
 
-        $username = $this->argument('username');
-        $password = $this->argument('password');
+        try {
+            $username = $this->argument('username');
+            $password = $this->argument('password');
 
-        $user = new User($username, $password);
+            $user = new User($username, $password);
 
-        $user->login();
+            $user->login();
 
-        $earn = new Earn($user->getCookie());
-        $earn->run();
-        var_dump($earn->getErrorMsg());
-
-        $this->comment($this->signature . " script is run end.\n");
-        Helper::unlock($this->signature);
-
+            $earn = new Earn($user->getCookie());
+            $earn->run();
+            var_dump($earn->getErrorMsg());
+        } catch (\Exception $e) {
+            $this->comment($e->getMessage());
+        } finally {
+            $this->comment($this->signature . " script is run end.\n");
+            Helper::unlock($this->signature);
+        }
     }
 
 }

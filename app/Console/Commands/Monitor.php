@@ -36,30 +36,38 @@ class Monitor extends Command
 
         $now  = time();
 
-        while (true) {
-            $task_list = DB::table('tasks')
-                ->where('status', 0)
-                ->get();
+        try {
+            while (true) {
+                $task_list = DB::table('tasks')
+                    ->where('status', 0)
+                    ->get();
 
-            if (!$task_list) {
-                $this->comment("task list is none");
-                sleep(5);
-            }
+                if (!$task_list) {
+                    $this->comment("task list is none");
+                    sleep(5);
+                }
 
-            $now = intval(date('gis', time()));
-            foreach ($task_list as $item) {
-                //if ($item->run_time >= $now) {
+                $now = intval(date('gis', time()));
+                foreach ($task_list as $item) {
+                    //if ($item->run_time >= $now) {
                     $this->runCmd($item->cmd);
                     $this->comment($item->cmd . " is start run.\n");
                     DB::table("tasks")->where('id', $item->id)->update(['status' => 1]);
-                //}
-            }
+                    //}
+                }
 
-            if ((time() - $now) > 300) {
-                $this->comment($this->signature . " script is run 5 minutes.\n");
-                Helper::unlock($this->signature);
-                return true;
+                if ((time() - $now) > 300) {
+                    $this->comment($this->signature . " script is run 5 minutes.\n");
+                    Helper::unlock($this->signature);
+                    return true;
+                }
             }
+        } catch (\Exception $e) {
+            $this->comment($e->getMessage());
+        } finally {
+            $this->comment($this->signature . " script is run 5 minutes.\n");
+            Helper::unlock($this->signature);
+            return true;
         }
 
     }

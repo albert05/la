@@ -34,7 +34,7 @@ class Base
 
     public function setError($response) {
         $this->error_no  = $response->code;
-        $this->error_msg = $response->message;
+        $this->error_msg = $response->message ?? '';
 
         return $response->code == 0;
     }
