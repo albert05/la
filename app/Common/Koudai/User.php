@@ -31,7 +31,7 @@ class User
             'password' => $this->password,
         ));
 
-        var_dump($curl->responseHeaders);
+        $this->cookie = $curl->response->sessionid;
     }
 
     public function getCookie() {
