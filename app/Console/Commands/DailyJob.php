@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use DB;
 use Illuminate\Console\Command;
 use App\Common\Helper;
+use App\Common\Koudai\User;
 
 class DailyJob extends Command
 {
@@ -13,7 +14,7 @@ class DailyJob extends Command
      *
      * @var string
      */
-    protected $signature = 'daily';
+    protected $signature = 'daily {username} {password}';
 
     /**
      * The console command description.
@@ -34,10 +35,15 @@ class DailyJob extends Command
             return false;
         }
 
-        var_dump($this->argument());
+        $username = $this->argument('username');
+        $password = $this->argument('password');
+
+        $user = new User($username, $password);
+
+        $user->login();
 
 
-        $this->comment($this->signature . " script is run 5 minutes.\n");
+        $this->comment($this->signature . " script is run end.\n");
         Helper::unlock($this->signature);
 
     }
