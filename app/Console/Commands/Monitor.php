@@ -55,7 +55,7 @@ class Monitor extends Command
                         $factory->createCmd($item);
                         $factory->runCmd();
                         $this->comment($factory->getCmd() . " is start run.\n");
-                        $this->updateStatus($item->id, $item->work_id, $now);
+                        $this->updateStatus($item->id, $item->work_id, $item->run_time);
                     }
                 }
 

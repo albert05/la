@@ -110,4 +110,13 @@ class Helper
         list($usec, $sec) = explode(" ", microtime());
         return floatval(date("Gis")) + $usec;
     }
+
+    /**
+     * 转换时间格式
+     * 转换时11/01/2017 12:00 AM间格式
+     * @param $timeStr
+     */
+    public function analyzeTimeStr($timeStr) {
+        return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(.*)$/', '$2\/$1\/$3', $timeStr)));
+    }
 }

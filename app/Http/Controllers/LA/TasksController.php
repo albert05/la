@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers\LA;
 
+use App\Common\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\WorkConfig;
 use Illuminate\Http\Request;
@@ -108,7 +109,7 @@ class TasksController extends Controller
                 'voucher_id' => $request->voucher_id,
                 'is_kdb_pay' => $request->is_kdb_pay,
                 'prize_number' => $request->prize_number,
-                'run_time' => date("Y-m-d H:i:s", strtotime($request->run_time)),
+                'run_time' => Helper::analyzeTimeStr($request->run_time),
                 'status' => 0,
             ]);
 
