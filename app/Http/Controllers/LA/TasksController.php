@@ -108,10 +108,9 @@ class TasksController extends Controller
                 'voucher_id' => $request->voucher_id,
                 'is_kdb_pay' => $request->is_kdb_pay,
                 'prize_number' => $request->prize_number,
-                'run_time' => $request->run_time,
+                'run_time' => date("Y-m-d H:i:s", strtotime($request->run_time)),
                 'status' => 0,
             ]);
-
 
             Log::info("Task created: title: ".$task->title." work_id: ".$task->work_id);
 

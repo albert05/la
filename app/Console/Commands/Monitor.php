@@ -35,7 +35,7 @@ class Monitor extends Command
             return false;
         }
 
-        $now  = time();
+        $t_now  = time();
 
         try {
             while (true) {
@@ -48,18 +48,18 @@ class Monitor extends Command
                     sleep(5);
                 }
 
-                $now = intval(date('gis', time()));
+                $now = date('Y-m-d H:i:s', time());
                 foreach ($task_list as $item) {
-                    //if ($item->run_time >= $now) {
-                    $factory = new Factory($item->work_id);
-                    $factory->createCmd($item);
-                    $factory->runCmd();
-                    $this->comment($factory->getCmd() . " is start run.\n");
-                    DB::table("tasks")->where('id', $item->id)->update(['status' => 1]);
-                    //}
+                    if ($item->run_time >= $now) {
+                        $factory = new Factory($item->work_id);
+                        $factory->createCmd($item);
+                        $factory->runCmd();
+                        $this->comment($factory->getCmd() . " is start run.\n");
+                        $this->updateStatus($item->id, $item->work_id, $now);
+                    }
                 }
 
-                if ((time() - $now) > 300) {
+                if ((time() - $t_now) > 300) {
                     $this->comment($this->signature . " script is run 5 minutes.\n");
                     Helper::unlock($this->signature);
                     return true;
@@ -72,6 +72,14 @@ class Monitor extends Command
             return true;
         }
 
+    }
+
+    private function updateStatus($id, $work_id, $time) {
+        if (in_array($work_id, ['daily'])) {
+            DB::table("tasks")->where('id', $id)->update(['run_time' => date("Y-m-d H:i:s", strtotime($time) + 86400)]);
+        } else {
+            DB::table("tasks")->where('id', $id)->update(['status' => 1]);
+        }
     }
 
 }
