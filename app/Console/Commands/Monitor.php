@@ -51,7 +51,7 @@ class Monitor extends Command
                 $now = intval(date('gis', time()));
                 foreach ($task_list as $item) {
                     //if ($item->run_time >= $now) {
-                    $factory = new Factory($item->id);
+                    $factory = new Factory($item->work_id);
                     $factory->createCmd($item);
                     $factory->runCmd();
                     $this->comment($factory->getCmd() . " is start run.\n");
