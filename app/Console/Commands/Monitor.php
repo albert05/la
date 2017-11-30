@@ -50,7 +50,7 @@ class Monitor extends Command
 
                 $now = date('Y-m-d H:i:s', time());
                 foreach ($task_list as $item) {
-                    if ($item->run_time >= $now) {
+                    if ($item->run_time <= $now) {
                         $factory = new Factory($item->work_id);
                         $factory->createCmd($item);
                         $factory->runCmd();
