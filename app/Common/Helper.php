@@ -42,4 +42,13 @@ class Helper
 
         return unlink($lock_file);
     }
+
+    /**
+     * 过滤命令参数
+     * @param $signature
+     * @return string
+     */
+    public static function filterSignature($signature) {
+        return trim(preg_replace('/{(\w+)/}', '', $signature));
+    }
 }
