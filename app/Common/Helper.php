@@ -117,6 +117,6 @@ class Helper
      * @param $timeStr
      */
     public function analyzeTimeStr($timeStr) {
-        return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(.*)$/', '$2\/$1\/$3', $timeStr)));
+        return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(\d{4})(.*)$/', '$3\/$1\/$2$4', $timeStr)));
     }
 }
