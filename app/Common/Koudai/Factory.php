@@ -9,7 +9,6 @@
 namespace App\Common\Koudai;
 
 use App\Common\Helper;
-use App\Models\Task;
 
 class Factory
 {
@@ -20,17 +19,17 @@ class Factory
         $this->taskId = $task_id;
     }
 
-    public function createCmd(Task $task)
+    public function createCmd($task)
     {
         $method = "create" . ucfirst($this->taskId) . "Cmd";
-        if (method_exists(self, $method)) {
+        if (method_exists($this, $method)) {
             return $this->$method($task);
         }
 
         return false;
     }
 
-    private function createDailyCmd(Task $task) {
+    private function createDailyCmd($task) {
         $this->cmd = Helper::getBash() . " {$this->taskId} " . $task->user_key . Helper::getLogOutput($this->taskId);
         return true;
     }
