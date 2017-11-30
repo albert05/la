@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Common\Koudai\KdUser;
+use App\Common\Koudai\Shake;
 use App\Models\UserInfo;
 use Illuminate\Console\Command;
 use App\Common\Helper;
@@ -31,17 +32,19 @@ class DailyJob extends Command
      */
     public function handle()
     {
-        if (!Helper::Lock($this->signature)) {
-            $this->comment($this->signature . " script is exists.\n");
+        $user_id = $this->argument('id');
+
+        $lock_name = $this->signature . $user_id;
+
+        if (!Helper::Lock($lock_name)) {
+            $this->comment($lock_name . " script is exists.\n");
             return false;
         }
 
         try {
-            $user_id = $this->argument('id');
+            $this->comment("{$lock_name} start.\n");
 
             $user = UserInfo::where('user_key', $user_id)->firstOrFail();
-
-            var_dump($user);
 
             $kd_user = new KdUser($user->user_name, $user->password);
 
@@ -49,12 +52,16 @@ class DailyJob extends Command
 
             $earn = new Earn($kd_user->getCookie());
             $earn->doJob();
-            var_dump($earn->getErrorMsg());
+            $this->comment("earn result: " . $earn->getErrorMsg());
+
+            $shake = new Shake($kd_user->getCookie());
+            $shake->doJob();
+            $this->comment("shake result: " . $shake->getErrorMsg());
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
         } finally {
-            $this->comment($this->signature . " script is run end.\n");
-            Helper::unlock($this->signature);
+            $this->comment("{$lock_name} end.\n");
+            Helper::unlock($lock_name);
         }
     }
 
