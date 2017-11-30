@@ -49,6 +49,6 @@ class Helper
      * @return string
      */
     public static function filterSignature($signature) {
-        return trim(preg_replace('/{(\w+)/}', '', $signature));
+        return trim(preg_replace('/\{(\w+)\}/', '', $signature));
     }
 }
