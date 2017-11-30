@@ -22,7 +22,7 @@ class Shake extends Base
     public function doJob()
     {
         $count = 0;
-        while ($count < $this->shake_count || $this->error_no != 0) {
+        while ($count < $this->shake_count && $this->error_no == 0) {
             $this->run(null);
             $count++;
         }

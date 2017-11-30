@@ -34,7 +34,7 @@ class DailyJob extends Command
     {
         $user_id = $this->argument('id');
 
-        $lock_name = Helper::filterSignature($this->signature) . $user_id;
+        $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");
