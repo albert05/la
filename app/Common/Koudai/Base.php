@@ -40,7 +40,7 @@ class Base
     }
 
     public function setResult($response) {
-        if ($response->order_id) {
+        if (property_exists($response, 'order_id')) {
             $this->order_id = $response->order_id;
         }
         $this->error_no  = $response->code;

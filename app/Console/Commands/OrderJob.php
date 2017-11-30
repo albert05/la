@@ -55,7 +55,7 @@ class OrderJob extends Command
 
             $kd_user->login();
 
-            $order = new Order($kd_user->getCookie());
+            $order = new Order($kd_user->getCookie(), $user->pay_passwd);
             $order->setProductId($product_id);
             $order->setMoney($money);
             $order->setIsKdbPay($is_kdb_pay);
