@@ -16,7 +16,7 @@ class Shake extends Base
     public function __construct($cookie)
     {
         parent::__construct(self::SHAKE_URL);
-        $this->cookie= $cookie;
+        $this->cookie = $cookie;
     }
 
     public function doJob()

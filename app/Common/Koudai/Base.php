@@ -8,6 +8,7 @@
 
 namespace App\Common\Koudai;
 
+use App\Common\Helper;
 use \Curl\Curl;
 
 class Base
@@ -17,6 +18,7 @@ class Base
     protected $cookie;
     protected $error_no = 0;
     protected $error_msg = '';
+    protected $time_point = '';
 
     public function __construct($url)
     {
@@ -47,8 +49,14 @@ class Base
         $this->cookie = $cookie;
     }
 
+    public function setTimePoint($time_point) {
+        $this->time_point = $time_point;
+    }
+
     public function run($params)
     {
+        $this->wait();
+
         if ($this->cookie) {
             $this->curl->setCookie('SESSIONID', $this->cookie);
         }
@@ -58,5 +66,19 @@ class Base
             $this->setCookie($this->curl->response->sessionid);
         }
         return $this->setError($this->curl->response);
+    }
+
+    private function wait() {
+        if (!$this->time_point) {
+            return true;
+        }
+
+        $now = Helper::getMicrotime();
+
+        while ($now < $this->time_point) {
+            usleep(10000); // 10毫秒
+        }
+
+        return true;
     }
 }

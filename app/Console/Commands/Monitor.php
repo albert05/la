@@ -68,7 +68,6 @@ class Monitor extends Command
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
         } finally {
-            $this->comment($this->signature . " script is run 5 minutes.\n");
             Helper::unlock($this->signature);
             return true;
         }

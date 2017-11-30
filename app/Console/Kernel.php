@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         // Commands\Inspire::class,
         Commands\Monitor::class,
         Commands\DailyJob::class,
+        Commands\ExchangeJob::class,
     ];
 
     /**

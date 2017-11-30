@@ -101,4 +101,13 @@ class Helper
 
         return " 1>>" . $log_path . $id . "/" . date('Y-m-d') . ".log 2>&1 & ";
     }
+
+    /**
+     * 获取当前毫秒级时间
+     * @return float
+     */
+    public static function getMicrotime() {
+        list($usec, $sec) = explode(" ", microtime());
+        return floatval(date("gis")) + $usec;
+    }
 }

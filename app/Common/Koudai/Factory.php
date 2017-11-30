@@ -34,6 +34,14 @@ class Factory
         return true;
     }
 
+    //{id} {product_id} {time_point} {code} {prize_number}
+    private function createExchangeCmd($task) {
+        $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .
+                    " " . $task->code . " " . $task->prize_number;
+        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId);
+        return true;
+    }
+
     public function runCmd()
     {
         if ($this->cmd) {

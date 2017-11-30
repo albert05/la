@@ -16,7 +16,7 @@ class Earn extends Base
     public function __construct($cookie)
     {
         parent::__construct(self::EARN_URL);
-        $this->cookie= $cookie;
+        $this->cookie = $cookie;
     }
 
     public function doJob()
