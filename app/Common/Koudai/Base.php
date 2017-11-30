@@ -80,6 +80,7 @@ class Base
             $now = Helper::getMicrotime();
         }
 
+        echo $now . PHP_EOL;
         return true;
     }
 }

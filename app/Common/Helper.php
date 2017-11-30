@@ -108,6 +108,6 @@ class Helper
      */
     public static function getMicrotime() {
         list($usec, $sec) = explode(" ", microtime());
-        return floatval(date("gis")) + $usec;
+        return floatval(date("Gis")) + $usec;
     }
 }
