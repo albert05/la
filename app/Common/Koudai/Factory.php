@@ -42,6 +42,14 @@ class Factory
         return true;
     }
 
+    //{id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id}
+    private function createOrderCmd($task) {
+        $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .
+            " " . $task->money . " " . $task->is_kdb_pay . " " . $task->voucher_id;
+        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId);
+        return true;
+    }
+
     public function runCmd()
     {
         if ($this->cmd) {

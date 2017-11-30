@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\Monitor::class,
         Commands\DailyJob::class,
         Commands\ExchangeJob::class,
+        Commands\OrderJob::class,
     ];
 
     /**

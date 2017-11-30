@@ -19,6 +19,7 @@ class Base
     protected $error_no = 0;
     protected $error_msg = '';
     protected $time_point = '';
+    protected $order_id = '';
 
     public function __construct($url)
     {
@@ -34,7 +35,14 @@ class Base
         return $this->error_msg;
     }
 
-    public function setError($response) {
+    public function setUrl($url) {
+        $this->url = $url;
+    }
+
+    public function setResult($response) {
+        if ($response->order_id) {
+            $this->order_id = $response->order_id;
+        }
         $this->error_no  = $response->code;
         $this->error_msg = $response->message ?? '';
 
@@ -65,7 +73,7 @@ class Base
         if (!$this->cookie) {
             $this->setCookie($this->curl->response->sessionid);
         }
-        return $this->setError($this->curl->response);
+        return $this->setResult($this->curl->response);
     }
 
     private function wait() {

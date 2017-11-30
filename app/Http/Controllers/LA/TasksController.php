@@ -98,7 +98,7 @@ class TasksController extends Controller
             $task = Task::create([
                 'title' => $request->title,
                 'user_name' => Auth::user()->name,
-                'cmd' => $this->getCmd($request),
+                'cmd' => '',
                 'work_id' => $request->work_id,
                 'user_key' => $request->user_key,
                 'time_point' => $request->time_point,
@@ -120,61 +120,6 @@ class TasksController extends Controller
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
         }
-    }
-
-    private function getCmd(Request $request) {
-        $bash = $this->getBash();
-        $log = $this->getLogOutput($request);
-        $params = $this->getParams($request);
-
-        return $bash . $params . $log;
-    }
-
-    private function getBash() {
-        $global_config = DB::table('workconfigs')
-            ->where('work_id', 'global')
-            ->lists('value', 'key');
-
-        $cmd = '';
-        $script_path = '';
-        foreach ($global_config as $k => $v) {
-            if ($k == 'cmd') {
-                $cmd = $v;
-            } elseif($k == 'script_path') {
-                $script_path = $v;
-            }
-        }
-
-
-        return " " . $cmd . " " . $script_path . " ";
-    }
-
-    private function getLogOutput(Request $request) {
-        $global_config = DB::table('workconfigs')
-            ->where('work_id', 'global')
-            ->lists( 'value', 'key');
-
-        $log_path = '/tmp/';
-        foreach ($global_config as $k => $v) {
-            if ($k == 'log_path') {
-                $log_path = $v;
-            }
-        }
-
-        $path = $log_path . $request->work_id;
-        if (!is_dir($path)) {
-            mkdir($path, 0777, true);
-        }
-
-        return " 1>>" . $log_path . $request->work_id . "/" . date('Y-m-d') . ".log 2>&1 & ";
-
-    }
-
-    private function getParams(Request $request) {
-        return " id:" . $request->user_key . " job:" . $request->work_id .  " product_id:" . $request->product_id .
-                " time_point:" . $request->time_point . " code:" . $request->code . " money:" . $request->money .
-                " voucher_id:" . $request->voucher_id . " is_kdb_pay:" . $request->is_kdb_pay .
-                " prize_number:" . $request->prize_number . " ";
     }
 
     /**
