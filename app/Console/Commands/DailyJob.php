@@ -39,7 +39,7 @@ class DailyJob extends Command
         try {
             $user_id = $this->argument('id');
 
-            $user = UserInfo::where('user_key', $user_id)->get();
+            $user = UserInfo::where('user_key', $user_id)->firstOrFail();
 
             var_dump($user);
 
