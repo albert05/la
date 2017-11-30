@@ -11,6 +11,7 @@ namespace App\Common\Koudai;
 class Shake extends Base
 {
     const SHAKE_URL = "https://deposit.koudailc.com/daily-shake/daily-shake-award";
+    private $shake_count = 3;
 
     public function __construct($cookie)
     {
@@ -20,6 +21,16 @@ class Shake extends Base
 
     public function doJob()
     {
-        return $this->run(null);
+        $count = 0;
+        while ($count < $this->shake_count || $this->error_no != 0) {
+            $this->run(null);
+            $count++;
+        }
+
+        return $this->error_no == 0;
+    }
+
+    public function setShakeCount($count) {
+        $this->shake_count = $count;
     }
 }

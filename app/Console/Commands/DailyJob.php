@@ -37,12 +37,12 @@ class DailyJob extends Command
         $lock_name = $this->signature . $user_id;
 
         if (!Helper::Lock($lock_name)) {
-            $this->comment($lock_name . " script is exists.\n");
+            $this->comment($lock_name . " script is exists.");
             return false;
         }
 
         try {
-            $this->comment("{$lock_name} start.\n");
+            $this->comment("{$lock_name} start.");
 
             $user = UserInfo::where('user_key', $user_id)->firstOrFail();
 
@@ -60,7 +60,7 @@ class DailyJob extends Command
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
         } finally {
-            $this->comment("{$lock_name} end.\n");
+            $this->comment("{$lock_name} end.");
             Helper::unlock($lock_name);
         }
     }
