@@ -8,7 +8,7 @@
  */
 namespace App\Common\Koudai;
 
-class User extends Base
+class KdUser extends Base
 {
     const LOGIN_URL = "http://deposit.koudailc.com/user/login";
     private $username;

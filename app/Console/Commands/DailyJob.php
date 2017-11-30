@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use DB;
+use App\Common\Koudai\KdUser;
+use App\Models\UserInfo;
 use Illuminate\Console\Command;
 use App\Common\Helper;
-use App\Common\Koudai\User;
 use App\Common\Koudai\Earn;
 
 class DailyJob extends Command
@@ -15,7 +15,7 @@ class DailyJob extends Command
      *
      * @var string
      */
-    protected $signature = 'daily {username} {password}';
+    protected $signature = 'daily {id}';
 
     /**
      * The console command description.
@@ -37,14 +37,17 @@ class DailyJob extends Command
         }
 
         try {
-            $username = $this->argument('username');
-            $password = $this->argument('password');
+            $user_id = $this->argument('id');
 
-            $user = new User($username, $password);
+            $user = UserInfo::where('user_key', $user_id)->get();
 
-            $user->login();
+            var_dump($user);
 
-            $earn = new Earn($user->getCookie());
+            $kd_user = new KdUser($user->user_name, $user->password);
+
+            $kd_user->login();
+
+            $earn = new Earn($kd_user->getCookie());
             $earn->doJob();
             var_dump($earn->getErrorMsg());
         } catch (\Exception $e) {
