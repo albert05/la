@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Common\Koudai\Factory;
 use DB;
 use Illuminate\Console\Command;
 use App\Common\Helper;
@@ -50,8 +51,10 @@ class Monitor extends Command
                 $now = intval(date('gis', time()));
                 foreach ($task_list as $item) {
                     //if ($item->run_time >= $now) {
-                    $this->runCmd($item->cmd);
-                    $this->comment($item->cmd . " is start run.\n");
+                    $factory = new Factory($item->id);
+                    $factory->createCmd($item);
+                    $factory->runCmd();
+                    $this->comment($factory->getCmd() . " is start run.\n");
                     DB::table("tasks")->where('id', $item->id)->update(['status' => 1]);
                     //}
                 }
@@ -72,7 +75,4 @@ class Monitor extends Command
 
     }
 
-    private function runCmd($cmd) {
-        exec($cmd);
-    }
 }
