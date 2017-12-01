@@ -204,7 +204,21 @@ class TasksController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();;
             }
 
-            Module::updateRow("Tasks", $request, $id);
+            Task::where('id', $id)->update([
+                'title' => $request->title,
+                'work_id' => $request->work_id,
+                'user_key' => $request->user_key,
+                'time_point' => $request->time_point,
+                'product_id' => $request->product_id,
+                'code' => $request->code,
+                'money' => $request->money,
+                'voucher_id' => $request->voucher_id,
+                'is_kdb_pay' => $request->is_kdb_pay,
+                'prize_number' => $request->prize_number,
+                'run_time' => $request->run_time,
+            ]);
+
+//            Module::updateRow("Tasks", $request, $id);
 
             return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
 
