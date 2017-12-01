@@ -1,8 +1,5 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/userinfos') }}">UserInfos</a> :
-@endsection
 @section("contentheader_description", $userinfo->$view_col)
 @section("section", "UserInfos")
 @section("section_url", url(config('laraadmin.adminRoute') . '/userinfos'))
