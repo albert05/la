@@ -26,7 +26,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>{{$exchange}}<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{$exchange}}</h3>
                   <p>Exchange Task</p>
                 </div>
                 <div class="icon">
