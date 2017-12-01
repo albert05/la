@@ -56,7 +56,18 @@
                 {!! Form::open(['action' => 'LA\TasksController@store', 'id' => 'task-add-form']) !!}
                 <div class="modal-body">
                     <div class="box-body">
-                        @la_form($module)
+                        @la_input($module, 'title')
+                        @la_input($module, 'work_id')
+                        @la_input($module, 'user_key')
+                        @la_input($module, 'time_point')
+                        @la_input($module, 'run_time')
+                        @la_input($module, 'product_id')
+                        @la_input($module, 'code')
+                        @la_input($module, 'money')
+                        @la_input($module, 'voucher_id')
+                        @la_input($module, 'is_kdb_pay')
+                        @la_input($module, 'prize_number')
+                        {{--@la_form($module)--}}
                     </div>
                 </div>
                 <div class="modal-footer">
