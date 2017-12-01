@@ -34,9 +34,9 @@
 				@la_input($module, 'title')
 				@la_input($module, 'work_id')
 				@la_input($module, 'user_key')
-				{{--@la_input($module, 'run_time')--}}
-				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'> <input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
-					<input type="hidden" id="run_time_v" value="@if(1){{$task->run_time}}@endif">
+				@la_input($module, 'run_time')
+				{{--<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'> <input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>--}}
+					{{--<input type="hidden" id="run_time_v" value="@if(1){{$task->run_time}}@endif">--}}
 					@la_input($module, 'time_point')
 					@la_input($module, 'product_id')
 					@la_input($module, 'code')
@@ -67,7 +67,7 @@ $(function () {
         format: 'YYYY-MM-DD HH:mm::ss',
     });
 
-    $("#datetimepicker").val($("#run_time_v").val());
+//    $("#datetimepicker").val($("#run_time_v").val());
 });
 </script>
 @endpush
