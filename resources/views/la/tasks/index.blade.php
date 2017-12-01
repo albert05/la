@@ -59,7 +59,6 @@
                         @la_input($module, 'title')
                         @la_input($module, 'work_id')
                         @la_input($module, 'user_key')
-                        {{--@la_input($module, 'run_time')--}}
                         <div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
                         @la_input($module, 'time_point')
                         @la_input($module, 'product_id')
