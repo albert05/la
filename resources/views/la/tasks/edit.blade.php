@@ -31,28 +31,17 @@
 			<div class="col-md-8 col-md-offset-2">
 				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.tasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
 					{{--@la_form($module)--}}
-				@la_input($module, 'title')
-				@la_input($module, 'work_id')
-				@la_input($module, 'user_key')
-				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
-					@la_input($module, 'time_point')
-					@la_input($module, 'product_id')
-					@la_input($module, 'code')
-					@la_input($module, 'money')
-					@la_input($module, 'voucher_id')
-					@la_input($module, 'is_kdb_pay')
-					@la_input($module, 'prize_number')
-                    <div class="form-group">
-						<label for="role">Role* :</label>
-						<select class="form-control" required="1" data-placeholder="Select Role" rel="select2" name="role">
-							<?php $roles = App\Role::all(); ?>
-							@foreach($roles as $role)
-								@if($role->id != 1 || Entrust::hasRole("SUPER_ADMIN"))
-									<option value="{{ $role->id }}">{{ $role->name }}</option>
-								@endif
-							@endforeach
-						</select>
-					</div>
+				@la_input($module, 'title', $task->title)
+				@la_input($module, 'work_id', $task->work_id)
+				@la_input($module, 'user_key', $task->user_key)
+				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value="{{$task->run_time}}"></div>
+					@la_input($module, 'time_point', $task->time_point)
+					@la_input($module, 'product_id', $task->product_id)
+					@la_input($module, 'code', $task->code)
+					@la_input($module, 'money', $task->money)
+					@la_input($module, 'voucher_id', $task->voucher_id)
+					@la_input($module, 'is_kdb_pay', $task->is_kdb_pay)
+					@la_input($module, 'prize_number', $task->prize_number)
 					<br>
 					<div class="form-group">
 						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">Cancel</a></button>
