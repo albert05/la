@@ -59,8 +59,9 @@
                         @la_input($module, 'title')
                         @la_input($module, 'work_id')
                         @la_input($module, 'user_key')
+                        {{--@la_input($module, 'run_time')--}}
+                        <div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""><span class='input-group-addon'><span class='fa fa-calendar'></span></span></div>
                         @la_input($module, 'time_point')
-                        @la_input($module, 'run_time')
                         @la_input($module, 'product_id')
                         @la_input($module, 'code')
                         @la_input($module, 'money')
