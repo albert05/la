@@ -2368,7 +2368,8 @@
 
     $.fn.datetimepicker.defaults = {
         timeZone: 'Etc/UTC',
-        format: false,
+        format: 'Cutstom',
+        CutstomFormat: 'yyyy-MM-dd HH:mm:ss',
         dayViewHeaderFormat: 'MMMM YYYY',
         extraFormats: false,
         stepping: 1,
