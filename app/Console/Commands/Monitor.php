@@ -65,6 +65,9 @@ class Monitor extends Command
                     Helper::unlock($this->signature);
                     return true;
                 }
+
+                $this->comment("task sleep 5 seconds.");
+                sleep(5);
             }
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
@@ -81,6 +84,8 @@ class Monitor extends Command
         } else {
             DB::table("tasks")->where('id', $id)->update(['status' => 1]);
         }
+
+        return true;
     }
 
 }
