@@ -193,7 +193,12 @@ class UserInfosController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			Module::updateRow("UserInfos", $request, $id);
+            UserInfo::where('id', $id)->update([
+                'user_key' => $request->user_key,
+                'user_name' => $request->user_name,
+                'password' => $request->password,
+                'pay_passwd' => $request->pay_passwd,
+            ]);
         	
 			return redirect()->route(config('laraadmin.adminRoute') . '.userinfos.index');
 			
