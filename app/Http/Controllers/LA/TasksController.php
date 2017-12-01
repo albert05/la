@@ -222,7 +222,7 @@ class TasksController extends Controller
     public function destroy($id)
     {
         if(Module::hasAccess("Tasks", "delete")) {
-            WorkList::find($id)->delete();
+            Task::find($id)->delete();
 
             // Redirecting to index() method
             return redirect()->route(config('laraadmin.adminRoute') . '.tasks.index');
