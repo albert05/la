@@ -109,7 +109,7 @@ class TasksController extends Controller
                 'voucher_id' => $request->voucher_id,
                 'is_kdb_pay' => $request->is_kdb_pay,
                 'prize_number' => $request->prize_number,
-                'run_time' => Helper::analyzeTimeStr($request->run_time),
+                'run_time' => $request->run_time,
                 'status' => 0,
             ]);
 
