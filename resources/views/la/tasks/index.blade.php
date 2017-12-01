@@ -107,10 +107,8 @@
         $("#employee-add-form").validate({
 
         });
-        var date = new Date();
         $("#datetimepicker").datetimepicker({
-            format: 'yyyy-mm-dd hh:ii::ss',
-            startDate: date
+            format: 'yyyy-MM-dd HH:mm::ss',
         });
     });
 </script>
