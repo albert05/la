@@ -216,6 +216,7 @@ class TasksController extends Controller
                 'is_kdb_pay' => $request->is_kdb_pay,
                 'prize_number' => $request->prize_number,
                 'run_time' => $request->run_time,
+                'status' => $request->status,
             ]);
 
 //            Module::updateRow("Tasks", $request, $id);
