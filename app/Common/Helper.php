@@ -116,7 +116,7 @@ class Helper
      * 转换时11/01/2017 12:00 AM间格式
      * @param $timeStr
      */
-    public function analyzeTimeStr($timeStr) {
+    public static function analyzeTimeStr($timeStr) {
         return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(\d{4})(.*)$/', '$3\/$1\/$2$4', $timeStr)));
     }
 
@@ -131,5 +131,22 @@ class Helper
         }
 
         return $user_agent_pool[0];
+    }
+
+    public static function analyzeUrl($url) {
+        $query = parse_url($url, PHP_URL_QUERY);
+
+        if ($query == false) {
+            return false;
+        }
+
+        $query_arr = [];
+        $query_list = explode("&", $query);
+        foreach ($query_list as $value) {
+            $item = explode("=", $value);
+            $query_arr[$item[0]] = $item[1];
+        }
+
+        return $query_arr;
     }
 }
