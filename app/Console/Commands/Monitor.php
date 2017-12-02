@@ -79,13 +79,28 @@ class Monitor extends Command
     }
 
     private function updateStatus($id, $work_id, $time) {
-        if (in_array($work_id, ['daily'])) {
+        if ($work_id == 'daily') {
             DB::table("tasks")->where('id', $id)->update(['run_time' => date("Y-m-d H:i:s", strtotime($time) + 86400)]);
+        } elseif ($work_id == 'share') {
+            DB::table("tasks")->where('id', $id)->update(['run_time' => $this->handleShareTime($time)]);
         } else {
             DB::table("tasks")->where('id', $id)->update(['status' => 1]);
         }
 
         return true;
+    }
+
+    private function handleShareTime($time) {
+        $hour = intval(date("H", strtotime($time)));
+
+
+        if ($hour <= 10) {
+            $date = date("Y-m-d 12:i:s", strtotime($time));
+        } else {
+            $date = date("Y-m-d H:i:s", strtotime($time) + 7200);
+        }
+
+        return $date;
     }
 
 }
