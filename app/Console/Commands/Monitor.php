@@ -91,14 +91,12 @@ class Monitor extends Command
     }
 
     private function handleShareTime($time) {
-        if (time() > strtotime($time)) {
-            $time = date("Y-m-d H:i:s");
-        }
+        $time = max(date("Y-m-d H:30:s", time()), date("Y-m-d H:30:s", strtotime($time)));
 
         $hour = intval(date("H", strtotime($time)));
 
         if ($hour <= 10) {
-            $date = date("Y-m-d 12:i:s", strtotime($time));
+            $date = date("Y-m-d 11:30:00", time());
         } else {
             $date = date("Y-m-d H:i:s", strtotime($time) + 7200);
         }
