@@ -49,7 +49,7 @@ class ShareJob extends Command
 //
 //            $kd_user->login();
 
-            $spider = new Spider();
+            $spider = new Spider(Spider::BBS_URL);
             $spider->setUserAgent(Helper::getUserAgent());
             $spider->doJob();
             $spider->analyseBbs();
