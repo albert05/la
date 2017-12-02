@@ -9,6 +9,7 @@ namespace App\Http\Controllers\LA;
 use App\Common\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\WorkConfig;
+use App\Models\WorkList;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
@@ -171,9 +172,13 @@ class TasksController extends Controller
 
                 $module->row = $task;
 
+                $work_list = DB::table('worklists')
+                    ->lists('name', 'work_id');
+
                 return view('la.tasks.edit', [
                     'module' => $module,
                     'view_col' => $this->view_col,
+                    'work_list' => $work_list,
                 ])->with('task', $task);
             } else {
                 return view('errors.404', [
