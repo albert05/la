@@ -16,6 +16,7 @@ class Spider extends Base
 //    const BBS_URL = "https://bbs.koudailc.com/m";
 //    const BBS_URL = "https://bbs.koudailc.com/category/54";
     const BBS_URL = "https://bbs.koudailc.com/?/m/ajax/elite_list/sort_type-new__day-0__is_recommend-0_page-1";
+    const ORDER_URL = "https://www.koudailc.com/list/detail?id=%s&channelId=4";
     private $response;
     private $analyse_data = [];
 
@@ -59,6 +60,23 @@ class Spider extends Base
         } catch (\Exception $e) {
             echo "{$e->getMessage()}\n";
         }
+    }
+
+    public function analyseOrder() {
+        $crawler = new Crawler();
+        $crawler->addHtmlContent($this->response);
+
+        try {
+            $exists = $crawler->filterXPath('//div[contains(@class,"koudai_sjk")]')->text();
+            if ($exists) {
+                echo $exists;
+            }
+
+        } catch (\Exception $e) {
+            echo "{$e->getMessage()}\n";
+        }
+
+        return false;
     }
 
 }
