@@ -36,9 +36,9 @@
 				{{--@la_input($module, 'work_id')--}}
 				<div class="form-group">
 					<label for="word_id">Work Id :</label>
-					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="-1" aria-hidden="true">
+					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="0" aria-hidden="true">
 						@foreach ($work_list as $k => $v)
-							<option value="{{$k}}" @if($k == $task->work_id) selected@endif>{{$v}}</option>
+							<option value="{{$k}}" @if($k == $task->work_id) selected @endif>{{$v}}</option>
 						@endforeach
 					</select>
 					<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
@@ -49,7 +49,24 @@
 		</div>
 				{{--@la_input($module, 'work_id')--}}
 
-				@la_input($module, 'user_key')
+				<div class="form-group">
+					<label for="user_key">User Key :</label>
+					<select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true">
+						@foreach ($user_list as $k => $v)
+							<option value="{{$k}}" @if($k == $task->user_key) selected @endif>{{$v}}</option>
+						@endforeach
+					</select>
+					<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
+					<span class="selection">
+				</span>
+				<span class="dropdown-wrapper" aria-hidden="true"></span>
+			</span>
+				</div>
+
+				{{--@la_input($module, 'user_key')--}}
+
+
+
 				{{--@la_input($module, 'run_time')--}}
 				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'> <input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
 					<input type="hidden" id="run_time_v" value="@if(1){{$task->run_time}}@endif">

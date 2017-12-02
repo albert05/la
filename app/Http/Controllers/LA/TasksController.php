@@ -57,10 +57,17 @@ class TasksController extends Controller
         $module = Module::get('Tasks');
 
         if(Module::hasAccess($module->id)) {
+            $work_list = DB::table('worklists')
+                ->lists('name', 'work_id');
+            $user_list = DB::table('userinfos')
+                ->lists('user_key', 'user_key');
+
             return View('la.tasks.index', [
                 'show_actions' => $this->show_action,
                 'listing_cols' => $this->listing_cols,
-                'module' => $module
+                'module' => $module,
+                'work_list' => $work_list,
+                'user_list' => $user_list,
             ]);
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
@@ -174,11 +181,14 @@ class TasksController extends Controller
 
                 $work_list = DB::table('worklists')
                     ->lists('name', 'work_id');
+                $user_list = DB::table('userinfos')
+                    ->lists('user_key', 'user_key');
 
                 return view('la.tasks.edit', [
                     'module' => $module,
                     'view_col' => $this->view_col,
                     'work_list' => $work_list,
+                    'user_list' => $user_list,
                 ])->with('task', $task);
             } else {
                 return view('errors.404', [
