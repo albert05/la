@@ -37,10 +37,12 @@ class DashboardController extends Controller
         $daily_count = Task::where('work_id', 'daily')->count();
         $exchange_count = Task::where('work_id', 'exchange')->count();
         $order_count = Task::where('work_id', 'order')->count();
+        $share_count = Task::where('work_id', 'share')->count();
         return view('la.dashboard', [
             'daily' => $daily_count,
             'exchange' => $exchange_count,
             'order' => $order_count,
+            'share' => $share_count,
         ]);
     }
 }
