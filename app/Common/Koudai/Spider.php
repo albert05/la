@@ -8,7 +8,7 @@
  */
 namespace App\Common\Koudai;
 
-use Symfony\DomCrawler\Crawler;//Component\
+use Symfony\Component\DomCrawler\Crawler;
 
 class Spider extends Base
 {
