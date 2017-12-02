@@ -15,7 +15,7 @@ class ShareJob extends Command
      *
      * @var string
      */
-    protected $signature = 'share {id}';
+    protected $signature = 'share';
 
     /**
      * The console command description.
@@ -31,9 +31,9 @@ class ShareJob extends Command
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
+//        $user_id = $this->argument('id');
 
-        $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
+        $lock_name = Helper::filterSignature($this->signature);//. " " . $user_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");
