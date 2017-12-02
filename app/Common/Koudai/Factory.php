@@ -34,6 +34,10 @@ class Factory
         return true;
     }
 
+    private function createShareCmd($task) {
+        return $this->createDailyCmd($task);
+    }
+
     //{id} {product_id} {time_point} {code} {prize_number}
     private function createExchangeCmd($task) {
         $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .
