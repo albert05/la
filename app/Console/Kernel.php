@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\ExchangeJob::class,
         Commands\OrderJob::class,
         Commands\ShareJob::class,
+        Commands\TestJob::class,
     ];
 
     /**
