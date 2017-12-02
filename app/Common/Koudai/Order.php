@@ -17,6 +17,7 @@ class Order extends Base
     private $is_kdb_pay = 0;
     private $voucher_id = '';
     private $pay_passwd = '';
+    private $is_wait_sjk = 0;
 
     public function __construct($cookie, $pay_passwd)
     {
@@ -39,6 +40,11 @@ class Order extends Base
         $this->preJob();
         if ($this->getErrorNo() != 0) {
             return false;
+        }
+
+        if ($this->is_wait_sjk) {
+            $spider = new Spider(sprintf(Spider::ORDER_URL, $this->product_id));
+            $spider->waitOrder();
         }
 
         $this->setUrl(self::ORDER_DO_URL);
@@ -68,5 +74,9 @@ class Order extends Base
 
     public function setVoucherId($voucher_id) {
         $this->voucher_id = $voucher_id;
+    }
+
+    public function setIsWaitSjk($is_wait_sjk) {
+        $this->is_wait_sjk = $is_wait_sjk;
     }
 }

@@ -16,7 +16,7 @@ class OrderJob extends Command
      *
      * @var string
      */
-    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id}';
+    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk}';
 
     /**
      * The console command description.
@@ -38,6 +38,7 @@ class OrderJob extends Command
         $is_kdb_pay = $this->argument('is_kdb_pay');
         $time_point = $this->argument('time_point');
         $voucher_id = $this->argument('voucher_id');
+        $is_wait_sjk = $this->argument('is_wait_sjk');
 
         $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
 
@@ -61,6 +62,7 @@ class OrderJob extends Command
             $order->setIsKdbPay($is_kdb_pay);
             $order->setTimePoint($time_point);
             $order->setVoucherId($voucher_id);
+            $order->setIsWaitSjk($is_wait_sjk);
             $order->doJob();
             $this->comment("order result: " . $order->getErrorMsg());
 

@@ -44,6 +44,7 @@
 					@la_input($module, 'voucher_id')
 					@la_input($module, 'is_kdb_pay')
 					@la_input($module, 'prize_number')
+					@la_input($module, 'is_wait_sjk')
 					@la_input($module, 'status')
 					<br>
 					<div class="form-group">

@@ -67,16 +67,21 @@ class Spider extends Base
         $crawler->addHtmlContent($this->response);
 
         try {
-            $exists = $crawler->filterXPath('//div[contains(@class,"koudai_sjk")]')->text();
-            if ($exists) {
-                echo $exists;
-            }
+            $crawler->filterXPath('//div[contains(@class,"koudai_sjk")]')->text();
 
         } catch (\Exception $e) {
-            echo "{$e->getMessage()}\n";
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    public function waitOrder() {
+        $this->doJob();
+        while(!$this->analyseOrder()) {
+            usleep(10000);
+            $this->doJob();
+        }
     }
 
 }
