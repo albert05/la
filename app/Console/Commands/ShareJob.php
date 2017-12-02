@@ -50,8 +50,9 @@ class ShareJob extends Command
 //            $kd_user->login();
 
             $spider = new Spider();
+            $spider->setUserAgent(Helper::getUserAgent());
             $spider->doJob();
-            $spider->analyse();
+            $spider->analyseBbs();
 //            $this->comment("spider result: " . $earn->getErrorMsg());
 
 //            $shake = new Shake($kd_user->getCookie());

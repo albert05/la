@@ -8,12 +8,13 @@
  */
 namespace App\Common\Koudai;
 
-use Symfony\Component\DomCrawler\Crawler;
+use Symfony\DomCrawler\Crawler;//Component\
 
 class Spider extends Base
 {
 //    const BBS_URL = "https://bbs.koudailc.com/m";
-    const BBS_URL = "https://bbs.koudailc.com/category/54";
+//    const BBS_URL = "https://bbs.koudailc.com/category/54";
+    const BBS_URL = "https://bbs.koudailc.com/?/m/ajax/elite_list/sort_type-new__day-0__is_recommend-0_page-1";
     private $response;
 
     public function __construct()
@@ -23,7 +24,7 @@ class Spider extends Base
 
     public function doJob()
     {
-//        $this->curl->setUserAgent($this->user_agent);
+        $this->curl->setUserAgent($this->user_agent);
         $this->curl->get($this->url);
 
         $this->response = $this->curl->response;
@@ -34,7 +35,7 @@ class Spider extends Base
     }
 
 
-    public function analyse() {
+    public function analyseBbs() {
         //进行XPath页面数据抽取
         $data    = []; //结构化数据存本数组
         $crawler = new Crawler();
@@ -42,7 +43,13 @@ class Spider extends Base
 
         try {
 
-            $data['name'] = $crawler->filterXPath('//*[@id="cg_content"]/div[contains(@class,"cg_content_left")]/div[contains(@class,"cg_down")]/div[1]/div')->text();
+//            $data['name'] = $crawler->filterXPath('//*[@id="cg_content"]/div[contains(@class,"cg_content_left")]/div[contains(@class,"cg_down")]/div[1]/div')->text();
+            $list = $crawler->filterXPath('//a')->each();
+
+            $count = count($list);
+            for ($i = 0; $i < $count; $i++) {
+                $data[] = $crawler->filterXPath("//a[" . $i . "][@href]")->text();
+            }
 
 
             var_dump($data);

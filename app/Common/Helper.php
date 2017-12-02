@@ -120,7 +120,7 @@ class Helper
         return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(\d{4})(.*)$/', '$3\/$1\/$2$4', $timeStr)));
     }
 
-    public function getUserAgent($is_rand = false) {
+    public static function getUserAgent($is_rand = false) {
         $user_agent_pool = [
             "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1",
         ];
