@@ -32,7 +32,13 @@ class TasksController extends Controller
 {
     public $show_action = true;
     public $view_col = 'title';
-    public $listing_cols = ['id', 'title', 'work_id', 'user_key', 'run_time', 'time_point', 'product_id', 'money', 'code', 'voucher_id', 'is_kdb_pay', 'prize_number', 'is_wait_sjk', 'status'];
+    public $listing_cols = [
+        'id', 'title', 'work_id',
+        'user_key', 'run_time',
+        'time_point', 'product_id',
+        'money', 'code', 'voucher_id',
+        'is_kdb_pay', 'prize_number',
+        'is_wait_sjk', 'status', 'result'];
 
     public function __construct() {
 
