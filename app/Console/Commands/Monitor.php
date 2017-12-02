@@ -95,8 +95,8 @@ class Monitor extends Command
 
         $hour = intval(date("H", strtotime($time)));
 
-        if ($hour <= 10) {
-            $date = date("Y-m-d 11:30:00", time());
+        if ($hour <= 17) {
+            $date = date("Y-m-d 17:30:00", time());
         } else {
             $date = date("Y-m-d H:i:s", strtotime($time) + 7200);
         }
