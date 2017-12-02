@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Common\Koudai\Exchange;
+use App\Models\Task;
 use Illuminate\Console\Command;
 use App\Common\Helper;
 
@@ -13,7 +14,7 @@ class ExchangeJob extends Command
      *
      * @var string
      */
-    protected $signature = 'exchange {id} {product_id} {time_point} {code} {prize_number}';
+    protected $signature = 'exchange {id} {product_id} {time_point} {code} {prize_number} {task_id}';
 
     /**
      * The console command description.
@@ -34,6 +35,7 @@ class ExchangeJob extends Command
         $product_id = $this->argument('product_id');
         $prize_number = $this->argument('prize_number');
         $time_point = $this->argument('time_point');
+        $task_id = $this->argument('task_id');
 
         $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
 
@@ -54,6 +56,11 @@ class ExchangeJob extends Command
             $exchange->setTimePoint($time_point);
             $exchange->doJob();
             $this->comment("exchange result: " . $exchange->getErrorMsg());
+
+            Task::where('id', $task_id)->update([
+                'result' => $exchange->getErrorMsg(),
+                'status' => $exchange->getErrorNo() == 0 ? 3 : 2,
+            ]);
 
         } catch (\Exception $e) {
             $this->comment($e->getMessage());

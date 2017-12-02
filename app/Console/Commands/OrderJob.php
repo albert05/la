@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Common\Koudai\Exchange;
 use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Order;
+use App\Models\Task;
 use App\Models\UserInfo;
 use Illuminate\Console\Command;
 use App\Common\Helper;
@@ -16,7 +17,7 @@ class OrderJob extends Command
      *
      * @var string
      */
-    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk}';
+    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk} {task_id}';
 
     /**
      * The console command description.
@@ -39,6 +40,7 @@ class OrderJob extends Command
         $time_point = $this->argument('time_point');
         $voucher_id = $this->argument('voucher_id');
         $is_wait_sjk = $this->argument('is_wait_sjk');
+        $task_id = $this->argument('task_id');
 
         $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
 
@@ -65,6 +67,11 @@ class OrderJob extends Command
             $order->setIsWaitSjk($is_wait_sjk);
             $order->doJob();
             $this->comment("order result: " . $order->getErrorMsg());
+
+            Task::where('id', $task_id)->update([
+                'result' => $order->getErrorMsg(),
+                'status' => $order->getErrorNo() == 0 ? 3 : 2,
+            ]);
 
         } catch (\Exception $e) {
             $this->comment($e->getMessage());

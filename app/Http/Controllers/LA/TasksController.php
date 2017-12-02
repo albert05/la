@@ -220,7 +220,7 @@ class TasksController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();;
             }
 
-            Task::where('id', $id)->update([
+            $params = [
                 'title' => $request->title,
                 'work_id' => $request->work_id,
                 'user_key' => $request->user_key,
@@ -233,8 +233,13 @@ class TasksController extends Controller
                 'is_wait_sjk' => $request->is_wait_sjk,
                 'prize_number' => $request->prize_number,
                 'run_time' => $request->run_time,
-                'status' => $request->status,
-            ]);
+            ];
+
+            if (isset($request->status)) {
+                $params['status'] = $request->status;
+            }
+
+            Task::where('id', $id)->update($params);
 
 //            Module::updateRow("Tasks", $request, $id);
 
