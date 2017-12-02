@@ -119,4 +119,17 @@ class Helper
     public function analyzeTimeStr($timeStr) {
         return date("Y-m-d H:i:s", strtotime(preg_replace('/^(\d{2})\/(\d{2})\/(\d{4})(.*)$/', '$3\/$1\/$2$4', $timeStr)));
     }
+
+    public function getUserAgent($is_rand = false) {
+        $user_agent_pool = [
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1",
+        ];
+
+        if ($is_rand) {
+            $idx = rand(0, count($user_agent_pool) - 1);
+            return $user_agent_pool[$idx] ?? $user_agent_pool[0];
+        }
+
+        return $user_agent_pool[0];
+    }
 }

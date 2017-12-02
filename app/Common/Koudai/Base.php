@@ -20,6 +20,7 @@ class Base
     protected $error_msg = '';
     protected $time_point = '';
     protected $order_id = '';
+    protected $user_agent;
 
     public function __construct($url)
     {
@@ -37,6 +38,10 @@ class Base
 
     public function setUrl($url) {
         $this->url = $url;
+    }
+
+    public function setUserAgent($user_agent) {
+        $this->user_agent = $user_agent;
     }
 
     public function setResult($response) {
