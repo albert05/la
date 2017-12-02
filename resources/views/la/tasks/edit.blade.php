@@ -38,21 +38,15 @@
 					<label for="word_id">Work Id :</label>
 					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="-1" aria-hidden="true">
 						@foreach ($work_list as $k => $v)
-							<option value="{{$k}}">{{$v}}</option>
+							<option value="{{$k}}" @if($k == $task->work_id) selected@endif>{{$v}}</option>
 						@endforeach
 					</select>
 					<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-		<span class="selection">
-			<span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-word_id-yg-container">
-				<span class="select2-selection__rendered" id="select2-word_id-yg-container" title="{{$work_list[$task->work_id]}}">{{$task->work_id}}</span>
-				<span class="select2-selection__arrow" role="presentation">
-					<b role="presentation"></b>
+					<span class="selection">
 				</span>
+				<span class="dropdown-wrapper" aria-hidden="true"></span>
 			</span>
-		</span>
-	<span class="dropdown-wrapper" aria-hidden="true"></span>
-	</span>
-				</div>
+		</div>
 				{{--@la_input($module, 'work_id')--}}
 
 				@la_input($module, 'user_key')
