@@ -39,7 +39,7 @@ class Exchange extends Base
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
-        var_dump($this->curl->response);
+        var_dump($this->cookie);
 
         return $this->setResult($this->curl->response);
     }
