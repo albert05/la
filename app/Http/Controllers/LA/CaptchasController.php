@@ -40,7 +40,7 @@ class CaptchasController extends Controller
     public function index()
     {
         $db=new Storage();
-        $image_path = public_path() + 'la-assets/img/captcha/captcha.png';
+        $image_path = public_path('la-assets/img/captcha/captcha.png');
         if(isset($_POST['send'])&&$_POST['send']=="send"){
             $image=new Image($image_path);
             $code=$_POST['code'];
@@ -59,4 +59,37 @@ class CaptchasController extends Controller
 
         return View('la.captchas.index');
     }
+
+    /**
+     * Store a newly created worklist in database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        var_dump($request->code);exit;
+        if(Module::hasAccess("Captchas", "create")) {
+
+            $image_path = public_path('la-assets/img/captcha/captcha.png');
+            $db=new Storage();
+
+            $image=new Image($image_path);
+            $code= $request->code;
+            $code_arr=str_split($code);
+
+            for($i=0;$i<$image::CHAR_NUM;$i++){
+                $hash_img_data=implode("",$image->splitImage($i));
+                $db->add($code_arr[$i],$hash_img_data);
+            }
+
+            $db->save();
+
+            return redirect()->route(config('laraadmin.adminRoute') . '.captchas.index');
+
+        } else {
+            return redirect(config('laraadmin.adminRoute')."/");
+        }
+    }
+
 }
