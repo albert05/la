@@ -25,7 +25,7 @@ class Code extends Base
         parent::__construct(self::CODE_URL);
         $this->cookie = $cookie;
         $rand = time() + "" + rand(100000, 999999);
-        $this->filename = app_path("common//koudai/img/captcha_{$rand}.png");
+        $this->filename = app_path("common/koudai/img/captcha_{$rand}.png");
     }
 
     public function refresh() {
