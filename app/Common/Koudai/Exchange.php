@@ -34,7 +34,7 @@ class Exchange extends Base
             'prize_number' => $this->prize_number,
         ];
 
-        var_dump($params);
+        echo $this->code . PHP_EOL;
 
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
