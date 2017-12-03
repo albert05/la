@@ -45,9 +45,15 @@ class Base
     }
 
     public function setResult($response) {
-        $this->order_id = $response->order_id ?? '';
-        $this->error_no  = $response->code ?? -2000;
-        $this->error_msg = $response->message ?? '';
+        if (property_exists($response, 'order_id')) {
+            $this->order_id = $response->order_id;
+        }
+        if (property_exists($response, 'code')) {
+            $this->error_no = $response->code;
+        }
+        if (property_exists($response, 'message')) {
+            $this->error_msg = $response->message;
+        }
 
         return $response->code == 0;
     }
