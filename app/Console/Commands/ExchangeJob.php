@@ -58,13 +58,11 @@ class ExchangeJob extends Command
 
                 $kd_user->login();
                 $cookie = $kd_user->getCookie();
-                echo $cookie;
 
                 $code = new Code($cookie);
                 $code->refresh();
                 $code->doJob();
                 $filename = $code->getFileName();
-                echo $filename;
                 Task::where('id', $task_id)->update([
                     'img_url' => $filename,
                 ]);
