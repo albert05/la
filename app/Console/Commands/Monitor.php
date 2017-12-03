@@ -60,8 +60,8 @@ class Monitor extends Command
                 }
 
                 unset($task_list);
-                if ((time() - $t_now) > 300) {
-                    $this->comment($this->signature . " script is run 5 minutes.\n");
+                if ((time() - $t_now) > 1200) {
+                    $this->comment($this->signature . " script is run 20 minutes.\n");
                     Helper::unlock($this->signature);
                     return true;
                 }
