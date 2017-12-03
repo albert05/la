@@ -60,7 +60,6 @@ class ExchangeJob extends Command
                 $cookie = $kd_user->getCookie();
 
                 $code = new Code($cookie);
-                $code->setDebug(true);
                 $code->refresh();
                 $code->doJob();
                 $filename = $code->getFileName();
@@ -83,7 +82,7 @@ class ExchangeJob extends Command
             ]);
 
         } catch (\Exception $e) {
-            $this->comment($e->getMessage() . $e->getLine());
+            $this->comment($e->getMessage() . $e->getTrace());
         } finally {
             $this->comment("{$lock_name} end.");
             Helper::unlock($lock_name);
