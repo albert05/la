@@ -64,7 +64,7 @@ class ShareJob extends Command
                 foreach ($result as $item) {
                     $id = $item['question_id'];
 
-                    $record = ShareRecord::where('question_id', $id)->first();
+                    $record = ShareRecord::where(['user_key' => $user_id, 'question_id' => $id])->first();
                     if (isset($record->id)) {
                         continue;
                     }
