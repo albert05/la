@@ -2,8 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Common\Koudai\Code;
 use App\Common\Koudai\Exchange;
+use App\Common\Koudai\KdUser;
 use App\Models\Task;
+use App\Models\UserInfo;
 use Illuminate\Console\Command;
 use App\Common\Helper;
 
@@ -14,7 +17,7 @@ class ExchangeJob extends Command
      *
      * @var string
      */
-    protected $signature = 'exchange {id} {product_id} {time_point} {code} {prize_number} {task_id}';
+    protected $signature = 'exchange {id} {product_id} {time_point} {prize_number} {task_id} {code?}';
 
     /**
      * The console command description.
@@ -48,6 +51,19 @@ class ExchangeJob extends Command
             $this->comment("{$lock_name} start.");
 
             $cookie = $user_id;
+            if (!$code) {
+                $user = UserInfo::where('user_key', $user_id)->firstOrFail();
+
+                $kd_user = new KdUser($user->user_name, $user->password);
+
+                $kd_user->login();
+                $cookie = $kd_user->getCookie();
+
+                $code = new Code($cookie);
+                $code->refresh();
+                $code->doJob();
+                $code = $code->getCode();
+            }
 
             $exchange = new Exchange($cookie);
             $exchange->setProductId($product_id);
