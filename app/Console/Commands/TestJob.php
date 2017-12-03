@@ -34,6 +34,7 @@ class TestJob extends Command
     public function handle()
     {
         $id = $this->argument('id');
+        ;
 
         $lock_name = Helper::filterSignature($this->signature) . " " . $id;
 
@@ -45,9 +46,16 @@ class TestJob extends Command
         try {
             $this->comment("{$lock_name} start.");
 
-            $spider = new Spider(sprintf(Spider::ORDER_URL, $id));
-            $spider->doJob();
-            $spider->analyseOrder();
+            $image=new \Mohuishou\ImageOCR\Image(asset('la-assets/img/captcha/captcha.png'));
+
+            $image->draw();
+
+            var_dump($image->find());
+
+
+//            $spider = new Spider(sprintf(Spider::ORDER_URL, $id));
+//            $spider->doJob();
+//            $spider->analyseOrder();
         } catch (\Exception $e) {
             $this->comment($e->getMessage());
         } finally {
