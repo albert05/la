@@ -11,6 +11,7 @@ namespace App\Common\Koudai;
 class Share extends Base
 {
     const SHARE_URL = "https://deposit.koudailc.com/activity/success-up";
+    const ACTIVITY_URL = "https://deposit.koudailc.com/page/koudai-bbs?redirectUrl=https://bbs.koudailc.com&clientType=android&appVersion=6.4.0&deviceName=1505-A02&appMarket=360_sc&isShare=1";
 
     public function __construct($cookie)
     {
@@ -23,7 +24,7 @@ class Share extends Base
     {
         $params = [
             'share_type' => 3,
-            'activity_url' => 'https://deposit.koudailc.com/page/koudai-bbs?redirectUrl=https://bbs.koudailc.com&clientType=android&appVersion=6.4.0&deviceName=1505-A02&appMarket=360_sc&isShare=1',
+            'activity_url' => self::ACTIVITY_URL,
             'share_platform' => 1,
             'activity_id' => $activity_id,
         ];

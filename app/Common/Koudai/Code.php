@@ -17,6 +17,7 @@ class Code extends Base
     private $ver_count = 3;
     private $codes = [];
     private $url_params;
+    private $is_debug = false;
 
     public function __construct($cookie)
     {
@@ -42,6 +43,9 @@ class Code extends Base
             try {
                 $image = new Image($this->curl->response);
                 $this->codes[] = implode("", $image->find());
+                if ($this->is_debug) {
+                    $image->draw();
+                }
             } catch (\Exception $e) {
                 echo $e->getMessage() . "\n";
                 $err_i++;
@@ -58,11 +62,18 @@ class Code extends Base
     }
 
     public function getCode() {
+        if ($this->is_debug) {
+            var_dump($this->codes);
+        }
         if (count(array_unique($this->codes)) != 1) {
             return '';
         }
 
         return $this->codes[0];
+    }
+
+    public function setDebug($debug) {
+        $this->is_debug = $debug;
     }
 
 }

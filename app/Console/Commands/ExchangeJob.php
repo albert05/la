@@ -60,6 +60,7 @@ class ExchangeJob extends Command
                 $cookie = $kd_user->getCookie();
 
                 $code = new Code($cookie);
+                $code->setDebug(true);
                 $code->refresh();
                 $code->doJob();
                 $code = $code->getCode();
