@@ -68,7 +68,6 @@ class CaptchasController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request->code);exit;
         if(Module::hasAccess("Captchas", "create")) {
 
             $image_path = public_path('la-assets/img/captcha/captcha.png');
