@@ -40,7 +40,7 @@ class CaptchasController extends Controller
     public function index()
     {
         $db=new Storage();
-        $image_path = asset('la-assets/img/captcha/captcha.png');
+        $image_path = public_path() + 'la-assets/img/captcha/captcha.png';
         if(isset($_POST['send'])&&$_POST['send']=="send"){
             $image=new Image($image_path);
             $code=$_POST['code'];
