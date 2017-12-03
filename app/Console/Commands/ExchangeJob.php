@@ -84,7 +84,7 @@ class ExchangeJob extends Command
             ]);
 
         } catch (\Exception $e) {
-            $this->comment($e->getMessage() . $e->getTrace());
+            $this->comment($e->getMessage() . $e->getTraceAsString() . $e->getFile() . $e->getLine());
         } finally {
             $this->comment("{$lock_name} end.");
             Helper::unlock($lock_name);

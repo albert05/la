@@ -45,10 +45,8 @@ class Base
     }
 
     public function setResult($response) {
-        if (property_exists($response, 'order_id')) {
-            $this->order_id = $response->order_id;
-        }
-        $this->error_no  = $response->code;
+        $this->order_id = $response->order_id ?? '';
+        $this->error_no  = $response->code ?? -2000;
         $this->error_msg = $response->message ?? '';
 
         return $response->code == 0;
