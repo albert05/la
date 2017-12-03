@@ -73,19 +73,23 @@ class CaptchasController extends Controller
             $image_path = public_path('la-assets/img/captcha/captcha.png');
             $db=new Storage();
 
-            $image=new Image($image_path);
-            $code= $request->code;
-            $code_arr=str_split($code);
+            try {
+                $image=new Image($image_path);
 
-            for($i=0;$i<$image::CHAR_NUM;$i++){
-                $hash_img_data=implode("",$image->splitImage($i));
-                $db->add($code_arr[$i],$hash_img_data);
+                $code= $request->code;
+                $code_arr=str_split($code);
+
+                for($i=0;$i<$image::CHAR_NUM;$i++){
+                    $hash_img_data=implode("",$image->splitImage($i));
+                    $db->add($code_arr[$i],$hash_img_data);
+                }
+
+                $db->save();
+            } catch (\Exception $e) {
+
+            } finally {
+                return redirect()->route(config('laraadmin.adminRoute') . '.captchas.index');
             }
-
-            $db->save();
-
-            return redirect()->route(config('laraadmin.adminRoute') . '.captchas.index');
-
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
         }
