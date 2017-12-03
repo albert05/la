@@ -45,6 +45,9 @@ class Base
     }
 
     public function setResult($response) {
+        if (is_string($response)) {
+            return false;
+        }
         if (property_exists($response, 'order_id')) {
             $this->order_id = $response->order_id;
         }
