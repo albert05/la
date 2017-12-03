@@ -63,7 +63,10 @@ class ExchangeJob extends Command
                 $code->setDebug(true);
                 $code->refresh();
                 $code->doJob();
-                $code = $code->getCode();
+                $filename = $code->getFileName();
+                Task::where('id', $task_id)->update([
+                    'img_url' => $filename,
+                ]);
             }
 
             $exchange = new Exchange($cookie);
@@ -71,7 +74,7 @@ class ExchangeJob extends Command
             $exchange->setCode($code);
             $exchange->setPrizeNumber($prize_number);
             $exchange->setTimePoint($time_point);
-            $exchange->doJob();
+            $exchange->doJob($task_id);
             $this->comment("exchange result: " . $exchange->getErrorMsg());
 
             Task::where('id', $task_id)->update([

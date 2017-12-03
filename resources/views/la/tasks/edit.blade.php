@@ -72,6 +72,11 @@
 					<input type="hidden" id="run_time_v" value="@if(1){{$task->run_time}}@endif">
 					@la_input($module, 'time_point')
 					@la_input($module, 'product_id')
+					@if ($task->img_url != "")
+						<div class="form-group"><label for="img_url">Img Url:</label><div class='input-group'>
+								<img src="{{asset($task->img_url)}}">
+						</div>
+					@endif
 					@la_input($module, 'code')
 					@la_input($module, 'money')
 					@la_input($module, 'voucher_id')

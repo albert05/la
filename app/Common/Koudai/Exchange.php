@@ -8,6 +8,9 @@
  */
 namespace App\Common\Koudai;
 
+use App\Common\Helper;
+use App\Models\Task;
+
 class Exchange extends Base
 {
     const EXCHANGE_URL = "https://deposit.koudailc.com/user-order-form/convert";
@@ -21,7 +24,7 @@ class Exchange extends Base
         $this->cookie = $cookie;
     }
 
-    public function doJob()
+    public function doJob($task_id = '')
     {
         $params = [
             'id' => $this->product_id,
@@ -30,6 +33,36 @@ class Exchange extends Base
         ];
 
         return $this->run($params);
+    }
+
+    public function run($params, $task_id)
+    {
+        $this->wait($task_id);
+
+        $this->curl->setCookie('SESSIONID', $this->cookie);
+        $this->curl->post($this->url, $params);
+
+        return $this->setResult($this->curl->response);
+    }
+
+    protected function wait($task_id) {
+        if (!$this->time_point) {
+            return true;
+        }
+
+        $now = Helper::getMicrotime();
+
+        while ($now < $this->time_point) {
+            usleep(10000); // 10毫秒
+            $now = Helper::getMicrotime();
+            if (!$this->code) {
+                $task = Task::where(['id' => $task_id])->first();
+                $this->code = trim($task->code);
+            }
+        }
+
+        echo $now . PHP_EOL;
+        return true;
     }
 
     public function setCode($code) {

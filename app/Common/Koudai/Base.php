@@ -81,7 +81,7 @@ class Base
         return $this->setResult($this->curl->response);
     }
 
-    private function wait() {
+    protected function wait() {
         if (!$this->time_point) {
             return true;
         }

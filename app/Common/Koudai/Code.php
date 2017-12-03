@@ -25,7 +25,7 @@ class Code extends Base
         parent::__construct(self::CODE_URL);
         $this->cookie = $cookie;
         $rand = time() + "" + rand(100000, 999999);
-        $this->filename = app_path("Common/Koudai/img/captcha_{$rand}.png");
+        $this->filename = "la-assets/img/captcha/captcha_{$rand}.png";
     }
 
     public function refresh() {
@@ -38,27 +38,28 @@ class Code extends Base
     public function doJob()
     {
 
-        $err_i = 0;
-        for($i = 0; $i < $this->ver_count; $i++) {
-            $this->createImage();
+        $this->createImage();
 
-            try {
-                $image = new Image($this->filename);
-                $this->codes[] = implode("", $image->find());
-                if ($this->is_debug) {
-                    $image->draw();
-                }
-            } catch (\Exception $e) {
-                echo $e->getMessage() . "\n";
-                $err_i++;
-            } finally {
-                $i--;
-                if ($err_i > 5) {
-                    return false;
-                }
-            }
-
-        }
+//        $err_i = 0;
+//        for($i = 0; $i < $this->ver_count; $i++) {
+//
+//            try {
+//                $image = new Image($this->filename);
+//                $this->codes[] = implode("", $image->find());
+//                if ($this->is_debug) {
+//                    $image->draw();
+//                }
+//            } catch (\Exception $e) {
+//                echo $e->getMessage() . "\n";
+//                $err_i++;
+//            } finally {
+//                $i--;
+//                if ($err_i > 5) {
+//                    return false;
+//                }
+//            }
+//
+//        }
 
         return true;
     }
@@ -79,8 +80,12 @@ class Code extends Base
         $this->is_debug = $debug;
     }
 
+    public function getFileName() {
+        return $this->filename;
+    }
+
     private function createImage() {
-        $fp = fopen($this->filename, 'wb');
+        $fp = fopen(public_path($this->filename), 'wb');
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->setOpt(CURLOPT_FILE, $fp);
         $this->curl->setOpt(CURLOPT_HEADER, 0);
