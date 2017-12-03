@@ -53,7 +53,7 @@ class CaptchasController extends Controller
 
             $db->save();
         }else{
-            $image=new Image("http://www.169ol.com/Stream/Code/getCode");
+            $image = new Image("http://deposit.koudailc.com/user/captcha"); //http://www.169ol.com/Stream/Code/getCode
             imagepng($image->_in_img, $image_path);
         }
 
