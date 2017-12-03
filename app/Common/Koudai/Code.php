@@ -18,11 +18,14 @@ class Code extends Base
     private $codes = [];
     private $url_params;
     private $is_debug = false;
+    private $filename;
 
     public function __construct($cookie)
     {
         parent::__construct(self::CODE_URL);
         $this->cookie = $cookie;
+        $rand = time() + "" + rand(100000, 999999);
+        $this->filename = app_path("common//koudai/img/captcha_{$rand}.png");
     }
 
     public function refresh() {
@@ -37,11 +40,10 @@ class Code extends Base
 
         $err_i = 0;
         for($i = 0; $i < $this->ver_count; $i++) {
-            $this->curl->setCookie('SESSIONID', $this->cookie);
-            $this->curl->post(sprintf($this->url, $this->url_params), null);
+            $this->createImage();
 
             try {
-                $image = new Image($this->curl->response);
+                $image = new Image($this->filename);
                 $this->codes[] = implode("", $image->find());
                 if ($this->is_debug) {
                     $image->draw();
@@ -74,6 +76,16 @@ class Code extends Base
 
     public function setDebug($debug) {
         $this->is_debug = $debug;
+    }
+
+    private function createImage() {
+        $fp = fopen($this->filename, 'wb');
+        $this->curl->setCookie('SESSIONID', $this->cookie);
+        $this->curl->setOpt(CURLOPT_FILE, $fp);
+        $this->curl->setOpt(CURLOPT_HEADER, 0);
+        $this->curl->setOpt(CURLOPT_FOLLOWLOCATION, 1);
+        $this->curl->post(sprintf($this->url, $this->url_params), null);
+        fclose($fp);
     }
 
 }
