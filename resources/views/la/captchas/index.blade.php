@@ -13,7 +13,7 @@
 				<div class="col-md-8 col-md-offset-2">
 					{!! Form::model(null, ['route' => [config('laraadmin.adminRoute') . '.captchas.store'], 'method'=>'PUT', 'id' => 'captcha-edit-form']) !!}
 					<img src="{{asset('la-assets/img/captcha/captcha.png')}}">
-					<div class="form-group"><label for="run_time">Code* :</label><div class='input-group datetime'> <input class="form-control" placeholder="Enter Code" required="1" name="code" type="text" value=""></div>
+					<div class="form-group"><label for="run_time">Enter Code* :</label><div class='input-group'> <input class="form-control" placeholder="Enter Code" required="1" name="code" type="text" value=""></div>
 						<br>
 						<div class="form-group">
 							{!! Form::submit( 'Store', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/captchas') }}">Cancel</a></button>
