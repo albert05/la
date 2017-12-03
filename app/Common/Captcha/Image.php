@@ -316,6 +316,7 @@ class Image{
         //去掉零行
         $data=$this->removeZero($data);
 
+        $data1 = [];
         //按列取图像获取宽度
         for($i=0;$i<$img_w;$i++){
             $column=array_column($data,$i);
