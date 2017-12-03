@@ -56,6 +56,7 @@ class ShareJob extends Command
             $spider->doJob();
             $spider->analyseBbs();
             $result = $spider->getAnalyseData();
+            var_dump($result);
             
             if (is_array($result) && count($result) > 0) {
                 $share = new Share($kd_user->getCookie());
