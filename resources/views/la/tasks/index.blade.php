@@ -76,21 +76,21 @@
 
                         {{--@la_input($module, 'work_id')--}}
 
-                        <div class="form-group">
-                            <label for="user_key">User Key :</label>
-                            <select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true">
-                                @foreach ($user_list as $k => $v)
-                                    <option value="{{$k}}" >{{$v}}</option>
-                                @endforeach
-                            </select>
-                            <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-					<span class="selection">
-				</span>
-				<span class="dropdown-wrapper" aria-hidden="true"></span>
-			</span>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label for="user_key">User Key :</label>--}}
+                            {{--<select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true">--}}
+                                {{--@foreach ($user_list as $k => $v)--}}
+                                    {{--<option value="{{$k}}" >{{$v}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                            {{--<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">--}}
+					{{--<span class="selection">--}}
+				{{--</span>--}}
+				{{--<span class="dropdown-wrapper" aria-hidden="true"></span>--}}
+			{{--</span>--}}
+                        {{--</div>--}}
 
-                        {{--@la_input($module, 'user_key')--}}
+                        @la_input($module, 'user_key')
 
                         <div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
                         @la_input($module, 'time_point')

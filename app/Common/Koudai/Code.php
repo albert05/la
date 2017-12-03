@@ -53,7 +53,7 @@ class Code extends Base
                 $err_i++;
             } finally {
                 $i--;
-                if ($err_i > 2) {
+                if ($err_i > 5) {
                     return false;
                 }
             }
@@ -67,11 +67,12 @@ class Code extends Base
         if ($this->is_debug) {
             var_dump($this->codes);
         }
-        if (count(array_unique($this->codes)) != 1) {
-            return '';
+        if (count(array_unique($this->codes)) >= 4) {
+            $tmp = array_unique($this->codes);
+            return current($tmp);
         }
 
-        return $this->codes[0];
+        return '';
     }
 
     public function setDebug($debug) {
