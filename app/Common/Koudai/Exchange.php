@@ -26,13 +26,15 @@ class Exchange extends Base
 
     public function doJob($task_id = '')
     {
+        $this->waitIt($task_id);
+
         $params = [
             'id' => $this->product_id,
             'imgcode' => $this->code,
             'prize_number' => $this->prize_number,
         ];
 
-        $this->waitIt($task_id);
+        var_dump($params);
 
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
