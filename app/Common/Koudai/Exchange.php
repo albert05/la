@@ -32,12 +32,7 @@ class Exchange extends Base
             'prize_number' => $this->prize_number,
         ];
 
-        return $this->run($params);
-    }
-
-    public function run($params, $task_id)
-    {
-        $this->wait($task_id);
+        $this->waitIt($task_id);
 
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
@@ -45,7 +40,7 @@ class Exchange extends Base
         return $this->setResult($this->curl->response);
     }
 
-    protected function wait($task_id) {
+    protected function waitIt($task_id) {
         if (!$this->time_point) {
             return true;
         }
