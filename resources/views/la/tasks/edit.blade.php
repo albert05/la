@@ -38,7 +38,7 @@
 
 				<div class="form-group control-all">
 					<label for="word_id">任务类型 :</label>
-					<select class="form-control select2-hidden-accessible work-select" data-placeholder="选择任务类型" rel="select2" name="work_id" tabindex="0" aria-hidden="true" disabled="disabled">
+					<select class="form-control select2-hidden-accessible work-select" data-placeholder="选择任务类型" rel="select2" name="work_id" tabindex="0" aria-hidden="true">
 						@foreach ($work_list as $k => $v)
 							<option value="{{$k}}" @if($k == $task->work_id) selected @endif>{{$v}}</option>
 						@endforeach
@@ -59,14 +59,14 @@
 				<div class="form-group control-exchange control-order">
 					<label for="run_time">脚本开始时间* :</label>
 					<div class='input-group datetime'>
-						<input id= 'datetimepicker' class="form-control" placeholder="选择脚本开始时间" required="1" name="run_time" type="text" value="{{$task->run_time}}" @if ($task->status != 0)disabled="disabled"@endif>
+						<input id= 'datetimepicker' class="form-control" placeholder="选择脚本开始时间" required="1" name="run_time" type="text" value="{{$task->run_time}}" >
 					</div>
 				</div>
 				<input type="hidden" id="run_time_v" value="{{$task->run_time}}">
 
 					<div class="form-group  control-exchange control-order">
 						<label for="time_point">任务执行时间点 :</label>
-						<input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false" @if ($task->status != 0)disabled="disabled"@endif >
+						<input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false" >
 					</div>
 
 					<div class="form-group  control-exchange control-order">
