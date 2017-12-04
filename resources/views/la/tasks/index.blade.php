@@ -90,7 +90,7 @@
 
                             <div class="form-group control-exchange control-order">
                                 <label for="time_point">任务执行时间点 :</label>
-                                <input class="form-control valid" placeholder="输入任务请求时间点，如输入100001.95表示10点1分950毫秒执行" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
+                                <input class="form-control valid" placeholder="输入任务请求时间点，如输入100101.95表示10点1分1秒950毫秒执行" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
                             </div>
                             <div class="form-group control-exchange control-order">
                                 <label for="product_id">产品ID :</label>
