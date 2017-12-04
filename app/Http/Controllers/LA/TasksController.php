@@ -122,15 +122,15 @@ class TasksController extends Controller
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code;
-                $params['prize_number'] = $request->prize_number;
+                $params['prize_number'] = $request->prize_numberc ?? 1;
             } else if ($request->work_id == 'order') {
                 $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
-                $params['money'] = $request->money;
-                $params['voucher_id'] = $request->voucher_id;
-                $params['is_kdb_pay'] = $request->is_kdb_pay;
-                $params['is_wait_sjk'] = $request->is_wait_sjk;
+                $params['money'] = $request->money ?? 1000;
+                $params['voucher_id'] = $request->voucher_id ?? 0;
+                $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
+                $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             }
 
             // Create Task
@@ -243,15 +243,15 @@ class TasksController extends Controller
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code;
-                $params['prize_number'] = $request->prize_number;
+                $params['prize_number'] = $request->prize_number ?? 1;
             } else if ($request->work_id == 'order') {
                 $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
-                $params['money'] = $request->money;
-                $params['voucher_id'] = $request->voucher_id;
-                $params['is_kdb_pay'] = $request->is_kdb_pay;
-                $params['is_wait_sjk'] = $request->is_wait_sjk;
+                $params['money'] = $request->money ?? 1000;
+                $params['voucher_id'] = $request->voucher_id ?? 0;
+                $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
+                $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             }
 
 
@@ -316,13 +316,14 @@ class TasksController extends Controller
                 $col = $this->listing_cols[$j];
                 if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
                     $data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
-                    if ($col == 'work_id') {
-                        $data->data[$i][$j] = $work_list[$data->data[$i][$j]];
-                    } elseif ($col == 'is_kdb_pay' || $col == 'is_wait_sjk') {
-                        $data->data[$i][$j] = $data->data[$i][$j] == 1 ? '是' : '否';
-                    }  elseif ($col == 'status') {
-                        $data->data[$i][$j] = $status_arr[$data->data[$i][$j]];
-                    }
+                }
+
+                if ($col == 'work_id') {
+                    $data->data[$i][$j] = $work_list[$data->data[$i][$j]];
+                } elseif ($col == 'is_kdb_pay' || $col == 'is_wait_sjk') {
+                    $data->data[$i][$j] = $data->data[$i][$j] == 1 ? '是' : '否';
+                }  elseif ($col == 'status') {
+                    $data->data[$i][$j] = $status_arr[$data->data[$i][$j]];
                 }
                 if($col == $this->view_col) {
                     $data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/tasks/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';

@@ -102,11 +102,11 @@
                             </div>
                             <div class="form-group control-order">
                                 <label for="money">Money :</label>
-                                <input class="form-control valid" placeholder="Enter Money" name="money" type="number" value="" aria-invalid="false">
+                                <input class="form-control valid" placeholder="Enter Money" name="money" type="number" value="0" aria-invalid="false">
                             </div>
                             <div class="form-group control-order">
                                 <label for="voucher_id">Voucher Id :</label>
-                                <input class="form-control valid" placeholder="Enter Voucher Id" name="voucher_id" type="number" value="" aria-invalid="false">
+                                <input class="form-control valid" placeholder="Enter Voucher Id" name="voucher_id" type="number" value="0" aria-invalid="false">
                             </div>
                             <div class="form-group control-order">
                                 <label for="is_kdb_pay">Is Kdb Pay :</label>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="form-group control-exchange">
                                 <label for="prize_number">Prize Number :</label>
-                                <input class="form-control valid" placeholder="Enter Prize Number" name="prize_number" type="number" value="" aria-invalid="false">
+                                <input class="form-control valid" placeholder="Enter Prize Number" name="prize_number" type="number" value="1" aria-invalid="false">
                             </div>
                     </div>
                 </div>
