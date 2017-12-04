@@ -89,8 +89,13 @@
 								</select>
 							</div>
 					{{--@la_input($module, 'is_kdb_pay')--}}
-					@la_input($module, 'prize_number')
+					{{--@la_input($module, 'prize_number')--}}
 					{{--@la_input($module, 'is_wait_sjk')--}}
+
+							<div class="form-group">
+								<label for="prize_number">Prize Number :</label>
+								<input class="form-control valid" placeholder="Enter Prize Number" name="prize_number" type="number" value="{{$task->prize_number}}" aria-invalid="false">
+							</div>
 
 					<div class="form-group">
 						<label for="is_wait_sjk">Is Wait Sjk :</label>
