@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('errors.404');
 });
 
 /* ================== Homepage + Admin Routes ================== */
