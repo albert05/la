@@ -51,7 +51,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Task</h4>
+                    <h4 class="modal-title" id="myModalLabel">添加任务</h4>
                 </div>
                 {!! Form::open(['action' => 'LA\TasksController@store', 'id' => 'task-add-form']) !!}
                 <div class="modal-body">
@@ -89,8 +89,8 @@
                         </div>
 
                             <div class="form-group control-exchange control-order">
-                                <label for="time_point">任务请求时间点 :</label>
-                                <input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
+                                <label for="time_point">任务执行时间点 :</label>
+                                <input class="form-control valid" placeholder="输入任务请求时间点，如输入100001.95表示10点1分950毫秒执行" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
                             </div>
                             <div class="form-group control-exchange control-order">
                                 <label for="product_id">产品ID :</label>

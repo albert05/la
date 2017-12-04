@@ -65,7 +65,7 @@
 				<input type="hidden" id="run_time_v" value="{{$task->run_time}}">
 
 					<div class="form-group  control-exchange control-order">
-						<label for="time_point">任务请求时间点 :</label>
+						<label for="time_point">任务执行时间点 :</label>
 						<input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false">
 					</div>
 
