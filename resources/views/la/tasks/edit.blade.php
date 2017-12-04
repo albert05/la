@@ -83,9 +83,9 @@
 					@la_input($module, 'is_kdb_pay')
 					@la_input($module, 'prize_number')
 					@la_input($module, 'is_wait_sjk')
-                    @if (in_array($task->status, [0, 1]))
-					    @la_input($module, 'status')
-                    @endif
+                    {{--@if (in_array($task->status, [0, 1]))--}}
+					    {{--@la_input($module, 'status')--}}
+                    {{--@endif--}}
 					<br>
 					<div class="form-group">
 						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">Cancel</a></button>
