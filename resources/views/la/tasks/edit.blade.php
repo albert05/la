@@ -31,7 +31,12 @@
 			<div class="col-md-8 col-md-offset-2">
 				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.tasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
 					{{--@la_form($module)--}}
-				@la_input($module, 'title')
+				{{--@la_input($module, 'title')--}}
+
+				<div class="form-group">
+					<label for="title">Title :</label>
+					<input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="{{$task->title}}">
+				</div>
 
 				{{--@la_input($module, 'work_id')--}}
 				<div class="form-group">

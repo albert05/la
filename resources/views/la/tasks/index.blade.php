@@ -56,7 +56,12 @@
                 {!! Form::open(['action' => 'LA\TasksController@store', 'id' => 'task-add-form']) !!}
                 <div class="modal-body">
                     <div class="box-body">
-                        @la_input($module, 'title')
+                        {{--@la_input($module, 'title')--}}
+
+                        <div class="form-group">
+                            <label for="title">Title :</label>
+                            <input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="{{$task->title}}">
+                        </div>
 
                         {{--@la_input($module, 'work_id')--}}
 
@@ -76,31 +81,70 @@
 
                         {{--@la_input($module, 'work_id')--}}
 
-                        {{--<div class="form-group">--}}
-                            {{--<label for="user_key">User Key :</label>--}}
-                            {{--<select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true">--}}
-                                {{--@foreach ($user_list as $k => $v)--}}
-                                    {{--<option value="{{$k}}" >{{$v}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
-                            {{--<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">--}}
-					{{--<span class="selection">--}}
-				{{--</span>--}}
-				{{--<span class="dropdown-wrapper" aria-hidden="true"></span>--}}
-			{{--</span>--}}
-                        {{--</div>--}}
+                        <div class="form-group">
+                            <label for="user_key">User Key :</label>
+                            <select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true">
+                                @foreach ($user_list as $k => $v)
+                                    <option value="{{$k}}" >{{$v}}</option>
+                                @endforeach
+                            </select>
+                            <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
+					<span class="selection">
+				</span>
+				<span class="dropdown-wrapper" aria-hidden="true"></span>
+			</span>
+                        </div>
 
-                        @la_input($module, 'user_key')
+                        {{--@la_input($module, 'user_key')--}}
 
                         <div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'><input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
-                        @la_input($module, 'time_point')
-                        @la_input($module, 'product_id')
-                        @la_input($module, 'code')
-                        @la_input($module, 'money')
-                        @la_input($module, 'voucher_id')
-                        @la_input($module, 'is_kdb_pay')
-                        @la_input($module, 'is_wait_sjk')
-                        @la_input($module, 'prize_number')
+                        {{--@la_input($module, 'time_point')--}}
+                        {{--@la_input($module, 'product_id')--}}
+                        {{--@la_input($module, 'code')--}}
+                        {{--@la_input($module, 'money')--}}
+                        {{--@la_input($module, 'voucher_id')--}}
+                        {{--@la_input($module, 'is_kdb_pay')--}}
+                        {{--@la_input($module, 'is_wait_sjk')--}}
+                        {{--@la_input($module, 'prize_number')--}}
+
+                            <div class="form-group">
+                                <label for="time_point">Time Point :</label>
+                                <input class="form-control valid" placeholder="Enter Time Point" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
+                            </div>
+                            <div class="form-group">
+                                <label for="product_id">Product Id :</label>
+                                <input class="form-control valid" placeholder="Enter Product Id" name="product_id" type="number" value="" aria-invalid="false">
+                            </div>
+                            <div class="form-group">
+                                <label for="code">Code :</label>
+                                <input class="form-control" placeholder="Enter Code" data-rule-maxlength="256" name="code" type="text" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="money">Money :</label>
+                                <input class="form-control valid" placeholder="Enter Money" name="money" type="number" value="" aria-invalid="false">
+                            </div>
+                            <div class="form-group">
+                                <label for="voucher_id">Voucher Id :</label>
+                                <input class="form-control valid" placeholder="Enter Voucher Id" name="voucher_id" type="number" value="" aria-invalid="false">
+                            </div>
+                            <div class="form-group">
+                                <label for="is_kdb_pay">Is Kdb Pay :</label>
+                                <select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Kdb Pay" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
+                                    <option value="0" @if(0 == $task->is_kdb_pay) selected @endif>0</option>
+                                    <option value="1" @if(1 == $task->is_kdb_pay) selected @endif>1</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="is_wait_sjk">Is Wait Sjk :</label>
+                                <select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Wait Sjk" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
+                                    <option value="0" @if(0 == $task->is_wait_sjk) selected @endif>0</option>
+                                    <option value="1" @if(1 == $task->is_wait_sjk) selected @endif>1</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="prize_number">Prize Number :</label>
+                                <input class="form-control valid" placeholder="Enter Prize Number" name="prize_number" type="number" value="" aria-invalid="false">
+                            </div>
                         {{--@la_form($module)--}}
                     </div>
                 </div>
