@@ -309,6 +309,7 @@ class TasksController extends Controller
             1 => '运行中',
             2 => '失败',
             3 => '成功',
+            4 => '已取消',
         ];
 
         for($i=0; $i < count($data->data); $i++) {

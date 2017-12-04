@@ -98,7 +98,7 @@
 
 							<div class="form-group control-order">
 								<label for="is_kdb_pay">是否使用口袋宝 :</label>
-								<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
+								<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_kdb_pay" tabindex="0" aria-hidden="true">
 									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>否</option>
 									<option value="1" @if(1 == $task->is_kdb_pay) selected @endif>是</option>
 								</select>
@@ -111,14 +111,21 @@
 
 					<div class="form-group control-order">
 						<label for="is_wait_sjk">是否等待三剑客 :</label>
-						<select class="form-control select2-hidden-accessible" data-placeholder="选择是否等待三剑客" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
+						<select class="form-control select2-hidden-accessible" data-placeholder="选择是否等待三剑客" rel="select2" name="is_wait_sjk" tabindex="1" aria-hidden="true">
 							<option value="0" @if(0 == $task->is_wait_sjk) selected @endif>否</option>
 							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>是</option>
 						</select>
 					</div>
-                    {{--@if (in_array($task->status, [0, 1]))--}}
-					    {{--@la_input($module, 'status')--}}
-                    {{--@endif--}}
+                    @if (in_array($task->status, [0, 1]))
+					<div class="form-group control-order">
+						<label for="status">任务状态 :</label>
+						<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
+							<option value="{{$task->status}}" selected >@if(0 == $task->status) 已创建 @else 运行中 @endif</option>
+							<option value="4">取消任务</option>
+						</select>
+					</div>
+					    @la_input($module, 'status')
+                    @endif
 					<br>
 					<div class="form-group control-all">
 						{!! Form::submit( '更新', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">取消</a></button>
