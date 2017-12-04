@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">Tasks</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">任务</a> :
 @endsection
 @section("contentheader_description", $task->$view_col)
-@section("section", "Tasks")
+@section("section", "任务")
 @section("section_url", url(config('laraadmin.adminRoute') . '/tasks'))
-@section("sub_section", "Edit")
+@section("sub_section", "编辑")
 
-@section("htmlheader_title", "Task Edit : ".$task->$view_col)
+@section("htmlheader_title", "任务编辑 : ".$task->$view_col)
 
 @section("main-content")
 
