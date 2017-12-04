@@ -109,24 +109,32 @@ class TasksController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            // Create Task
-            $task = Task::create([
+            $params = [
                 'title' => $request->title,
                 'user_name' => Auth::user()->name,
-                'cmd' => '',
                 'work_id' => $request->work_id,
                 'user_key' => $request->user_key,
-                'time_point' => $request->time_point,
-                'product_id' => $request->product_id,
-                'code' => $request->code,
-                'money' => $request->money,
-                'voucher_id' => $request->voucher_id,
-                'is_kdb_pay' => $request->is_kdb_pay,
-                'is_wait_sjk' => $request->is_wait_sjk,
-                'prize_number' => $request->prize_number,
-                'run_time' => $request->run_time,
                 'status' => 0,
-            ]);
+            ];
+
+            if ($request->work_id == 'exchange') {
+                $params['run_time'] = $request->run_time;
+                $params['time_point'] = $request->time_point;
+                $params['product_id'] = $request->product_id;
+                $params['code'] = $request->code;
+                $params['prize_number'] = $request->prize_number;
+            } else if ($request->work_id == 'order') {
+                $params['run_time'] = $request->run_time;
+                $params['time_point'] = $request->time_point;
+                $params['product_id'] = $request->product_id;
+                $params['money'] = $request->money;
+                $params['voucher_id'] = $request->voucher_id;
+                $params['is_kdb_pay'] = $request->is_kdb_pay;
+                $params['is_wait_sjk'] = $request->is_wait_sjk;
+            }
+
+            // Create Task
+            $task = Task::create($params);
 
             Log::info("Task created: title: ".$task->title." work_id: ".$task->work_id);
 
@@ -228,18 +236,24 @@ class TasksController extends Controller
 
             $params = [
                 'title' => $request->title,
-                'work_id' => $request->work_id,
-                'user_key' => $request->user_key,
-                'time_point' => $request->time_point,
-                'product_id' => $request->product_id,
-                'code' => $request->code,
-                'money' => $request->money,
-                'voucher_id' => $request->voucher_id,
-                'is_kdb_pay' => $request->is_kdb_pay,
-                'is_wait_sjk' => $request->is_wait_sjk,
-                'prize_number' => $request->prize_number,
-                'run_time' => $request->run_time,
             ];
+
+            if ($request->work_id == 'exchange') {
+                $params['run_time'] = $request->run_time;
+                $params['time_point'] = $request->time_point;
+                $params['product_id'] = $request->product_id;
+                $params['code'] = $request->code;
+                $params['prize_number'] = $request->prize_number;
+            } else if ($request->work_id == 'order') {
+                $params['run_time'] = $request->run_time;
+                $params['time_point'] = $request->time_point;
+                $params['product_id'] = $request->product_id;
+                $params['money'] = $request->money;
+                $params['voucher_id'] = $request->voucher_id;
+                $params['is_kdb_pay'] = $request->is_kdb_pay;
+                $params['is_wait_sjk'] = $request->is_wait_sjk;
+            }
+
 
             if (isset($request->status)) {
                 $params['status'] = $request->status;
