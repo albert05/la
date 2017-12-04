@@ -179,6 +179,15 @@
                 $(".control-order").show();
             }
         });
+
+        var work = $(".work-select").val();
+        $(".form-group").hide();
+        $(".control-all").show();
+        if (work == 'exchange') {
+            $(".control-exchange").show();
+        } else if (work == 'order') {
+            $(".control-order").show();
+        }
     });
 </script>
 @endpush
