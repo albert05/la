@@ -80,7 +80,15 @@
 					@la_input($module, 'code')
 					@la_input($module, 'money')
 					@la_input($module, 'voucher_id')
-					@la_input($module, 'is_kdb_pay')
+
+							<div class="form-group">
+								<label for="is_kdb_pay">Is Kdb Pay :</label>
+								<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Kdb Pay" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
+									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>0</option>
+									<option value="1" @if(1 == $task->is_kdb_pay) selected @endif>1</option>
+								</select>
+							</div>
+					{{--@la_input($module, 'is_kdb_pay')--}}
 					@la_input($module, 'prize_number')
 					{{--@la_input($module, 'is_wait_sjk')--}}
 
