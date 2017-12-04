@@ -301,11 +301,28 @@ class TasksController extends Controller
 
         $fields_popup = ModuleFields::getModuleFields('Tasks');
 
+        $work_list = DB::table('worklists')
+            ->lists('name', 'work_id');
+
+        $status_arr = [
+            0 => '已创建',
+            1 => '运行中',
+            2 => '失败',
+            3 => '成功',
+        ];
+
         for($i=0; $i < count($data->data); $i++) {
             for ($j=0; $j < count($this->listing_cols); $j++) {
                 $col = $this->listing_cols[$j];
                 if($fields_popup[$col] != null && starts_with($fields_popup[$col]->popup_vals, "@")) {
                     $data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
+                    if ($col == 'work_id') {
+                        $data->data[$i][$j] = $work_list[$data->data[$i][$j]];
+                    } elseif ($col == 'is_kdb_pay' || $col == 'is_wait_sjk') {
+                        $data->data[$i][$j] = $data->data[$i][$j] == 1 ? '是' : '否';
+                    }  elseif ($col == 'status') {
+                        $data->data[$i][$j] = $status_arr[$data->data[$i][$j]];
+                    }
                 }
                 if($col == $this->view_col) {
                     $data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/tasks/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';

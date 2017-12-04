@@ -32,12 +32,12 @@
 				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.tasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
 					{{--@la_form($module)--}}
 				<div class="form-group control-all">
-					<label for="title">Title :</label>
+					<label for="title">任务标题 :</label>
 					<input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="{{$task->title}}">
 				</div>
 
 				<div class="form-group control-all">
-					<label for="word_id">Work Id :</label>
+					<label for="word_id">任务类型 :</label>
 					<select class="form-control select2-hidden-accessible work-select" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="0" aria-hidden="true" disabled="disabled">
 						@foreach ($work_list as $k => $v)
 							<option value="{{$k}}" @if($k == $task->work_id) selected @endif>{{$v}}</option>
@@ -46,7 +46,7 @@
 				</div>
 
 				<div class="form-group control-all">
-					<label for="user_key">User Key :</label>
+					<label for="user_key">用户 :</label>
 					<select class="form-control select2-hidden-accessible" data-placeholder="Enter User Key" rel="select2" name="user_key" tabindex="1" aria-hidden="true" disabled="disabled">
 						@foreach ($user_list as $k => $v)
 							<option value="{{$k}}" @if($k == $task->user_key) selected @endif>{{$v}}</option>
@@ -57,7 +57,7 @@
 				{{--@la_input($module, 'user_key')--}}
 
 				<div class="form-group control-exchange control-order">
-					<label for="run_time">Run Time* :</label>
+					<label for="run_time">脚本开始时间* :</label>
 					<div class='input-group datetime'>
 						<input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value="">
 					</div>
@@ -65,39 +65,39 @@
 				<input type="hidden" id="run_time_v" value="{{$task->run_time}}">
 
 					<div class="form-group  control-exchange control-order">
-						<label for="time_point">Time Point :</label>
+						<label for="time_point">任务请求时间点 :</label>
 						<input class="form-control valid" placeholder="Enter Time Point" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false">
 					</div>
 
 					<div class="form-group  control-exchange control-order">
-						<label for="product_id">Product Id :</label>
+						<label for="product_id">产品ID :</label>
 						<input class="form-control valid" placeholder="Enter Product Id" name="product_id" type="number" value="{{$task->product_id}}" aria-invalid="false">
 					</div>
 					@if ($task->img_url != "")
 						<div class="form-group control-exchange">
-							<label for="img_url">Img Url:</label>
+							<label for="img_url">图片验证码 :</label>
 							<div class='input-group'>
 								<img src="{{asset($task->img_url)}}">
 							</div>
 						</div>
 					@endif
 							<div class="form-group control-exchange">
-								<label for="code">Code :</label>
+								<label for="code">验证码 :</label>
 								<input class="form-control" placeholder="Enter Code" data-rule-maxlength="256" name="code" type="text" value="{{$task->code}}">
 							</div>
 
 							<div class="form-group control-order">
-								<label for="money">Money :</label>
+								<label for="money">投资金额 :</label>
 								<input class="form-control valid" placeholder="Enter Money" name="money" type="number" value="{{$task->money}}" aria-invalid="false">
 							</div>
 
 							<div class="form-group control-order">
-								<label for="voucher_id">Voucher Id :</label>
+								<label for="voucher_id">加息券ID :</label>
 								<input class="form-control valid" placeholder="Enter Voucher Id" name="voucher_id" type="number" value="{{$task->voucher_id}}" aria-invalid="false">
 							</div>
 
 							<div class="form-group control-order">
-								<label for="is_kdb_pay">Is Kdb Pay :</label>
+								<label for="is_kdb_pay">是否使用口袋宝 :</label>
 								<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Kdb Pay" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
 									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>否</option>
 									<option value="1" @if(1 == $task->is_kdb_pay) selected @endif>是</option>
@@ -105,12 +105,12 @@
 							</div>
 
 							<div class="form-group control-exchange">
-								<label for="prize_number">Prize Number :</label>
+								<label for="prize_number">券数量 :</label>
 								<input class="form-control valid" placeholder="Enter Prize Number" name="prize_number" type="number" value="{{$task->prize_number}}" aria-invalid="false">
 							</div>
 
 					<div class="form-group control-order">
-						<label for="is_wait_sjk">Is Wait Sjk :</label>
+						<label for="is_wait_sjk">是否等待三剑客 :</label>
 						<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Wait Sjk" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
 							<option value="0" @if(0 == $task->is_wait_sjk) selected @endif>否</option>
 							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>是</option>
