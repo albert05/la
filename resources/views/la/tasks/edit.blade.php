@@ -82,7 +82,15 @@
 					@la_input($module, 'voucher_id')
 					@la_input($module, 'is_kdb_pay')
 					@la_input($module, 'prize_number')
-					@la_input($module, 'is_wait_sjk')
+					{{--@la_input($module, 'is_wait_sjk')--}}
+
+					<div class="form-group">
+						<label for="is_wait_sjk">Is Wait Sjk :</label>
+						<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Wait Sjk" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
+							<option value="0" @if(0 == $task->is_wait_sjk) selected @endif>0</option>
+							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>1</option>
+						</select>
+					</div>
                     {{--@if (in_array($task->status, [0, 1]))--}}
 					    {{--@la_input($module, 'status')--}}
                     {{--@endif--}}
