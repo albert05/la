@@ -60,7 +60,7 @@
 
                         <div class="form-group">
                             <label for="title">Title :</label>
-                            <input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="{{$task->title}}">
+                            <input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="">
                         </div>
 
                         {{--@la_input($module, 'work_id')--}}
@@ -130,15 +130,15 @@
                             <div class="form-group">
                                 <label for="is_kdb_pay">Is Kdb Pay :</label>
                                 <select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Kdb Pay" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
-                                    <option value="0" @if(0 == $task->is_kdb_pay) selected @endif>0</option>
-                                    <option value="1" @if(1 == $task->is_kdb_pay) selected @endif>1</option>
+                                    <option value="0" selected>0</option>
+                                    <option value="1" >1</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="is_wait_sjk">Is Wait Sjk :</label>
                                 <select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Wait Sjk" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
-                                    <option value="0" @if(0 == $task->is_wait_sjk) selected @endif>0</option>
-                                    <option value="1" @if(1 == $task->is_wait_sjk) selected @endif>1</option>
+                                    <option value="0" selected>0</option>
+                                    <option value="1" >1</option>
                                 </select>
                             </div>
                             <div class="form-group">
