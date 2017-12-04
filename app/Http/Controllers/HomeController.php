@@ -32,6 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('errors.503');
         $roleCount = \App\Role::count();
 		if($roleCount != 0) {
 			if($roleCount != 0) {
