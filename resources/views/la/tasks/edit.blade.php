@@ -38,7 +38,7 @@
 
 				<div class="form-group control-all">
 					<label for="word_id">Work Id :</label>
-					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="0" aria-hidden="true" disabled="disabled">
+					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="0" aria-hidden="true">
 						@foreach ($work_list as $k => $v)
 							<option value="{{$k}}" @if($k == $task->work_id) selected @endif>{{$v}}</option>
 						@endforeach
