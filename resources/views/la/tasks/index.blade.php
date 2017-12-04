@@ -72,11 +72,6 @@
                                     <option value="{{$k}}" >{{$v}}</option>
                                 @endforeach
                             </select>
-                            <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-					<span class="selection">
-				</span>
-				<span class="dropdown-wrapper" aria-hidden="true"></span>
-			</span>
                         </div>
 
                         {{--@la_input($module, 'work_id')--}}
@@ -88,11 +83,6 @@
                                     <option value="{{$k}}" >{{$v}}</option>
                                 @endforeach
                             </select>
-                            <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-					<span class="selection">
-				</span>
-				<span class="dropdown-wrapper" aria-hidden="true"></span>
-			</span>
                         </div>
 
                         {{--@la_input($module, 'user_key')--}}

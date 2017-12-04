@@ -46,12 +46,7 @@
 							<option value="{{$k}}" @if($k == $task->work_id) selected @endif>{{$v}}</option>
 						@endforeach
 					</select>
-					<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-					<span class="selection">
-				</span>
-				<span class="dropdown-wrapper" aria-hidden="true"></span>
-			</span>
-		</div>
+				</div>
 				{{--@la_input($module, 'work_id')--}}
 
 				<div class="form-group">
@@ -61,16 +56,9 @@
 							<option value="{{$k}}" @if($k == $task->user_key) selected @endif>{{$v}}</option>
 						@endforeach
 					</select>
-					<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;">
-					<span class="selection">
-				</span>
-				<span class="dropdown-wrapper" aria-hidden="true"></span>
-			</span>
 				</div>
 
 				{{--@la_input($module, 'user_key')--}}
-
-
 
 				{{--@la_input($module, 'run_time')--}}
 				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'> <input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
