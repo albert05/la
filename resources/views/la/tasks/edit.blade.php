@@ -31,14 +31,11 @@
 			<div class="col-md-8 col-md-offset-2">
 				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.tasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
 					{{--@la_form($module)--}}
-				{{--@la_input($module, 'title')--}}
-
 				<div class="form-group">
 					<label for="title">Title :</label>
 					<input class="form-control" placeholder="Enter Title" data-rule-maxlength="256" name="title" type="text" value="{{$task->title}}">
 				</div>
 
-				{{--@la_input($module, 'work_id')--}}
 				<div class="form-group">
 					<label for="word_id">Work Id :</label>
 					<select class="form-control select2-hidden-accessible" data-placeholder="Enter Work Id" rel="select2" name="work_id" tabindex="0" aria-hidden="true">
@@ -47,7 +44,6 @@
 						@endforeach
 					</select>
 				</div>
-				{{--@la_input($module, 'work_id')--}}
 
 				<div class="form-group">
 					<label for="user_key">User Key :</label>
@@ -60,11 +56,13 @@
 
 				{{--@la_input($module, 'user_key')--}}
 
-				{{--@la_input($module, 'run_time')--}}
-				<div class="form-group"><label for="run_time">Run Time* :</label><div class='input-group datetime'> <input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value=""></div>
-					<input type="hidden" id="run_time_v" value="@if(1){{$task->run_time}}@endif">
-					{{--@la_input($module, 'time_point')--}}
-					{{--@la_input($module, 'product_id')--}}
+				<div class="form-group">
+					<label for="run_time">Run Time* :</label>
+					<div class='input-group datetime'>
+						<input id= 'datetimepicker' class="form-control" placeholder="Enter Run Time" required="1" name="run_time" type="text" value="">
+					</div>
+				</div>
+				<input type="hidden" id="run_time_v" value="{{$task->run_time}}">
 
 					<div class="form-group">
 						<label for="time_point">Time Point :</label>
@@ -80,10 +78,6 @@
 								<img src="{{asset($task->img_url)}}">
 						</div>
 					@endif
-					{{--@la_input($module, 'code')--}}
-					{{--@la_input($module, 'money')--}}
-					{{--@la_input($module, 'voucher_id')--}}
-
 							<div class="form-group">
 								<label for="code">Code :</label>
 								<input class="form-control" placeholder="Enter Code" data-rule-maxlength="256" name="code" type="text" value="{{$task->code}}">
@@ -102,13 +96,10 @@
 							<div class="form-group">
 								<label for="is_kdb_pay">Is Kdb Pay :</label>
 								<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Kdb Pay" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
-									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>0</option>
-									<option value="1" @if(1 == $task->is_kdb_pay) selected @endif>1</option>
+									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>否</option>
+									<option value="1" @if(1 == $task->is_kdb_pay) selected @endif>是</option>
 								</select>
 							</div>
-					{{--@la_input($module, 'is_kdb_pay')--}}
-					{{--@la_input($module, 'prize_number')--}}
-					{{--@la_input($module, 'is_wait_sjk')--}}
 
 							<div class="form-group">
 								<label for="prize_number">Prize Number :</label>
@@ -118,8 +109,8 @@
 					<div class="form-group">
 						<label for="is_wait_sjk">Is Wait Sjk :</label>
 						<select class="form-control select2-hidden-accessible" data-placeholder="Enter Is Wait Sjk" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
-							<option value="0" @if(0 == $task->is_wait_sjk) selected @endif>0</option>
-							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>1</option>
+							<option value="0" @if(0 == $task->is_wait_sjk) selected @endif>否</option>
+							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>是</option>
 						</select>
 					</div>
                     {{--@if (in_array($task->status, [0, 1]))--}}
