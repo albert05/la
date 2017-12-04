@@ -144,13 +144,25 @@ $(function () {
 
     $("#datetimepicker").val($("#run_time_v").val());
 
-    var work_id = $(".work-select").val();
+    $(".work-select").change(function(){
+        var work_id = $(this).val();
+
+        $(".form-group").hide();
+        $(".control-all").show();
+        if (work_id == 'exchange') {
+            $(".control-exchange").show();
+        } else if (work_id == 'order') {
+            $(".control-order").show();
+        }
+    });
+
+    var work = $(".work-select").val();
 
     $(".form-group").hide();
     $(".control-all").show();
-    if (work_id == 'exchange') {
+    if (work == 'exchange') {
         $(".control-exchange").show();
-    } else if (work_id == 'order') {
+    } else if (work == 'order') {
         $(".control-order").show();
     }
 });
