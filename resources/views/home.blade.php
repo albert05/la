@@ -70,7 +70,7 @@
 <div id="c">
     <div class="container">
         <p>
-            <strong>Copyright &copy; 2016. Powered by <a href="https://dwijitsolutions.com"><b>Dwij IT Solutions</b></a>
+            <strong>Copyright &copy; {{date("Y")}}}. Powered by <a href="#"><b>Albert</b></a>
         </p>
     </div>
 </div>
