@@ -116,7 +116,7 @@
 							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>是</option>
 						</select>
 					</div>
-                    @if (in_array($task->status, [0, 1]))
+                    @if (in_array($task->status, [0]))
 					<div class="form-group control-order">
 						<label for="status">任务状态 :</label>
 						<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
