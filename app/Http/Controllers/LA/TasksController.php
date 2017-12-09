@@ -114,23 +114,24 @@ class TasksController extends Controller
                 'user_name' => Auth::user()->name,
                 'work_id' => $request->work_id,
                 'user_key' => $request->user_key,
+                'run_time' => $request->run_time,
                 'status' => 0,
             ];
 
             if ($request->work_id == 'exchange') {
-                $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code ?? '';
                 $params['prize_number'] = $request->prize_numberc ?? 1;
             } else if ($request->work_id == 'order') {
-                $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
+            } else if ($request->work_id == 'transfer') {
+                $params['product_id'] = $request->product_id;
             }
 
             // Create Task
@@ -236,22 +237,23 @@ class TasksController extends Controller
 
             $params = [
                 'title' => $request->title,
+                'run_time' => $request->run_time,
             ];
 
             if ($request->work_id == 'exchange') {
-                $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code;
                 $params['prize_number'] = $request->prize_number ?? 1;
             } else if ($request->work_id == 'order') {
-                $params['run_time'] = $request->run_time;
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
+            } else if ($request->work_id == 'transfer') {
+                $params['product_id'] = $request->product_id;
             }
 
 

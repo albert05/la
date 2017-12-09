@@ -81,7 +81,7 @@
 
                         {{--@la_input($module, 'user_key')--}}
 
-                        <div class="form-group control-exchange control-order">
+                        <div class="form-group control-all">
                             <label for="run_time">脚本开始时间* :</label>
                             <div class='input-group datetime'>
                                 <input id= 'datetimepicker' class="form-control" placeholder="选择脚本开始时间" required="1" name="run_time" type="text" value="">
@@ -92,7 +92,7 @@
                                 <label for="time_point">任务执行时间点 :</label>
                                 <input class="form-control valid" placeholder="输入任务请求时间点，如输入100101.95表示10点1分1秒950毫秒执行" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
                             </div>
-                            <div class="form-group control-exchange control-order">
+                            <div class="form-group control-exchange control-order control-transfer">
                                 <label for="product_id">产品ID :</label>
                                 <input class="form-control valid" placeholder="输入产品ID" name="product_id" type="number" value="" aria-invalid="false">
                             </div>
@@ -177,6 +177,8 @@
                 $(".control-exchange").show();
             } else if (work_id == 'order') {
                 $(".control-order").show();
+            } else if (work_id == 'transfer') {
+                $(".control-transfer").show();
             }
         });
 
@@ -187,6 +189,8 @@
             $(".control-exchange").show();
         } else if (work == 'order') {
             $(".control-order").show();
+        } else if (work_id == 'transfer') {
+            $(".control-transfer").show();
         }
     });
 </script>
