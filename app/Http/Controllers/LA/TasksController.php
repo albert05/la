@@ -132,6 +132,7 @@ class TasksController extends Controller
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'transfer') {
                 $params['product_id'] = $request->product_id;
+                $params['money'] = $request->money ?? 200000;
             }
 
             // Create Task
@@ -254,6 +255,7 @@ class TasksController extends Controller
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'transfer') {
                 $params['product_id'] = $request->product_id;
+                $params['money'] = $request->money ?? 1000;
             }
 
 

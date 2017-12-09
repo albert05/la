@@ -100,7 +100,7 @@
                                 {{--<label for="code">验证码 :</label>--}}
                                 {{--<input class="form-control" placeholder="输入验证码" data-rule-maxlength="256" name="code" type="text" value="">--}}
                             {{--</div>--}}
-                            <div class="form-group control-order">
+                            <div class="form-group control-order control-transfer">
                                 <label for="money">投资金额 :</label>
                                 <input class="form-control valid" placeholder="输入金额" name="money" type="number" value="0" aria-invalid="false">
                             </div>

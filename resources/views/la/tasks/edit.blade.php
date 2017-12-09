@@ -86,7 +86,7 @@
 								<input class="form-control" placeholder="输入上图图片验证码" data-rule-maxlength="256" name="code" type="text" value="{{$task->code}}">
 							</div>
 
-							<div class="form-group control-order">
+							<div class="form-group control-order control-transfer">
 								<label for="money">投资金额 :</label>
 								<input class="form-control valid" placeholder="输入投资金额" name="money" type="number" value="{{$task->money}}" aria-invalid="false">
 							</div>

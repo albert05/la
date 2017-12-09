@@ -83,6 +83,8 @@ class Monitor extends Command
             DB::table("tasks")->where('id', $id)->update(['run_time' => date("Y-m-d H:i:s", strtotime($time) + 86400)]);
         } elseif ($work_id == 'share') {
             DB::table("tasks")->where('id', $id)->update(['run_time' => $this->handleShareTime($time)]);
+        } else if ($work_id == 'transfer') {
+            DB::table("tasks")->where('id', $id)->update(['run_time' => date("Y-m-d H:i:s", strtotime($time) + 3600)]);
         } else {
             DB::table("tasks")->where('id', $id)->update(['status' => 1]);
         }
