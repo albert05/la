@@ -87,7 +87,7 @@
 							</div>
 
 							<div class="form-group control-order control-transfer">
-								<label for="money">投资金额 :</label>
+								<label for="money">金额 :</label>
 								<input class="form-control valid" placeholder="输入投资金额" name="money" type="number" value="{{$task->money}}" aria-invalid="false">
 							</div>
 
@@ -161,7 +161,7 @@ $(window).load(function (){
         $(".control-exchange").show();
     } else if (work == 'order') {
         $(".control-order").show();
-    } else if (work_id == 'transfer') {
+    } else if (work == 'transfer') {
         $(".control-transfer").show();
     }
 });
