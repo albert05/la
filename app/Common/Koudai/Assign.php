@@ -33,9 +33,9 @@ class Assign extends Base
 
         if ($this->curl->response->code == 0 && count($this->curl->response->list) > 0) {
             foreach ($this->curl->response->list as $item) {
-                if ($item['project_id'] == $this->product_id) {
-                    $this->status_type = $item['status_type'];
-                    $this->invest_id = $item['invest_id'];
+                if ($item->project_id == $this->product_id) {
+                    $this->status_type = $item->status_type;
+                    $this->invest_id = $item->invest_id;
                     break;
                 }
             }
