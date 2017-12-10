@@ -10,9 +10,9 @@ namespace App\Common\Koudai;
 
 class Assign extends Base
 {
-    const INVESTING_URL = "https://deposit.koudailc.com/user-project/project-investing-list";
-    const ASSIGN_URL = "https://deposit.koudailc.com/credit/assign";
-    const CANCEL_URL = "https://deposit.koudailc.com/credit/cancel-assignment";
+    const INVESTING_URL = "https://deposit.koudailc.com/user-project/project-investing-list?appVersion=6.4.1";
+    const ASSIGN_URL = "https://deposit.koudailc.com/credit/assign?appVersion=6.4.1";
+    const CANCEL_URL = "https://deposit.koudailc.com/credit/cancel-assignment?appVersion=6.4.1";
     private $product_id;
     private $money;
     private $pay_passwd = '';
