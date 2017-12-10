@@ -16,7 +16,7 @@ class Assign extends Base
     private $product_id;
     private $money;
     private $pay_passwd = '';
-    private $status_type;
+    private $status_type = -1;
     private $invest_id;
 
     public function __construct($cookie, $pay_passwd)
@@ -83,8 +83,8 @@ class Assign extends Base
         $this->product_id = $product_id;
     }
 
-    public function isAssign() {
-        return $this->status_type == 6;
+    public function getStatus() {
+        return $this->status_type == 6 ? true : ($this->status_type == -1 ? false : $this->status_type);
     }
 
 }

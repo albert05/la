@@ -61,10 +61,11 @@ class TransferJob extends Command
             $assign->doJob();
             $this->comment("assign result: " . $assign->getErrorMsg());
 
-            if ($assign->isAssign()) {
+            $status = $assign->getStatus();
+            if (is_bool($status)) {
                 Task::where('id', $task_id)->update([
                     'result' => $assign->getErrorMsg(),
-                    'status' => $assign->getErrorNo() == 0 ? 3 : 2,
+                    'status' => $status ? 3 : 2,
                 ]);
             }
 
