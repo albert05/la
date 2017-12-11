@@ -122,7 +122,7 @@ class TasksController extends Controller
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code ?? '';
-                $params['prize_number'] = $request->prize_numberc ?? 1;
+                $params['prize_number'] = $request->prize_number ?? 1;
             } else if ($request->work_id == 'order') {
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
