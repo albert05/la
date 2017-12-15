@@ -56,7 +56,7 @@
 
 				{{--@la_input($module, 'user_key')--}}
 
-				<div class="form-group control-exchange control-order">
+				<div class="form-group control-all">
 					<label for="run_time">脚本开始时间* :</label>
 					<div class='input-group datetime'>
 						<input id= 'datetimepicker' class="form-control" placeholder="选择脚本开始时间" required="1" name="run_time" type="text" value="{{$task->run_time}}" >
@@ -69,7 +69,7 @@
 						<input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false" >
 					</div>
 
-					<div class="form-group  control-exchange control-order">
+					<div class="form-group  control-exchange control-order  control-transfer">
 						<label for="product_id">产品ID :</label>
 						<input class="form-control valid" placeholder="输入产品ID" name="product_id" type="number" value="{{$task->product_id}}" aria-invalid="false">
 					</div>
@@ -86,8 +86,8 @@
 								<input class="form-control" placeholder="输入上图图片验证码" data-rule-maxlength="256" name="code" type="text" value="{{$task->code}}">
 							</div>
 
-							<div class="form-group control-order">
-								<label for="money">投资金额 :</label>
+							<div class="form-group control-order control-transfer">
+								<label for="money">金额 :</label>
 								<input class="form-control valid" placeholder="输入投资金额" name="money" type="number" value="{{$task->money}}" aria-invalid="false">
 							</div>
 
@@ -161,6 +161,8 @@ $(window).load(function (){
         $(".control-exchange").show();
     } else if (work == 'order') {
         $(".control-order").show();
+    } else if (work == 'transfer') {
+        $(".control-transfer").show();
     }
 });
 </script>

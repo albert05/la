@@ -38,6 +38,11 @@ class Factory
         return $this->createDailyCmd($task);
     }
 
+    private function createTransferCmd($task) {
+        $this->cmd = Helper::getBash() . " {$this->taskId} {$task->user_key} {$task->product_id} {$task->money} {$task->id} " . Helper::getLogOutput($this->taskId);
+        return true;
+    }
+
     //{id} {product_id} {time_point} {code} {prize_number}
     private function createExchangeCmd($task) {
         $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .

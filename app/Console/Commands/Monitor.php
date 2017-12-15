@@ -83,6 +83,8 @@ class Monitor extends Command
             DB::table("tasks")->where('id', $id)->update(['run_time' => date("Y-m-d H:i:s", strtotime($time) + 86400)]);
         } elseif ($work_id == 'share') {
             DB::table("tasks")->where('id', $id)->update(['run_time' => $this->handleShareTime($time)]);
+        } else if ($work_id == 'transfer') {
+            DB::table("tasks")->where('id', $id)->update(['run_time' => $this->handleTransferTime($time)]);
         } else {
             DB::table("tasks")->where('id', $id)->update(['status' => 1]);
         }
@@ -99,6 +101,20 @@ class Monitor extends Command
             $date = date("Y-m-d 17:30:00", time());
         } else {
             $date = date("Y-m-d H:i:s", strtotime($time) + 7200);
+        }
+
+        return $date;
+    }
+
+    private function handleTransferTime($time) {
+        $time = date("Y-m-d H:i:s", max(time(), strtotime($time)));
+
+        $hour = intval(date("H", strtotime($time)));
+
+        if ($hour >= 1 && $hour <= 5) {
+            $date = date("Y-m-d 06:00:00");
+        } else {
+            $date = date("Y-m-d H:i:s", strtotime($time) + 3600);
         }
 
         return $date;
