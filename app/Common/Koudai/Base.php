@@ -96,7 +96,7 @@ class Base
         $now = Helper::getMicrotime();
 
         while ($now < $this->time_point) {
-            usleep(1000); // 10毫秒
+            usleep(100); // 0.1毫秒
             $now = Helper::getMicrotime();
         }
 
