@@ -7,10 +7,10 @@ use App\Common\Koudai\Exchange;
 use App\Common\Koudai\KdUser;
 use App\Models\Task;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
+//use Illuminate\Console\Command;
 use App\Common\Helper;
 
-class ExchangeJob extends Command
+class ExchangeJob extends BaseJob
 {
     /**
      * The name and signature of the console command.
