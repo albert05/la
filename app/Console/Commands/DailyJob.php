@@ -5,11 +5,10 @@ namespace App\Console\Commands;
 use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Shake;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 use App\Common\Koudai\Earn;
 
-class DailyJob extends Command
+class DailyJob extends BaseJob
 {
     /**
      * The name and signature of the console command.

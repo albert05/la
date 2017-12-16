@@ -7,10 +7,9 @@ use App\Common\Koudai\Share;
 use App\Common\Koudai\Spider;
 use App\Models\ShareRecord;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 
-class ShareJob extends Command
+class ShareJob extends BaseJob
 {
     /**
      * The name and signature of the console command.

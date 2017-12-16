@@ -2,15 +2,13 @@
 
 namespace App\Console\Commands;
 
-use App\Common\Koudai\Exchange;
 use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Order;
 use App\Models\Task;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 
-class OrderJob extends Command
+class OrderJob extends BaseJob
 {
     /**
      * The name and signature of the console command.

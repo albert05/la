@@ -6,11 +6,10 @@ use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Shake;
 use App\Common\Koudai\Spider;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 use App\Common\Koudai\Earn;
 
-class TestJob extends Command
+class TestJob extends BaseJob
 {
     /**
      * The name and signature of the console command.

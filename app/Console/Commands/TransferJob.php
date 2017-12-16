@@ -6,10 +6,9 @@ use App\Common\Koudai\Assign;
 use App\Common\Koudai\KdUser;
 use App\Models\Task;
 use App\Models\UserInfo;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 
-class TransferJob extends Command
+class TransferJob extends BaseJob
 {
     /**
      * The name and signature of the console command.

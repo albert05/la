@@ -22,6 +22,7 @@ class BaseJob extends Command
 
     public function __construct()
     {
+        parent::__construct();
         error_reporting(E_ERROR);
     }
 

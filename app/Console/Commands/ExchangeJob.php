@@ -7,7 +7,6 @@ use App\Common\Koudai\Exchange;
 use App\Common\Koudai\KdUser;
 use App\Models\Task;
 use App\Models\UserInfo;
-//use Illuminate\Console\Command;
 use App\Common\Helper;
 
 class ExchangeJob extends BaseJob

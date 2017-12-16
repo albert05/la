@@ -4,10 +4,9 @@ namespace App\Console\Commands;
 
 use App\Common\Koudai\Factory;
 use DB;
-use Illuminate\Console\Command;
 use App\Common\Helper;
 
-class Monitor extends Command
+class Monitor extends BaseJob
 {
     /**
      * The name and signature of the console command.
