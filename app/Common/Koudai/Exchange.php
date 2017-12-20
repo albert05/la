@@ -48,12 +48,12 @@ class Exchange extends Base
         $now = Helper::getMicrotime();
 
         while ($now < $this->time_point) {
-            usleep(10); // 0.01毫秒
-            $now = Helper::getMicrotime();
+            //usleep(10); // 0.01毫秒
             if (!$this->code) {
                 $task = Task::where(['id' => $task_id])->first();
                 $this->code = trim($task->code);
             }
+            $now = Helper::getMicrotime();
         }
 
         echo $now . PHP_EOL;
