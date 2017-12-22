@@ -37,6 +37,8 @@ class Exchange extends Base
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
+        echo "end_tme: " . Helper::getMicrotime() . "\n";
+
         return $this->setResult($this->curl->response);
     }
 
