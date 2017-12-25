@@ -67,8 +67,11 @@ class Spider extends Base
         $crawler->addHtmlContent($this->response);
 
         try {
-            $crawler->filterXPath('//div[contains(@class,"koudai_sjk")]')->text();
+//            $crawler->filterXPath('//div[contains(@class,"koudai_sjk")]')->text();
+            $text = $crawler->filterXPath('//div[contains(@class,"table-detail")]/table/tbody/tr/td')->text();
+            var_dump($text);
 
+            return $text != "暂无数据";
         } catch (\Exception $e) {
             return false;
         }
@@ -79,7 +82,7 @@ class Spider extends Base
     public function waitOrder() {
         $this->doJob();
         while(!$this->analyseOrder()) {
-            usleep(10000);
+            usleep(10);
             $this->doJob();
         }
     }
