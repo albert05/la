@@ -43,7 +43,7 @@ class Order extends Base
         }
 
         if ($this->is_wait_sjk) {
-            $spider = new Spider(sprintf(Spider::ORDER_URL, $this->product_id));
+            $spider = new Spider(sprintf(Spider::ORDER_RECORD_URL, $this->product_id));
             $spider->waitOrder();
         }
 
