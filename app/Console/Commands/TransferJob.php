@@ -36,7 +36,7 @@ class TransferJob extends BaseJob
         $money = $this->argument('money');
         $task_id = $this->argument('task_id');
 
-        $lock_name = Helper::filterSignature($this->signature) . " " . $task_id;
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");

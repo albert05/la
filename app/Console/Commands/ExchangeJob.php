@@ -39,7 +39,7 @@ class ExchangeJob extends BaseJob
         $time_point = $this->argument('time_point');
         $task_id = $this->argument('task_id');
 
-        $lock_name = Helper::filterSignature($this->signature) . " " . $user_id;
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");
