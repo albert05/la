@@ -50,7 +50,7 @@ class Exchange extends Base
         $now = Helper::getMicrotime();
 
         while ($now < $this->time_point) {
-            //usleep(10); // 0.01毫秒
+            usleep(10); // 0.01毫秒
             if (!$this->code) {
                 $task = Task::where(['id' => $task_id])->first();
                 $this->code = trim($task->code);
