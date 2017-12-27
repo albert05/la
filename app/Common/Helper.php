@@ -82,7 +82,7 @@ class Helper
      * @param $id
      * @return string
      */
-    public static function getLogOutput($id) {
+    public static function getLogOutput($id, $user_id) {
         $global_config = DB::table('workconfigs')
             ->where('work_id', 'global')
             ->lists( 'value', 'key');
@@ -99,7 +99,7 @@ class Helper
             mkdir($path, 0777, true);
         }
 
-        return " 1>>" . $log_path . $id . "/" . date('Y-m-d') . ".log 2>&1 & ";
+        return " 1>>" . $log_path . $id . "/" . date('Y-m-d') . "_{$user_id}.log 2>&1 & ";
     }
 
     /**

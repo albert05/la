@@ -30,7 +30,7 @@ class Factory
     }
 
     private function createDailyCmd($task) {
-        $this->cmd = Helper::getBash() . " {$this->taskId} " . $task->user_key . Helper::getLogOutput($this->taskId);
+        $this->cmd = Helper::getBash() . " {$this->taskId} " . $task->user_key . Helper::getLogOutput($this->taskId, $task->user_key);
         return true;
     }
 
@@ -39,7 +39,7 @@ class Factory
     }
 
     private function createTransferCmd($task) {
-        $this->cmd = Helper::getBash() . " {$this->taskId} {$task->user_key} {$task->product_id} {$task->money} {$task->id} " . Helper::getLogOutput($this->taskId);
+        $this->cmd = Helper::getBash() . " {$this->taskId} {$task->user_key} {$task->product_id} {$task->money} {$task->id} " . Helper::getLogOutput($this->taskId, $task->user_key);
         return true;
     }
 
@@ -47,7 +47,7 @@ class Factory
     private function createExchangeCmd($task) {
         $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .
                     " " . $task->prize_number . " " . $task->id . " " . $task->code;
-        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId);
+        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId, $task->user_key);
         return true;
     }
 
@@ -55,7 +55,7 @@ class Factory
     private function createOrderCmd($task) {
         $params = $task->user_key . " " . $task->product_id . " " . $task->time_point .
             " " . $task->money . " " . $task->is_kdb_pay . " " . $task->voucher_id . " " . $task->is_wait_sjk . " " . $task->id;
-        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId);
+        $this->cmd = Helper::getBash() . " {$this->taskId} " . $params . Helper::getLogOutput($this->taskId, $task->user_key);
         return true;
     }
 

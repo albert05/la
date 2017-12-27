@@ -8,6 +8,8 @@
  */
 namespace App\Common\Koudai;
 
+use App\Common\Helper;
+
 class Order extends Base
 {
     const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-order?clientType=pc";
@@ -57,7 +59,9 @@ class Order extends Base
             'voucher_id' => $this->voucher_id,
         ];
 
-        return $this->run($params);
+        $ret = $this->run($params);
+        echo "end_time: " . Helper::getMicrotime() . "\n";
+        return $ret;
     }
 
     public function setMoney($money) {
