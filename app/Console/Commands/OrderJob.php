@@ -15,7 +15,7 @@ class OrderJob extends BaseJob
      *
      * @var string
      */
-    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk} {task_id}';
+    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk} {task_id} {order_number}';
 
     /**
      * The console command description.
@@ -39,6 +39,7 @@ class OrderJob extends BaseJob
         $voucher_id = $this->argument('voucher_id');
         $is_wait_sjk = $this->argument('is_wait_sjk');
         $task_id = $this->argument('task_id');
+        $order_number = $this->argument('order_number');
 
         $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id . "_" . $task_id;
 
@@ -63,7 +64,10 @@ class OrderJob extends BaseJob
             $order->setTimePoint($time_point);
             $order->setVoucherId($voucher_id);
             $order->setIsWaitSjk($is_wait_sjk);
-            $order->doJob();
+
+            for ($i = 0; $i < $order_number; $i++) {
+                $order->doJob();
+            }
             $this->comment("order result: " . $order->getErrorMsg());
 
             Task::where('id', $task_id)->update([

@@ -122,6 +122,10 @@
                                     <option value="1" >是</option>
                                 </select>
                             </div>
+                        <div class="form-group control-order">
+                            <label for="order_number">投资笔数 :</label>
+                            <input class="form-control valid" placeholder="输入投资笔数" name="order_number" type="number" value="1" aria-invalid="false">
+                        </div>
                             <div class="form-group control-exchange">
                                 <label for="prize_number">券数量 :</label>
                                 <input class="form-control valid" placeholder="输入券数量" name="prize_number" type="number" value="1" aria-invalid="false">

@@ -130,6 +130,7 @@ class TasksController extends Controller
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
+                $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
                 $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 200000;
@@ -253,6 +254,7 @@ class TasksController extends Controller
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
+                $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
                 $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;

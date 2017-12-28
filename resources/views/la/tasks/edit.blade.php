@@ -116,6 +116,10 @@
 							<option value="1" @if(1 == $task->is_wait_sjk) selected @endif>是</option>
 						</select>
 					</div>
+				<div class="form-group control-order">
+					<label for="order_number">投资笔数 :</label>
+					<input class="form-control valid" placeholder="输入投资笔数" name="order_number" type="number" value="{{$task->order_number}}" aria-invalid="false">
+				</div>
                     @if (in_array($task->status, [0]))
 					<div class="form-group control-order">
 						<label for="status">任务状态 :</label>
