@@ -30,6 +30,8 @@ class Order extends Base
 
     public function preJob()
     {
+        $this->setUrl(self::ORDER_PRE_URL);
+
         $params = [
             'money' => $this->money,
         ];
