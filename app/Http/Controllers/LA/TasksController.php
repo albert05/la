@@ -123,6 +123,7 @@ class TasksController extends Controller
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code ?? '';
                 $params['prize_number'] = $request->prize_number ?? 1;
+                $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'order') {
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;
@@ -247,6 +248,7 @@ class TasksController extends Controller
                 $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code;
                 $params['prize_number'] = $request->prize_number ?? 1;
+                $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'order') {
                 $params['time_point'] = $request->time_point;
                 $params['product_id'] = $request->product_id;

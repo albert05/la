@@ -115,7 +115,7 @@
                                     <option value="1" >是</option>
                                 </select>
                             </div>
-                            <div class="form-group control-order">
+                            <div class="form-group control-order control-exchange">
                                 <label for="is_wait_sjk">是否等待三剑客 :</label>
                                 <select class="form-control select2-hidden-accessible" data-placeholder="选择是否已等待三剑客" rel="select2" name="is_wait_sjk" tabindex="-1" aria-hidden="true">
                                     <option value="0" selected>否</option>
