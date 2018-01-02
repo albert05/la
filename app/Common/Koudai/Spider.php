@@ -18,8 +18,15 @@ class Spider extends Base
     const BBS_URL = "https://bbs.koudailc.com/?/m/ajax/elite_list/sort_type-new__day-0__is_recommend-0_page-1";
     const ORDER_URL = "https://www.koudailc.com/list/detail?id=%s&channelId=4";
     const ORDER_RECORD_URL = "https://deposit.koudailc.com/project/invest-list?clientType=pc&id=%s";
+    const EXCHANGE_MONITOR_URL = "https://deposit.koudailc.com/intergration/home-new?page=1&pageSize=8";
     private $response;
     private $analyse_data = [];
+    private $voucher_total = [
+        1 => 5,
+        2 => 10,
+        3 => 5,
+        4 => 3,
+    ];
 
     public function __construct($url)
     {
@@ -82,6 +89,25 @@ class Spider extends Base
         $this->doJob();
         while(!$this->analyseOrder()) {
 //            usleep(10);
+            $this->doJob();
+        }
+    }
+
+
+    public function analyseExchange() {
+        foreach ($this->response->prize_channel[0]->prize_info as $key => $value) {
+            if ($this->voucher_total[$key] > $value) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function waitExchange() {
+        $this->doJob();
+        while(!$this->analyseExchange()) {
+            usleep(10);
             $this->doJob();
         }
     }

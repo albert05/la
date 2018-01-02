@@ -17,6 +17,7 @@ class Exchange extends Base
     private $product_id = 4;  // 4: %1加息券
     private $code;
     private $prize_number = 1;
+    private $is_wait_sjk = 0;
 
     public function __construct($cookie)
     {
@@ -27,6 +28,11 @@ class Exchange extends Base
     public function doJob($task_id = '')
     {
         $this->waitIt($task_id);
+
+        if ($this->is_wait_sjk) {
+            $spider = new Spider(Spider::EXCHANGE_MONITOR_URL);
+            $spider->waitExchange();
+        }
 
         $params = [
             'id' => $this->product_id,
@@ -72,5 +78,9 @@ class Exchange extends Base
 
     public function setPrizeNumber($prize_number) {
         $this->prize_number = $prize_number;
+    }
+
+    public function setIsWaitSjk($is_wait_sjk) {
+        $this->is_wait_sjk = $is_wait_sjk;
     }
 }
