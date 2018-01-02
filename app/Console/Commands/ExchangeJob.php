@@ -39,6 +39,7 @@ class ExchangeJob extends BaseJob
         $product_id = $task->product_id;
         $prize_number = $task->prize_number;
         $time_point = $task->time_point;
+        $is_wait_sjk = $task->is_wait_sjk;
 
         $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
@@ -73,6 +74,7 @@ class ExchangeJob extends BaseJob
             $exchange->setCode($code);
             $exchange->setPrizeNumber($prize_number);
             $exchange->setTimePoint($time_point);
+            $exchange->setIsWaitSjk($is_wait_sjk);
             $exchange->doJob($task_id);
             $this->comment("exchange result: " . $exchange->getErrorMsg());
 
