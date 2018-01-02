@@ -15,7 +15,7 @@ class TransferJob extends BaseJob
      *
      * @var string
      */
-    protected $signature = 'transfer {id} {product_id} {money} {task_id}';
+    protected $signature = 'transfer {id}';
 
     /**
      * The console command description.
@@ -31,10 +31,12 @@ class TransferJob extends BaseJob
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
-        $product_id = $this->argument('product_id');
-        $money = $this->argument('money');
-        $task_id = $this->argument('task_id');
+
+        $task_id = $this->argument('id');
+        $task = Task::where('id', $task_id)->firstOrFail();
+        $user_id = $task->user_key;
+        $product_id = $task->product_id;
+        $money = $task->money;
 
         $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 

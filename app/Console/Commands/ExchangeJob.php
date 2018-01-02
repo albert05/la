@@ -16,7 +16,7 @@ class ExchangeJob extends BaseJob
      *
      * @var string
      */
-    protected $signature = 'exchange {id} {product_id} {time_point} {prize_number} {task_id} {code?}';
+    protected $signature = 'exchange {id}';
 
     /**
      * The console command description.
@@ -32,14 +32,15 @@ class ExchangeJob extends BaseJob
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
-        $code = $this->argument('code');
-        $product_id = $this->argument('product_id');
-        $prize_number = $this->argument('prize_number');
-        $time_point = $this->argument('time_point');
-        $task_id = $this->argument('task_id');
+        $task_id = $this->argument('id');
+        $task = Task::where('id', $task_id)->firstOrFail();
+        $user_id = $task->user_key;
+        $code = $task->code;
+        $product_id = $task->product_id;
+        $prize_number = $task->prize_number;
+        $time_point = $task->time_point;
 
-        $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id . "_" . $task_id;
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");

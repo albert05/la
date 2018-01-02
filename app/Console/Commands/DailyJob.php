@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Shake;
+use App\Models\Task;
 use App\Models\UserInfo;
 use App\Common\Helper;
 use App\Common\Koudai\Earn;
@@ -31,9 +32,10 @@ class DailyJob extends BaseJob
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
+        $task_id = $this->argument('id');
 
-        $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id;
+
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");
@@ -43,7 +45,8 @@ class DailyJob extends BaseJob
         try {
             $this->comment("{$lock_name} start.");
 
-            $user = UserInfo::where('user_key', $user_id)->firstOrFail();
+            $task = Task::where('id', $task_id)->firstOrFail();
+            $user = UserInfo::where('user_key', $task->user_key)->firstOrFail();
 
             $kd_user = new KdUser($user->user_name, $user->password);
 

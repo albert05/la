@@ -15,7 +15,7 @@ class OrderJob extends BaseJob
      *
      * @var string
      */
-    protected $signature = 'order {id} {product_id} {time_point} {money} {is_kdb_pay} {voucher_id} {is_wait_sjk} {task_id} {order_number}';
+    protected $signature = 'order {id}';
 
     /**
      * The console command description.
@@ -31,17 +31,18 @@ class OrderJob extends BaseJob
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
-        $money = $this->argument('money');
-        $product_id = $this->argument('product_id');
-        $is_kdb_pay = $this->argument('is_kdb_pay');
-        $time_point = $this->argument('time_point');
-        $voucher_id = $this->argument('voucher_id');
-        $is_wait_sjk = $this->argument('is_wait_sjk');
-        $task_id = $this->argument('task_id');
-        $order_number = $this->argument('order_number');
+        $task_id = $this->argument('id');
+        $task = Task::where('id', $task_id)->firstOrFail();
+        $user_id = $task->user_key;
+        $money = $task->money;
+        $product_id = $task->product_id;
+        $is_kdb_pay = $task->is_kdb_pay;
+        $time_point = $task->time_point;
+        $voucher_id = $task->voucher_id;
+        $is_wait_sjk = $task->is_wait_sjk;
+        $order_number = $task->order_number;
 
-        $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id . "_" . $task_id;
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");

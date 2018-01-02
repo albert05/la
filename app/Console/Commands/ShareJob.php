@@ -32,9 +32,11 @@ class ShareJob extends BaseJob
      */
     public function handle()
     {
-        $user_id = $this->argument('id');
+        $task_id = $this->argument('id');
+        $task = Task::where('id', $task_id)->firstOrFail();
+        $user_id = $task->user_key;
 
-        $lock_name = Helper::filterSignature($this->signature) . "_" . $user_id;
+        $lock_name = Helper::filterSignature($this->signature) . "_" . $task_id;
 
         if (!Helper::Lock($lock_name)) {
             $this->comment($lock_name . " script is exists.");
