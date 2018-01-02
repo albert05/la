@@ -13,15 +13,15 @@ use App\Common\Helper;
 class Factory
 {
     private $cmd;
-    private $taskId;
-    public function __construct($task_id)
+    private $workId;
+    public function __construct($work_id)
     {
-        $this->taskId = $task_id;
+        $this->workId = $work_id;
     }
 
     public function createCmd($task)
     {
-        $this->cmd = Helper::getBash() . $this->taskId . Helper::getLogOutput($this->taskId, $task->user_key);
+        $this->cmd = Helper::getBash() . $this->workId . " " . $task->id . Helper::getLogOutput($this->workId, $task->user_key);
         return true;
     }
 
