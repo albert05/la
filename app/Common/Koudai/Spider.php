@@ -95,8 +95,10 @@ class Spider extends Base
 
 
     public function analyseExchange() {
+        var_dump($this->response->prize_channel[0]->prize_info);
         foreach ($this->response->prize_channel[0]->prize_info as $key => $item) {
             if ($this->voucher_total[$item->id] > $item->limit) {
+                var_dump($this->voucher_total[$item->id]);
                 return true;
             }
         }
