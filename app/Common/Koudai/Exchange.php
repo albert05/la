@@ -40,6 +40,8 @@ class Exchange extends Base
             'prize_number' => $this->prize_number,
         ];
 
+        echo "start_tme: " . Helper::getMicrotime() . "\n";
+
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
