@@ -21,6 +21,7 @@ class Spider extends Base
     const EXCHANGE_MONITOR_URL = "https://deposit.koudailc.com/intergration/home-new?page=1&pageSize=8";
     private $response;
     private $analyse_data = [];
+    private $monitor_proid;
     private $voucher_total = [
         1 => 5,
         2 => 10,
@@ -97,7 +98,7 @@ class Spider extends Base
     public function analyseExchange() {
         var_dump($this->response->prize_channel[0]->prize_info);
         foreach ($this->response->prize_channel[0]->prize_info as $key => $item) {
-            if ($this->voucher_total[$item->id] > $item->limit) {
+            if ($this->monitor_proid == $item->id && $this->voucher_total[$item->id] > $item->limit) {
                 var_dump($this->voucher_total[$item->id]);
                 return true;
             }
@@ -112,6 +113,10 @@ class Spider extends Base
             usleep(10);
             $this->doJob();
         }
+    }
+
+    public function setMonitorProId($monitor_proid) {
+        $this->monitor_proid = $monitor_proid;
     }
 
 }
