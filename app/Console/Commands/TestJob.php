@@ -8,6 +8,7 @@ use App\Common\Koudai\Spider;
 use App\Models\UserInfo;
 use App\Common\Helper;
 use App\Common\Koudai\Earn;
+use Illuminate\Support\Facades\Redis;
 
 class TestJob extends BaseJob
 {
@@ -45,11 +46,14 @@ class TestJob extends BaseJob
         try {
             $this->comment("{$lock_name} start.");
 
-            $image=new \Mohuishou\ImageOCR\Image(asset('la-assets/img/captcha/captcha.png'));
+            Redis::set("test", 'albert');
+            echo Redis::get('test');
 
-            $image->draw();
-
-            var_dump($image->find());
+//            $image=new \Mohuishou\ImageOCR\Image(asset('la-assets/img/captcha/captcha.png'));
+//
+//            $image->draw();
+//
+//            var_dump($image->find());
 
 
 //            $spider = new Spider(sprintf(Spider::ORDER_URL, $id));
