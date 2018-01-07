@@ -31,6 +31,7 @@ class Exchange extends Base
 
         if ($this->is_wait_sjk) {
             $spider = new Spider(Spider::EXCHANGE_MONITOR_URL);
+            $spider->setMonitorProId($this->product_id);
             $spider->waitExchange();
         }
 
