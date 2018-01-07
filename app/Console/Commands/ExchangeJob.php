@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Common\Koudai\Code;
 use App\Common\Koudai\Exchange;
 use App\Common\Koudai\KdUser;
+use App\Common\Login;
 use App\Models\Task;
 use App\Models\UserInfo;
 use App\Common\Helper;
@@ -53,15 +54,13 @@ class ExchangeJob extends BaseJob
 
             $cookie = $user_id;
             if (!$code) {
-                $user = UserInfo::where('user_key', $user_id)->firstOrFail();
+                $login = new Login();
+                $info = $login->kd_login($user_id);
 
-                $kd_user = new KdUser($user->user_name, $user->password);
-
-                $kd_user->login();
-                $cookie = $kd_user->getCookie();
-
-                $xcode = new Code($cookie);
-                $xcode->refresh();
+                $xcode = new Code($info['cookie']);
+                if (!$info['is_cache']) {
+                    $xcode->refresh();
+                }
                 $xcode->doJob();
                 $filename = $xcode->getFileName();
                 Task::where('id', $task_id)->update([
@@ -90,5 +89,7 @@ class ExchangeJob extends BaseJob
             Helper::unlock($lock_name);
         }
     }
+
+
 
 }
