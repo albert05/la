@@ -59,7 +59,7 @@ class ExchangeJob extends BaseJob
 
                 $xcode = new Code($info['cookie']);
                 if (!$info['is_cache']) {
-                //    $xcode->refresh();
+                    $xcode->refresh();
                 }
                 $xcode->doJob();
                 $filename = $xcode->getFileName();
