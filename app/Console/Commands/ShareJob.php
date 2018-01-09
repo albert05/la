@@ -6,6 +6,7 @@ use App\Common\Koudai\KdUser;
 use App\Common\Koudai\Share;
 use App\Common\Koudai\Spider;
 use App\Models\ShareRecord;
+use App\Models\Task;
 use App\Models\UserInfo;
 use App\Common\Helper;
 
