@@ -33,6 +33,7 @@ class Exchange extends Base
             $spider = new Spider(Spider::EXCHANGE_MONITOR_URL);
             $spider->setMonitorProId($this->product_id);
             $spider->waitExchange();
+            $this->addDetail($spider->getDetail());
         }
 
         $params = [
@@ -41,12 +42,12 @@ class Exchange extends Base
             'prize_number' => $this->prize_number,
         ];
 
-        echo "start_tme: " . Helper::getMicrotime() . "\n";
+        $this->addDetail("start_tme: " . Helper::getMicrotime() . "\n");
 
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
-        echo "end_tme: " . Helper::getMicrotime() . "\n";
+        $this->addDetail("end_tme: " . Helper::getMicrotime() . "\n");
 
         return $this->setResult($this->curl->response);
     }
@@ -67,7 +68,7 @@ class Exchange extends Base
             $now = Helper::getMicrotime();
         }
 
-        echo $now . PHP_EOL;
+        $this->addDetail($now . PHP_EOL);
         return true;
     }
 

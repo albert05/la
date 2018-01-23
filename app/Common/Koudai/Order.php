@@ -49,6 +49,7 @@ class Order extends Base
         if ($this->is_wait_sjk) {
             $spider = new Spider(sprintf(Spider::ORDER_RECORD_URL, $this->product_id));
             $spider->waitOrder();
+            $this->addDetail($spider->getDetail());
         }
 
         $this->setUrl(self::ORDER_DO_URL);
@@ -62,7 +63,7 @@ class Order extends Base
         ];
 
         $ret = $this->run($params);
-        echo "end_time: " . Helper::getMicrotime() . "\n";
+        $this->addDetail("end_time: " . Helper::getMicrotime() . "\n");
         return $ret;
     }
 

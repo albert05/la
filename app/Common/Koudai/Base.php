@@ -21,6 +21,7 @@ class Base
     protected $time_point = '';
     protected $order_id = '';
     protected $user_agent;
+    protected $detail;
 
     public function __construct($url)
     {
@@ -34,6 +35,15 @@ class Base
 
     public function getErrorMsg() {
         return $this->error_msg;
+    }
+
+    public function getDetail() {
+        return $this->detail;
+    }
+
+    public function addDetail($msg) {
+        $this->detail .= $msg;
+        echo $msg;
     }
 
     public function setUrl($url) {

@@ -99,7 +99,7 @@ class Spider extends Base
         var_dump($this->response->prize_channel[0]->prize_info);
         foreach ($this->response->prize_channel[0]->prize_info as $key => $item) {
             if ($this->monitor_proid == $item->id && $this->voucher_total[$item->id] > $item->limit) {
-                var_dump($this->voucher_total[$item->id]);
+                $this->addDetail("剩余数量：" . $item->limit);
                 return true;
             }
         }

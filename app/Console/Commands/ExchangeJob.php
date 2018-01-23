@@ -80,6 +80,7 @@ class ExchangeJob extends BaseJob
 
             Task::where('id', $task_id)->update([
                 'result' => $exchange->getErrorMsg(),
+                'detail' => $exchange->getDetail(),
                 'status' => $exchange->getErrorNo() == 0 ? 3 : 2,
             ]);
 

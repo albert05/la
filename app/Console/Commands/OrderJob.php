@@ -73,6 +73,7 @@ class OrderJob extends BaseJob
 
             Task::where('id', $task_id)->update([
                 'result' => $order->getErrorMsg(),
+                'detail' => $order->getDetail(),
                 'status' => $order->getErrorNo() == 0 ? 3 : 2,
             ]);
 

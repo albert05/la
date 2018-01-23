@@ -65,6 +65,7 @@ class TransferJob extends BaseJob
             if ($assign->isAssign()) {
                 Task::where('id', $task_id)->update([
                     'result' => $assign->getErrorMsg(),
+                    'detail' => $assign->getDetail(),
                     'status' => 3,
                 ]);
             }
