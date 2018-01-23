@@ -42,7 +42,7 @@ class Base
     }
 
     public function addDetail($msg) {
-        $this->detail .= $msg;
+        $this->detail .= $msg . "</br>";
         echo $msg;
     }
 
