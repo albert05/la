@@ -44,6 +44,7 @@ class Exchange extends Base
 
         $this->addDetail("start_tme: " . Helper::getMicrotime() . "\n");
 
+        $this->curl->setHeaders(Helper::randIp());
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
