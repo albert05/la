@@ -8,6 +8,7 @@
  */
 namespace App\Common\Koudai;
 
+use App\Common\Helper;
 use \Curl\Curl;
 
 class Tool
@@ -35,7 +36,8 @@ class Tool
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
-        return json_encode($this->curl->response);
+        return Helper::jsonFormat($this->curl->response);
+//        return json_encode($this->curl->response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
 }
