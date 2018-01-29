@@ -89,6 +89,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
     Route::get(config('laraadmin.adminRoute') . '/workconfig_dt_ajax', 'LA\WorkConfigsController@dtajax');
 
 
-    Route::resource(config('laraadmin.adminRoute') . '/captchas', 'LA\CaptchasController');
+    Route::resource(config('laraadmin.adminRoute') . '/captchas', 'LA\CaptchasController@tool');
+    Route::get(config('laraadmin.adminRoute') . '/captchas_search', 'LA\CaptchasController@search');
 
 });

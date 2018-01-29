@@ -8,18 +8,14 @@ namespace App\Http\Controllers\LA;
 
 use App\Common\Captcha\Image;
 use App\Common\Captcha\Storage;
+use App\Common\Koudai\KdUser;
+use App\Common\Koudai\Tool;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response as FacadeResponse;
-use Illuminate\Support\Facades\Input;
-use Collective\Html\FormFacade as Form;
 
 use Dwij\Laraadmin\Models\Module;
-use Dwij\Laraadmin\Helpers\LAHelper;
-use Zizaco\Entrust\EntrustFacade as Entrust;
-
 use Auth;
 use DB;
 use File;
@@ -58,6 +54,31 @@ class CaptchasController extends Controller
         }
 
         return View('la.captchas.index');
+    }
+
+    public function tool() {
+        $user_list = DB::table('userinfos')
+            ->lists('user_key', 'user_key');
+
+        return View('la.captchas.tool', [
+            'user_list' => $user_list,
+        ]);
+    }
+
+    public function search(Request $request) {
+        $user_id = $request->user_key;
+        $idx = $request->search_idx;
+
+        $user = UserInfo::where('user_key', $user_id)->firstOrFail();
+
+        $kd_user = new KdUser($user->user_name, $user->password);
+
+        $kd_user->login();
+
+        $tool = new Tool($kd_user->getCookie());
+        $tool->setUrl($idx);
+
+        return $tool->doJob();
     }
 
     /**
