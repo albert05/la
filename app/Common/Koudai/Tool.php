@@ -15,6 +15,7 @@ class Tool
     private $url;
     private $url_list = [
         0 => "https://deposit.koudailc.com/user-project/project-investing-list",
+        1 => "https://deposit.koudailc.com/voucher/show-vouchers",
     ];
 
     public function __construct($cookie)

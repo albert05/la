@@ -20,7 +20,8 @@
 			<div class="form-group control-all">
 				<label>查询项 :</label>
 				<select class="form-control select2-hidden-accessible search_idx" data-placeholder="选择查询选项" rel="select2" tabindex="2" aria-hidden="true">
-					<option value="0" >项目列表</option>
+					<option value="0" >我的项目</option>
+					<option value="1" >我的口袋券</option>
 				</select>
 			</div>
 			<button type="button" class="btn btn-default" data-dismiss="modal">查询</button>
