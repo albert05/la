@@ -35,6 +35,11 @@
 @endsection
 
 @push('scripts')
+<style>
+	.form-group {
+		width: 200px;
+	}
+</style>
 <script>
 $(function () {
     $('button').click(function () {
