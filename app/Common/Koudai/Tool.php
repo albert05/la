@@ -50,7 +50,7 @@ class Tool
         //array_walk_recursive($data, 'jsonFormatProtect');
 
         // json encode
-        $data = json_encode($data);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
         // 将urlencode的内容进行urldecode
         $data = urldecode($data);
