@@ -35,7 +35,7 @@ class Tool
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post($this->url, $params);
 
-        return $this->curl->response;
+        return json_encode($this->curl->response);
     }
 
 }
