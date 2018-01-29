@@ -38,7 +38,7 @@ $(function () {
         search_idx = $(".search_idx").val();
         params = "user_key=" + user_key + "&search_idx=" + search_idx
         $.get("{{ url(config('laraadmin.adminRoute') . '/captchas_search?') }}" + params, function(result){
-            $("#result").html(result);
+            $(".result").html(result);
         });
     });
 
