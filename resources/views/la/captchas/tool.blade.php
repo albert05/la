@@ -24,6 +24,10 @@
 				</select>
 			</div>
 			<button type="button" class="btn btn-default" data-dismiss="modal">查询</button>
+		</div>
+	</div>
+	<div class="box">
+		<div class="box-body">
 			<div class="result">
 			</div>
 		</div>

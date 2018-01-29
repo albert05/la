@@ -47,7 +47,7 @@ class Tool
     public function jsonFormat($data, $indent=null){
 
         // 对数组中每个元素递归进行urlencode操作，保护中文字符
-        array_walk_recursive($data, 'jsonFormatProtect');
+        //array_walk_recursive($data, 'jsonFormatProtect');
 
         // json encode
         $data = json_encode($data);
@@ -60,7 +60,7 @@ class Tool
         $pos = 0;
         $length = strlen($data);
         $indent = isset($indent)? $indent : '    ';
-        $newline = "\n";
+        $newline = "\n</br>";
         $prevchar = '';
         $outofquotes = true;
 
