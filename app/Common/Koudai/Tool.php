@@ -59,7 +59,7 @@ class Tool
         $ret = '';
         $pos = 0;
         $length = strlen($data);
-        $indent = isset($indent)? $indent : '    ';
+        $indent = isset($indent)? $indent : '&nbsp;&nbsp;&nbsp;&nbsp;';
         $newline = "\n</br>";
         $prevchar = '';
         $outofquotes = true;
