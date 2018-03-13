@@ -66,8 +66,21 @@ class OrderJob extends BaseJob
             $order->setVoucherId($voucher_id);
             $order->setIsWaitSjk($is_wait_sjk);
 
+            $succ_count = 0;
+            $failed_count = 0;
             for ($i = 0; $i < $order_number; $i++) {
                 $order->doJob();
+                if ($order->getErrorNo() == 0) {
+                    $succ_count++;
+                } else {
+                    $failed_count++;
+                    $order_number++;
+                }
+
+                // 失败30次或20秒退出
+                if ($failed_count > 50 || intval(date('s')) > 20 ) {
+                    break;
+                }
             }
             $this->comment("order result: " . $order->getErrorMsg());
 
