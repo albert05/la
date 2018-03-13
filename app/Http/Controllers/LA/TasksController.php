@@ -37,7 +37,7 @@ class TasksController extends Controller
         'user_key', 'run_time',
         'time_point', 'product_id',
         'money', 'code', 'voucher_id',
-        'is_kdb_pay', 'prize_number',
+        'is_kdb_pay', 'prize_number', 'order_number',
         'is_wait_sjk', 'status', 'result', 'detail'];
 
     public function __construct() {
