@@ -106,7 +106,7 @@
                             </div>
                             <div class="form-group control-order">
                                 <label for="voucher_id">加息券ID :</label>
-                                <input class="form-control valid" placeholder="输入加息券ID" name="voucher_id" type="number" value="0" aria-invalid="false">
+                                <input class="form-control valid" placeholder="输入加息券ID" name="voucher_id" type="text" value="0" aria-invalid="false">
                             </div>
                             <div class="form-group control-order">
                                 <label for="is_kdb_pay">是否使用口袋宝 :</label>
