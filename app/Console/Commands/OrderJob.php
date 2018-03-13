@@ -38,7 +38,7 @@ class OrderJob extends BaseJob
         $product_id = $task->product_id;
         $is_kdb_pay = $task->is_kdb_pay;
         $time_point = $task->time_point;
-        $voucher_id = $task->voucher_id;
+        $voucher_ids = $task->voucher_id;
         $is_wait_sjk = $task->is_wait_sjk;
         $order_number = $task->order_number;
 
@@ -63,15 +63,22 @@ class OrderJob extends BaseJob
             $order->setMoney($money);
             $order->setIsKdbPay($is_kdb_pay);
             $order->setTimePoint($time_point);
-            $order->setVoucherId($voucher_id);
             $order->setIsWaitSjk($is_wait_sjk);
 
+            $voucher_id_list = explode(":", $voucher_ids);
+
             $failed_count = 0;
+            $succ_count = 0;
             for ($i = 0; $i < $order_number; $i++) {
+                if (isset($voucher_id_list[$succ_count])) {
+                    $order->setVoucherId($voucher_id_list[$succ_count]);
+                }
                 $order->doJob();
                 if ($order->getErrorNo() != 0) {
                     $failed_count++;
                     $order_number++;
+                } else {
+                    $succ_count++;
                 }
 
                 // 失败30次或20秒退出
