@@ -66,13 +66,10 @@ class OrderJob extends BaseJob
             $order->setVoucherId($voucher_id);
             $order->setIsWaitSjk($is_wait_sjk);
 
-            $succ_count = 0;
             $failed_count = 0;
             for ($i = 0; $i < $order_number; $i++) {
                 $order->doJob();
-                if ($order->getErrorNo() == 0) {
-                    $succ_count++;
-                } else {
+                if ($order->getErrorNo() != 0) {
                     $failed_count++;
                     $order_number++;
                 }
