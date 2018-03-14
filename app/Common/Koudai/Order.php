@@ -43,6 +43,7 @@ class Order extends Base
     {
         $this->preJob();
         if ($this->getErrorNo() != 0) {
+            $this->addDetail("pre order failed: " . Helper::getMicrotime() . "\n");
             return false;
         }
 

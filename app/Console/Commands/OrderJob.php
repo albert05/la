@@ -72,6 +72,8 @@ class OrderJob extends BaseJob
             for ($i = 0; $i < $order_number; $i++) {
                 if (isset($voucher_id_list[$succ_count])) {
                     $order->setVoucherId($voucher_id_list[$succ_count]);
+                } else {
+                    $order->setVoucherId(0);
                 }
                 $order->doJob();
                 if ($order->getErrorNo() != 0) {
