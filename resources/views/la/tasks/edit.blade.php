@@ -93,7 +93,7 @@
 
 							<div class="form-group control-order">
 								<label for="voucher_id">加息券ID :</label>
-								<input class="form-control valid" placeholder="输入加息券Id" name="voucher_id" type="number" value="{{$task->voucher_id}}" aria-invalid="false">
+								<input class="form-control valid" placeholder="输入加息券Id" name="voucher_id" type="text" value="{{$task->voucher_id}}" aria-invalid="false">
 							</div>
 
 							<div class="form-group control-order">
