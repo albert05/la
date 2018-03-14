@@ -70,7 +70,7 @@ class Order extends Base
         foreach ($params as $k => $val) {
             $tmpArr[] = "$k=$val";
         }
-        $params['sign'] = base64_encode(implode("&", $tmpArr) . "&" . self::KD_KEY);
+        $params['sign'] = base64_encode(implode("&", $tmpArr) . self::KD_KEY);
 
         $ret = $this->run($params);
         $this->addDetail("end_time: " . Helper::getMicrotime() . "\n");
