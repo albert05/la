@@ -49,6 +49,9 @@ class Monitor extends BaseJob
 
                 $now = date('Y-m-d H:i:s', time());
                 foreach ($task_list as $item) {
+                    if ($item->work_id == "exchange") {
+                        continue;
+                    }
                     if ($item->run_time <= $now) {
                         $factory = new Factory($item->work_id);
                         $factory->createCmd($item);
