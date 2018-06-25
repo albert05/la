@@ -135,6 +135,7 @@ class TasksController extends Controller
                 $params['money'] = $request->money ?? 200000;
             } else if ($request->work_id == 'abcGift') {
                 $params['code'] = $request->code;
+                $params['time_point'] = $request->time_point;
             }
 
             // Create Task
@@ -260,6 +261,7 @@ class TasksController extends Controller
                 $params['money'] = $request->money ?? 1000;
             } else if ($request->work_id == 'abcGift') {
                 $params['code'] = $request->code;
+                $params['time_point'] = $request->time_point;
             }
 
             if (isset($request->status)) {
