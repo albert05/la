@@ -94,7 +94,7 @@
                             </div>
                             <div class="form-group control-exchange control-order control-transfer control-abcGift">
                                 <label for="product_id">产品ID :</label>
-                                <input class="form-control valid" placeholder="输入产品ID" name="product_id" type="number" value="" aria-invalid="false">
+                                <input class="form-control valid" placeholder="输入产品ID" name="product_id" value="" aria-invalid="false">
                             </div>
                             <div class="form-group control-abcGift">
                                 <label for="code">验证码 :</label>

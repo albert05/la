@@ -71,7 +71,7 @@
 
 					<div class="form-group  control-exchange control-order  control-transfer control-abcGift">
 						<label for="product_id">产品ID :</label>
-						<input class="form-control valid" placeholder="输入产品ID" name="product_id" type="number" value="{{$task->product_id}}" aria-invalid="false">
+						<input class="form-control valid" placeholder="输入产品ID" name="product_id" value="{{$task->product_id}}" aria-invalid="false">
 					</div>
 					@if ($task->img_url != "")
 						<div class="form-group control-exchange">
