@@ -116,25 +116,25 @@ class TasksController extends Controller
                 'user_key' => $request->user_key,
                 'run_time' => $request->run_time,
                 'status' => 0,
+                "product_id" => $request->product_id
             ];
 
             if ($request->work_id == 'exchange') {
                 $params['time_point'] = $request->time_point;
-                $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code ?? '';
                 $params['prize_number'] = $request->prize_number ?? 1;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'order') {
                 $params['time_point'] = $request->time_point;
-                $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
                 $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
-                $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 200000;
+            } else if ($request->work_id == 'abcGift') {
+                $params['code'] = $request->code;
             }
 
             // Create Task
@@ -241,27 +241,26 @@ class TasksController extends Controller
             $params = [
                 'title' => $request->title,
                 'run_time' => $request->run_time,
+                "product_id" => $request->product_id
             ];
 
             if ($request->work_id == 'exchange') {
                 $params['time_point'] = $request->time_point;
-                $params['product_id'] = $request->product_id;
                 $params['code'] = $request->code;
                 $params['prize_number'] = $request->prize_number ?? 1;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
             } else if ($request->work_id == 'order') {
                 $params['time_point'] = $request->time_point;
-                $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;
                 $params['voucher_id'] = $request->voucher_id ?? 0;
                 $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
                 $params['is_wait_sjk'] = $request->is_wait_sjk ?? 0;
                 $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
-                $params['product_id'] = $request->product_id;
                 $params['money'] = $request->money ?? 1000;
+            } else if ($request->work_id == 'abcGift') {
+                $params['code'] = $request->code;
             }
-
 
             if (isset($request->status)) {
                 $params['status'] = $request->status;
