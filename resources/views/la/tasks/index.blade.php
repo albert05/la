@@ -183,7 +183,7 @@
                 $(".control-order").show();
             } else if (work_id == 'transfer') {
                 $(".control-transfer").show();
-            } else if (work == 'abcGift') {
+            } else if (work_id == 'abcGift') {
                 $(".control-abcGift").show();
             }
         });
@@ -197,7 +197,7 @@
             $(".control-order").show();
         } else if (work_id == 'transfer') {
             $(".control-transfer").show();
-        } else if (work == 'abcGift') {
+        } else if (work_id == 'abcGift') {
             $(".control-abcGift").show();
         }
     });
