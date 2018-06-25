@@ -88,18 +88,18 @@
                             </div>
                         </div>
 
-                            <div class="form-group control-exchange control-order">
+                            <div class="form-group control-exchange control-order control-abcGift">
                                 <label for="time_point">任务执行时间点 :</label>
                                 <input class="form-control valid" placeholder="输入任务请求时间点，如输入100101.95表示10点1分1秒950毫秒执行" data-rule-maxlength="256" name="time_point" type="text" value="" aria-invalid="false">
                             </div>
-                            <div class="form-group control-exchange control-order control-transfer">
+                            <div class="form-group control-exchange control-order control-transfer control-abcGift">
                                 <label for="product_id">产品ID :</label>
                                 <input class="form-control valid" placeholder="输入产品ID" name="product_id" type="number" value="" aria-invalid="false">
                             </div>
-                            {{--<div class="form-group control-exchange">--}}
-                                {{--<label for="code">验证码 :</label>--}}
-                                {{--<input class="form-control" placeholder="输入验证码" data-rule-maxlength="256" name="code" type="text" value="">--}}
-                            {{--</div>--}}
+                            <div class="form-group control-abcGift">
+                                <label for="code">验证码 :</label>
+                                <input class="form-control" placeholder="输入验证码" data-rule-maxlength="256" name="code" type="text" value="">
+                            </div>
                             <div class="form-group control-order control-transfer">
                                 <label for="money">金额 :</label>
                                 <input class="form-control valid" placeholder="输入金额" name="money" type="number" value="0" aria-invalid="false">
@@ -195,6 +195,8 @@
             $(".control-order").show();
         } else if (work_id == 'transfer') {
             $(".control-transfer").show();
+        } else if (work == 'abcGift') {
+            $(".control-abcGift").show();
         }
     });
 </script>
