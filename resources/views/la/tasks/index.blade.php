@@ -183,6 +183,8 @@
                 $(".control-order").show();
             } else if (work_id == 'transfer') {
                 $(".control-transfer").show();
+            } else if (work == 'abcGift') {
+                $(".control-abcGift").show();
             }
         });
 
