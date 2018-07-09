@@ -133,7 +133,7 @@ class TasksController extends Controller
                 $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
                 $params['money'] = $request->money ?? 200000;
-            } else if ($request->work_id == 'abcGift') {
+            } else if ($request->work_id == 'abcGift' || $request->work_id == 'icbcGift') {
                 $params['code'] = $request->code;
                 $params['time_point'] = $request->time_point;
             }
@@ -259,7 +259,7 @@ class TasksController extends Controller
                 $params['order_number'] = $request->order_number ?? 1;
             } else if ($request->work_id == 'transfer') {
                 $params['money'] = $request->money ?? 1000;
-            } else if ($request->work_id == 'abcGift') {
+            } else if ($request->work_id == 'abcGift' || $request->work_id == 'icbcGift') {
                 $params['code'] = $request->code;
                 $params['time_point'] = $request->time_point;
             }

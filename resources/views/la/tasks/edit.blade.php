@@ -64,12 +64,12 @@
 				</div>
 				<input type="hidden" id="run_time_v" value="{{$task->run_time}}">
 
-					<div class="form-group  control-exchange control-order control-abcGift">
+					<div class="form-group  control-exchange control-order control-abcGift control-icbcGift">
 						<label for="time_point">任务执行时间点 :</label>
 						<input class="form-control valid" placeholder="输入任务请求时间点" data-rule-maxlength="256" name="time_point" type="text" value="{{$task->time_point}}" aria-invalid="false" >
 					</div>
 
-					<div class="form-group  control-exchange control-order  control-transfer control-abcGift">
+					<div class="form-group  control-exchange control-order  control-transfer control-abcGift control-icbcGift">
 						<label for="product_id">产品ID :</label>
 						<input class="form-control valid" placeholder="输入产品ID" name="product_id" value="{{$task->product_id}}" aria-invalid="false">
 					</div>
@@ -81,7 +81,7 @@
 							</div>
 						</div>
 					@endif
-							<div class="form-group control-exchange control-abcGift">
+							<div class="form-group control-exchange control-abcGift control-icbcGift">
 								<label for="code">验证码 :</label>
 								<input class="form-control" placeholder="输入上图图片验证码" data-rule-maxlength="256" name="code" type="text" value="{{$task->code}}">
 							</div>
@@ -169,6 +169,8 @@ $(window).load(function (){
         $(".control-transfer").show();
     } else if (work == 'abcGift') {
         $(".control-abcGift").show();
+    } else if (work == 'icbcGift') {
+        $(".control-icbcGift").show();
     }
 });
 </script>
