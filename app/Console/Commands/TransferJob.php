@@ -52,22 +52,26 @@ class TransferJob extends BaseJob
 
             $kd_user = new KdUser($user->user_name, $user->password);
 
-            $kd_user->login();
+            for ( $i = 0; $i < 3; $i++ ) {
+                $kd_user->login();
 
-            $assign = new Assign($kd_user->getCookie(), $user->pay_passwd);
-            $assign->setMoney($money);
-            $assign->setProductId($product_id);
-            $assign->analyseList();
-            $assign->cancel();
-            $assign->doJob();
-            $this->comment("assign result: " . $assign->getErrorMsg());
+                $assign = new Assign($kd_user->getCookie(), $user->pay_passwd);
+                $assign->setMoney($money);
+                $assign->setProductId($product_id);
+                $assign->analyseList();
+                $assign->cancel();
+                $assign->doJob();
+                $this->comment("assign result: " . $assign->getErrorMsg());
 
-            if ($assign->isAssign()) {
-                Task::where('id', $task_id)->update([
-                    'result' => $assign->getErrorMsg(),
-                    'detail' => $assign->getDetail(),
-                    'status' => 3,
-                ]);
+                if ( !$assign->isAssign() ) {
+                    break;
+                } elseif ( $i == 2 ) {
+                    Task::where('id', $task_id)->update([
+                        'result' => $assign->getErrorMsg(),
+                        'detail' => $assign->getDetail(),
+                        'status' => 3,
+                    ]);
+                }
             }
 
         } catch (\Exception $e) {

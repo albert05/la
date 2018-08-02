@@ -39,6 +39,8 @@ class Assign extends Base
                     break;
                 }
             }
+        } else {
+            $this->addDetail(json_encode($this->curl->response));
         }
 
         return !empty($this->invest_id) && in_array($this->status_type, [3, 4]);
