@@ -31,15 +31,18 @@ class Assign extends Base
         $this->curl->setCookie('SESSIONID', $this->cookie);
         $this->curl->post(self::INVESTING_URL, null);
 
-        if ($this->curl->response->code == 0 && count($this->curl->response->list) > 0) {
-            foreach ($this->curl->response->list as $item) {
-                if ($item->project_id == $this->product_id) {
-                    $this->status_type = $item->status_type;
-                    $this->invest_id = $item->invest_id;
-                    break;
+        if ($this->curl->response->code == 0) {
+            if ( count($this->curl->response->list) > 0 ) {
+                foreach ($this->curl->response->list as $item) {
+                    if ($item->project_id == $this->product_id) {
+                        $this->status_type = $item->status_type;
+                        $this->invest_id = $item->invest_id;
+                        break;
+                    }
                 }
             }
         } else {
+            $this->status_type = -2;
             $this->addDetail(json_encode($this->curl->response));
         }
 
