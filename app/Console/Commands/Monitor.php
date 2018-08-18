@@ -49,7 +49,7 @@ class Monitor extends BaseJob
 
                 $now = date('Y-m-d H:i:s', time());
                 foreach ($task_list as $item) {
-                    if ($item->work_id == "exchange") {
+                    if (in_array($item->work_id, ["exchange", "abcGift"])) {
                         continue;
                     }
                     if ($item->run_time <= $now) {
