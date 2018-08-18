@@ -113,8 +113,11 @@ class Monitor extends BaseJob
 
         $hour = intval(date("H", strtotime($time)));
 
+        $n = rand(0, 40);
+        $m = $n >= 10 ? $n : "0{$n}";
+
         if ($hour >= 1 && $hour <= 5) {
-            $date = date("Y-m-d 06:00:00");
+            $date = date("Y-m-d 06:{$m}:00");
         } else {
             $date = date("Y-m-d H:i:s", strtotime($time) + 3600);
         }
