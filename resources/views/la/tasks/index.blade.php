@@ -108,7 +108,7 @@
                                 <label for="voucher_id">加息券ID :</label>
                                 <input class="form-control valid" placeholder="输入加息券ID" name="voucher_id" type="text" value="0" aria-invalid="false">
                             </div>
-                            <div class="form-group control-order">
+                            <div class="form-group control-order control-abcGift">
                                 <label for="is_kdb_pay">是否使用口袋宝 :</label>
                                 <select class="form-control select2-hidden-accessible" data-placeholder="选择师傅使用口袋宝" rel="select2" name="is_kdb_pay" tabindex="-1" aria-hidden="true">
                                     <option value="0" selected>否</option>

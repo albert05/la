@@ -136,6 +136,7 @@ class TasksController extends Controller
             } else if ($request->work_id == 'abcGift' || $request->work_id == 'icbcGift') {
                 $params['code'] = $request->code;
                 $params['time_point'] = $request->time_point;
+                $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
             }
 
             // Create Task
@@ -262,6 +263,7 @@ class TasksController extends Controller
             } else if ($request->work_id == 'abcGift' || $request->work_id == 'icbcGift') {
                 $params['code'] = $request->code;
                 $params['time_point'] = $request->time_point;
+                $params['is_kdb_pay'] = $request->is_kdb_pay ?? 0;
             }
 
             if (isset($request->status)) {

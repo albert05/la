@@ -96,7 +96,7 @@
 								<input class="form-control valid" placeholder="输入加息券Id" name="voucher_id" type="text" value="{{$task->voucher_id}}" aria-invalid="false">
 							</div>
 
-							<div class="form-group control-order">
+							<div class="form-group control-order control-abcGift">
 								<label for="is_kdb_pay">是否使用口袋宝 :</label>
 								<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_kdb_pay" tabindex="0" aria-hidden="true">
 									<option value="0" @if(0 == $task->is_kdb_pay) selected @endif>否</option>
