@@ -171,7 +171,8 @@ class BankTasksController extends Controller
                 'run_time' => $request->run_time,
                 'time_point' => $request->time_point,
                 "product_id" => $request->product_id,
-                "is_card" => $request->is_card
+                "is_card" => $request->is_card,
+                "status" => $request->status,
             ];
 
             BankTask::where('id', $id)->update($params);

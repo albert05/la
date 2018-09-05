@@ -87,7 +87,6 @@
 							<option value="4">取消任务</option>
 						</select>
 					</div>
-					    @la_input($module, 'status')
                     @endif
 					<br>
 					<div class="form-group control-all">
