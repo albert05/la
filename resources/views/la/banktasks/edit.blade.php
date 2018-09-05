@@ -47,7 +47,7 @@
 
 				<div class="form-group control-all">
 					<label for="user_key">用户标识 :</label>
-					<input class="form-control" placeholder="输入用户标识" data-rule-maxlength="256" name="title" type="text" value="{{$task->user_key}}">
+					<input class="form-control" placeholder="输入用户标识" data-rule-maxlength="256" name="user_key" type="text" value="{{$task->user_key}}">
 				</div>
 
 				{{--@la_input($module, 'user_key')--}}
