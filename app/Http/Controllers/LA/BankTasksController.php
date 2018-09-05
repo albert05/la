@@ -130,7 +130,7 @@ class BankTasksController extends Controller
                 $module = Module::get('BankTasks');
                 $module->row = $task;
 
-                return view('la.tasks.edit', [
+                return view('la.banktasks.edit', [
                     'module' => $module,
                     'view_col' => $this->view_col,
                     'work_list' => BankTask::$work_list,
