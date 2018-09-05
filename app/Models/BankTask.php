@@ -13,7 +13,7 @@ class BankTask extends Model
 {
     use SoftDeletes;
 	
-	protected $table = 'bank_tasks';
+	protected $table = 'banktasks';
 	
 	protected $hidden = [
         
