@@ -208,7 +208,7 @@ class BankTasksController extends Controller
      */
     public function dtajax()
     {
-        $values = DB::table('bank_tasks')->select($this->listing_cols)->orderBy('id', 'desc')->whereNull('deleted_at');
+        $values = DB::table('banktasks')->select($this->listing_cols)->orderBy('id', 'desc')->whereNull('deleted_at');
         $out = Datatables::of($values)->make();
         $data = $out->getData();
 
