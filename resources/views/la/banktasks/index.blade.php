@@ -72,7 +72,7 @@
 
                         <div class="form-group control-all">
                             <label for="user_key">用户标识 :</label>
-                            <input class="form-control" placeholder="输入用户标识" data-rule-maxlength="256" name="title" type="text" value="{{$task->user_key}}">
+                            <input class="form-control" placeholder="输入用户标识" data-rule-maxlength="256" name="title" type="text" value="">
                         </div>
 
                         {{--@la_input($module, 'user_key')--}}
@@ -97,8 +97,8 @@
                         <div class="form-group control-order control-abcGift">
                             <label for="is_card">是否选择银行卡 :</label>
                             <select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_card" tabindex="0" aria-hidden="true">
-                                <option value="0" @if(0 == $task->is_card) selected @endif>否</option>
-                                <option value="1" @if(1 == $task->is_card) selected @endif>是</option>
+                                <option value="0" selected>否</option>
+                                <option value="1" >是</option>
                             </select>
                         </div>
                     </div>
