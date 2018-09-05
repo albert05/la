@@ -76,7 +76,7 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute') . '/task_dt_ajax', 'LA\TasksController@dtajax');
 
     /* ================== BankTasks ================== */
-    Route::resource(config('laraadmin.adminRoute') . '/bank', 'LA\BankTasksController');
+    Route::resource(config('laraadmin.adminRoute') . '/banktasks', 'LA\BankTasksController');
     Route::get(config('laraadmin.adminRoute') . '/bank_dt_ajax', 'LA\BankTasksController@dtajax');
 
     /* ================== WorkLists ================== */

@@ -1,7 +1,7 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/bank') }}">银行卡任务</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/banktasks') }}">银行卡任务</a> :
 @endsection
 @section("contentheader_description", $task->$view_col)
 @section("section", "银行卡任务")
@@ -91,7 +91,7 @@
                     @endif
 					<br>
 					<div class="form-group control-all">
-						{!! Form::submit( '更新', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/bank') }}">取消</a></button>
+						{!! Form::submit( '更新', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/banktasks') }}">取消</a></button>
 					</div>
 				{!! Form::close() !!}
 				

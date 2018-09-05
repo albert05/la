@@ -52,7 +52,7 @@ class BankTasksController extends Controller
         $module = Module::get('Tasks');
 
         if(Module::hasAccess($module->id)) {
-            return View('la.bank.index', [
+            return View('la.banktasks.index', [
                 'show_actions' => $this->show_action,
                 'listing_cols' => $this->listing_cols,
                 'module' => $module,
@@ -108,7 +108,7 @@ class BankTasksController extends Controller
 
             Log::info("Task created: title: ".$task->title." work_id: ".$task->work_id);
 
-            return redirect()->route(config('laraadmin.adminRoute') . '.bank.index');
+            return redirect()->route(config('laraadmin.adminRoute') . '.banktasks.index');
 
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
@@ -176,7 +176,7 @@ class BankTasksController extends Controller
 
             BankTask::where('id', $id)->update($params);
 
-            return redirect()->route(config('laraadmin.adminRoute') . '.bank.index');
+            return redirect()->route(config('laraadmin.adminRoute') . '.banktasks.index');
 
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
@@ -195,7 +195,7 @@ class BankTasksController extends Controller
             BankTask::find($id)->delete();
 
             // Redirecting to index() method
-            return redirect()->route(config('laraadmin.adminRoute') . '.bank.index');
+            return redirect()->route(config('laraadmin.adminRoute') . '.banktasks.index');
         } else {
             return redirect(config('laraadmin.adminRoute')."/");
         }
@@ -237,18 +237,18 @@ class BankTasksController extends Controller
                     $data->data[$i][$j] = $status_arr[$data->data[$i][$j]];
                 }
                 if($col == $this->view_col) {
-                    $data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/bank/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+                    $data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/banktasks/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
                 }
             }
 
             if($this->show_action) {
                 $output = '';
                 if(Module::hasAccess("BankTasks", "edit")) {
-                    $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/bank/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+                    $output .= '<a href="'.url(config('laraadmin.adminRoute') . '/banktasks/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
                 }
 
                 if(Module::hasAccess("BankTasks", "delete")) {
-                    $output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.bank.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+                    $output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.banktasks.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
                     $output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
                     $output .= Form::close();
                 }
