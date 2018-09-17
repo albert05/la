@@ -12,7 +12,7 @@ use App\Common\Helper;
 
 class Order extends Base
 {
-    const ORDER_PRE_URL = "https://deposit.koudailc.com/deposit/project/invest-order"; //?clientType=pc
+    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-order"; //?clientType=pc
     const ORDER_DO_URL = "https://deposit.koudailc.com/deposit/project/invest"; //-v2//deposit/project/invest
     const KD_KEY = "**kdlc**";
     private $product_id;
