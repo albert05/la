@@ -12,8 +12,8 @@ use App\Common\Helper;
 
 class Order extends Base
 {
-    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-order"; //?clientType=pc
-    const ORDER_DO_URL = "https://deposit.koudailc.com/project/invest-v2";
+    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/check-pay"; //?clientType=pc
+    const ORDER_DO_URL = "https://deposit.koudailc.com/project/invest"; //-v2
     const KD_KEY = "**kdlc**";
     private $product_id;
     private $money;
@@ -58,8 +58,8 @@ class Order extends Base
         $params = [
             'id' => $this->product_id,
             'money' => $this->money,
-            'pay_password' => $this->pay_passwd,
-            'is_kdb_pay' => $this->is_kdb_pay,
+           // 'pay_password' => $this->pay_passwd,
+            //'is_kdb_pay' => $this->is_kdb_pay,
             'order_id' => $this->order_id,
             'voucher_id' => $this->voucher_id,
         ];
@@ -70,7 +70,7 @@ class Order extends Base
         foreach ($params as $k => $val) {
             $tmpArr[] = "$k=$val";
         }
-        $params['sign'] = base64_encode(implode("&", $tmpArr) . self::KD_KEY);
+        $params['invest_sign'] = base64_encode(implode("&", $tmpArr) . self::KD_KEY);
 
         $ret = $this->run($params);
         $this->addDetail("end_time: " . Helper::getMicrotime() . "\n");
