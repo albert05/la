@@ -12,7 +12,7 @@ use App\Common\Helper;
 
 class Order extends Base
 {
-    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/check-pay"; //?clientType=pc
+    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-order"; //?clientType=pc
     const ORDER_DO_URL = "https://deposit.koudailc.com/project/invest"; //-v2
     const KD_KEY = "**kdlc**";
     private $product_id;
@@ -34,6 +34,7 @@ class Order extends Base
         $this->setUrl(self::ORDER_PRE_URL);
 
         $params = [
+            'is_deposit' => 1,
             'money' => $this->money,
         ];
 
@@ -42,11 +43,11 @@ class Order extends Base
 
     public function doJob()
     {
-//        $this->preJob();
-//        if ($this->getErrorNo() != 0) {
-//            $this->addDetail("pre order failed: " . Helper::getMicrotime() . "\n");
-//            return false;
-//        }
+        $this->preJob();
+        if ($this->getErrorNo() != 0) {
+            $this->addDetail("pre order failed: " . Helper::getMicrotime() . "\n");
+            return false;
+        }
 
         if ($this->is_wait_sjk) {
             $spider = new Spider(sprintf(Spider::ORDER_RECORD_URL, $this->product_id));
@@ -62,6 +63,7 @@ class Order extends Base
             //'is_kdb_pay' => $this->is_kdb_pay,
             'order_id' => $this->order_id,
             'voucher_id' => $this->voucher_id,
+            'redpacket_money' => 0.00,
         ];
 
         // 加密校验
