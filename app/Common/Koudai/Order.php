@@ -12,8 +12,8 @@ use App\Common\Helper;
 
 class Order extends Base
 {
-    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-order"; //?clientType=pc
-    const ORDER_DO_URL = "https://deposit.koudailc.com/deposit/project/invest"; //-v2//deposit/project/invest
+    const ORDER_PRE_URL = "https://deposit.koudailc.com/project/invest-orderregistrationID=121c83f76076f6e3c7b&appMarket=AppStore4&appVersion=6.7.5&device_id=4272aa8203bee10150e08e23a8fefb16e1f09a3e&osVersion=11.400000&clientType=ios&deviceName=iPhoneX"; //?clientType=pc
+    const ORDER_DO_URL = "https://deposit.koudailc.com/deposit/project/investregistrationID=121c83f76076f6e3c7b&appMarket=AppStore4&appVersion=6.7.5&device_id=4272aa8203bee10150e08e23a8fefb16e1f09a3e&osVersion=11.400000&clientType=ios&deviceName=iPhoneX"; //-v2//deposit/project/invest
     const KD_KEY = "**kdlc**";
     private $product_id;
     private $money;
