@@ -35,7 +35,9 @@ class OrderJob extends BaseJob
         $task = Task::where('id', $task_id)->firstOrFail();
         $user_id = $task->user_key;
         $money = $task->money;
-        $product_id = $task->product_id;
+        $tmpArr = explode(":", $task->product_id);
+        $product_id = $tmpArr[0];
+        $order_id = $tmpArr[1];
         $is_kdb_pay = $task->is_kdb_pay;
         $time_point = $task->time_point;
         $voucher_ids = $task->voucher_id;
@@ -64,6 +66,7 @@ class OrderJob extends BaseJob
             $order->setIsKdbPay($is_kdb_pay);
             $order->setTimePoint($time_point);
             $order->setIsWaitSjk($is_wait_sjk);
+            $order->setOrderId($order_id);
 
             $voucher_id_list = explode(":", $voucher_ids);
 

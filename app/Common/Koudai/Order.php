@@ -42,11 +42,11 @@ class Order extends Base
 
     public function doJob()
     {
-        $this->preJob();
-        if ($this->getErrorNo() != 0) {
-            $this->addDetail("pre order failed: " . Helper::getMicrotime() . "\n");
-            return false;
-        }
+//        $this->preJob();
+//        if ($this->getErrorNo() != 0) {
+//            $this->addDetail("pre order failed: " . Helper::getMicrotime() . "\n");
+//            return false;
+//        }
 
         if ($this->is_wait_sjk) {
             $spider = new Spider(sprintf(Spider::ORDER_RECORD_URL, $this->product_id));

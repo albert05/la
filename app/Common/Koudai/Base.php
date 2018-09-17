@@ -54,6 +54,10 @@ class Base
         $this->user_agent = $user_agent;
     }
 
+    public function setOrderId($order_id) {
+        $this->order_id = $order_id;
+    }
+
     public function setResult($response) {
         if (is_string($response)) {
             return false;
