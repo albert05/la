@@ -155,7 +155,7 @@ class BankTasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        if(Module::hasAccess("BankTasks", "edit")) {
+        if(Module::hasAccess("BankTasks", "edit")) {
 
             $rules = Module::validateRules("BankTasks", $request, true);
 
@@ -178,10 +178,10 @@ class BankTasksController extends Controller
             BankTask::where('id', $id)->update($params);
 
             return redirect()->route(config('laraadmin.adminRoute') . '.banktasks.index');
-//
-//        } else {
-//            return redirect(config('laraadmin.adminRoute')."/");
-//        }
+
+        } else {
+            return redirect(config('laraadmin.adminRoute')."/");
+        }
     }
 
     /**

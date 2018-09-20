@@ -29,7 +29,7 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.tasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
+				{!! Form::model($task, ['route' => [config('laraadmin.adminRoute') . '.banktasks.update', $task->id ], 'method'=>'PUT', 'id' => 'task-edit-form']) !!}
 					{{--@la_form($module)--}}
 				<div class="form-group control-all">
 					<label for="title">任务标题 :</label>
