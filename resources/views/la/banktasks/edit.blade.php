@@ -72,7 +72,7 @@
 
 				<div class="form-group control-abcGift">
 					<label for="extra">额外json数据 :</label>
-					<input class="form-control" placeholder="输入json" data-rule-maxlength="256" name="extra" type="text" value="{{$task->extra}}">
+					<input class="form-control" placeholder="输入json" data-rule-maxlength="1024" name="extra" type="text" value="{{$task->extra}}">
 				</div>
 							{{--<div class="form-group control-order control-abcGift">--}}
 								{{--<label for="is_card">是否选择银行卡 :</label>--}}
