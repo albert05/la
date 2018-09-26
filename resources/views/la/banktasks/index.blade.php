@@ -94,13 +94,17 @@
                             </div>
 
 
-                        <div class="form-group control-order control-abcGift">
-                            <label for="is_card">是否选择银行卡 :</label>
-                            <select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_card" tabindex="0" aria-hidden="true">
-                                <option value="0" selected>否</option>
-                                <option value="1" >是</option>
-                            </select>
+                        <div class="form-group control-abcGift">
+                            <label for="extra">额外json数据 :</label>
+                            <input class="form-control" placeholder="输入json" data-rule-maxlength="256" name="extra" type="text" value="{{$task->extra}}">
                         </div>
+                        {{--<div class="form-group control-order control-abcGift">--}}
+                            {{--<label for="is_card">是否选择银行卡 :</label>--}}
+                            {{--<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_card" tabindex="0" aria-hidden="true">--}}
+                                {{--<option value="0" selected>否</option>--}}
+                                {{--<option value="1" >是</option>--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
                 <div class="modal-footer">

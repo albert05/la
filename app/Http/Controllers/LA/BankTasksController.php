@@ -27,7 +27,7 @@ class BankTasksController extends Controller
         'id', 'title', 'work_id',
         'user_key', 'run_time',
         'time_point', 'product_id',
-        'is_card', 'status', 'result'];
+        'extra', 'status', 'result'];
 
     public function __construct() {
 
@@ -100,7 +100,7 @@ class BankTasksController extends Controller
                 'status' => 0,
                 'time_point' => $request->time_point,
                 "product_id" => $request->product_id,
-                "is_card" => $request->is_card
+                "extra" => $request->extra
             ];
 
             // Create Task
@@ -171,7 +171,7 @@ class BankTasksController extends Controller
                 'run_time' => $request->run_time,
                 'time_point' => $request->time_point,
                 "product_id" => $request->product_id,
-                "is_card" => $request->is_card,
+                "extra" => $request->extra,
                 //"status" => $request->status,
             ];
 

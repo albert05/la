@@ -70,14 +70,17 @@
 						<input class="form-control valid" placeholder="输入产品ID" name="product_id" value="{{$task->product_id}}" aria-invalid="false">
 					</div>
 
-
-							<div class="form-group control-order control-abcGift">
-								<label for="is_card">是否选择银行卡 :</label>
-								<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_card" tabindex="0" aria-hidden="true">
-									<option value="0" @if(0 == $task->is_card) selected @endif>否</option>
-									<option value="1" @if(1 == $task->is_card) selected @endif>是</option>
-								</select>
-							</div>
+				<div class="form-group control-abcGift">
+					<label for="extra">额外json数据 :</label>
+					<input class="form-control" placeholder="输入json" data-rule-maxlength="256" name="extra" type="text" value="{{$task->extra}}">
+				</div>
+							{{--<div class="form-group control-order control-abcGift">--}}
+								{{--<label for="is_card">是否选择银行卡 :</label>--}}
+								{{--<select class="form-control select2-hidden-accessible" data-placeholder="选择是否使用口袋宝" rel="select2" name="is_card" tabindex="0" aria-hidden="true">--}}
+									{{--<option value="0" @if(0 == $task->is_card) selected @endif>否</option>--}}
+									{{--<option value="1" @if(1 == $task->is_card) selected @endif>是</option>--}}
+								{{--</select>--}}
+							{{--</div>--}}
 
                     @if (in_array($task->status, [0]))
 					<div class="form-group control-order">
