@@ -122,11 +122,11 @@
 				</div>
 					<div class="form-group control-order">
 						<label for="status">任务状态 :</label>
-						@foreach( $status_list as $k => $v )
 							<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
-								<option value="{{$k}}" @if($k == $task->status) selected @endif >$v</option>
+                                @foreach( $status_list as $k => $v )
+                                    <option value="{{$k}}" @if($k == $task->status) selected @endif >$v</option>
+                                @endforeach
 							</select>
-						@endforeach
 
 					</div>
 					    @la_input($module, 'status')
