@@ -209,6 +209,7 @@ class TasksController extends Controller
                     'view_col' => $this->view_col,
                     'work_list' => $work_list,
                     'user_list' => $user_list,
+                    'status_list' => Task::$statusText,
                 ])->with('task', $task);
             } else {
                 return view('errors.404', [

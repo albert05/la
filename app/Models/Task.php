@@ -22,4 +22,12 @@ class Task extends Model
 	protected $guarded = [];
 
 	protected $dates = ['deleted_at'];
+
+	public static $statusText = [
+        0 => "已创建",
+        1 => "运行中",
+        2 => "失败",
+        3 => "成功",
+        4 => "已取消",
+    ];
 }

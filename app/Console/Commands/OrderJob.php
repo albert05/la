@@ -83,12 +83,14 @@ class OrderJob extends BaseJob
                     $succ_count++;
                 }
 
+                $this->comment("order result: " . $order->getErrorMsg());
+                $this->comment("order detail: " . $order->getDetail());
+
                 // 失败30次或20秒退出
                 if ($failed_count > 50 || intval(date('s')) > 20 ) {
                     break;
                 }
             }
-            $this->comment("order result: " . $order->getErrorMsg());
 
             Task::where('id', $task_id)->update([
                 'result' => $order->getErrorMsg(),

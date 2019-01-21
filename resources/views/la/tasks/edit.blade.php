@@ -120,16 +120,16 @@
 					<label for="order_number">投资笔数 :</label>
 					<input class="form-control valid" placeholder="输入投资笔数" name="order_number" type="number" value="{{$task->order_number}}" aria-invalid="false">
 				</div>
-                    @if (in_array($task->status, [0]))
 					<div class="form-group control-order">
 						<label for="status">任务状态 :</label>
-						<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
-							<option value="{{$task->status}}" selected >@if(0 == $task->status) 已创建 @else 运行中 @endif</option>
-							<option value="4">取消任务</option>
-						</select>
+						@foreach( $status_list as $k => $v )
+							<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
+								<option value="{{$k}}" @if($k == $task->status) selected @endif >$v</option>
+							</select>
+						@endforeach
+
 					</div>
 					    @la_input($module, 'status')
-                    @endif
 					<br>
 					<div class="form-group control-all">
 						{!! Form::submit( '更新', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/tasks') }}">取消</a></button>
