@@ -124,7 +124,7 @@
 						<label for="status">任务状态 :</label>
 							<select class="form-control select2-hidden-accessible" data-placeholder="选择任务状态" rel="select2" name="status" tabindex="2" aria-hidden="true">
                                 @foreach( $status_list as $k => $v )
-                                    <option value="{{$k}}" @if($k == $task->status) selected @endif >$v</option>
+                                    <option value="{{$k}}" @if($k == $task->status) selected @endif >{{$v}}</option>
                                 @endforeach
 							</select>
 
