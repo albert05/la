@@ -317,6 +317,7 @@ class TasksController extends Controller
             ->lists('name', 'work_id');
 
         $status_arr = [
+            -1 => '异常',
             0 => '已创建',
             1 => '运行中',
             2 => '失败',
