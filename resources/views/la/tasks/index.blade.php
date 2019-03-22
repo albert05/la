@@ -157,7 +157,6 @@
             serverSide: true,
             ajax: {
                 "url": "{{ url(config('laraadmin.adminRoute') . '/task_dt_ajax') }}",
-                "type": "POST"
             },
             language: {
                 lengthMenu: "_MENU_",
