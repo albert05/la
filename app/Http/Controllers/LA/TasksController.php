@@ -307,7 +307,9 @@ class TasksController extends Controller
      */
     public function dtajax()
     {
-        $values = DB::table('tasks')->select($this->listing_cols)->orderBy('id', 'desc')->whereNull('deleted_at');
+        $s = request("start", 0);
+        $l = request("length", 10);
+        $values = DB::table('tasks')->select($this->listing_cols)->orderBy('id', 'desc')->whereNull('deleted_at')->offset($s)->limit($l);
         $out = Datatables::of($values)->make();
         $data = $out->getData();
 
