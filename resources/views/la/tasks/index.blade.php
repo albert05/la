@@ -155,7 +155,10 @@
         $("#example1").DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ url(config('laraadmin.adminRoute') . '/task_dt_ajax') }}",
+            ajax: {
+                "url": "{{ url(config('laraadmin.adminRoute') . '/task_dt_ajax') }}",
+                "type": "POST"
+            },
             language: {
                 lengthMenu: "_MENU_",
                 search: "_INPUT_",
